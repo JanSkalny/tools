@@ -1,0 +1,3 @@
+- include: smartmontools.yml
+- include: mdadm.yml
+

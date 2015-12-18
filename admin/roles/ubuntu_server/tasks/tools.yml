@@ -1,0 +1,20 @@
+  - name: install some usefull tools
+    apt: name="{{item}}"
+    with_items:
+    - vim-nox
+    - tcpdump
+    - screen
+    - bc
+    - tcptraceroute
+    - debian-keyring
+    - links
+    - nmap
+    - patch
+    - iptraf
+    - subversion
+    - wget
+    - cron
+    - make
+    - openssl-blacklist
+    - mtr
+    - netsniff-ng

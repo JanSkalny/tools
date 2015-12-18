@@ -1,0 +1,23 @@
+- name: install ntp
+  apt: name=ntp
+  apt: name=ntpdate
+
+- name: stop ntp
+  service: name=ntp state=stopped
+- name: syncronize time
+  command: ntpdate pool.ntp.org
+
+- name: configure ntpd
+  lineinfile: 
+    dest: "/etc/ntp.conf" 
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+  with_items:
+  - { regexp: '^server 0.pool.ntp.org', line: 'server 0.pool.ntp.org burst iburst' }
+  - { regexp: '^server 1.pool.ntp.org', line: 'server 1.pool.ntp.org burst iburst' }
+  - { regexp: '^server 2.pool.ntp.org', line: 'server 2.pool.ntp.org burst iburst' }
+  - { regexp: '^server 3.pool.ntp.org', line: 'server 3.pool.ntp.org burst iburst' }
+  - { regexp: '^server europe.pool.ntp.org', line: 'server europe.pool.ntp.org burst iburst' }
+
+- name: start ntp
+  service: name=ntp state=restarted

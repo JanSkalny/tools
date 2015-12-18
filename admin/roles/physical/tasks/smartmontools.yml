@@ -1,0 +1,15 @@
+- name: install smartmontools
+  apt: name=smartmontools
+
+- name: configure smartmontools
+  template: src="smartd.conf.j2" dest="/etc/smartd.conf"
+
+- name: use smartd
+  lineinfile:
+    dest: "/etc/default/smartmontools"
+    regexp: "^start_smartd=yes"
+    line: "start_smartd=yes"
+
+- name: restart smartmontools
+  service: name=smartmontools state=restarted
+

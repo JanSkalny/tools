@@ -1,0 +1,19 @@
+- name: reboot on panic
+  lineinfile:
+    dest: "/etc/sysctl.conf"
+    regexp: "^kernel.panic"
+    line: "kernel.panic = 10"
+
+- name: vim is default editor
+  command: update-alternatives --set editor /usr/bin/vim.nox
+
+- name: configure vim
+  copy: src="vimrc.local" dest="/etc/vim/vimrc.local"
+- name: configure vim (cont)
+  lineinfile:
+    dest: "/etc/vim/vimrc"
+    regexp: "source /etc/vim/vimrc.local"
+    line: "\nif filereadable(\"/etc/vim/vimrc.local\")\n    source /etc/vim/vimrc.local\nendif"
+
+- name: configure subversion client
+  copy: src="subversion.config" dest="/etc/subversion/config"

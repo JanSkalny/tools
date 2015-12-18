@@ -1,0 +1,9 @@
+---
+- hosts: azami
+  sudo: yes
+  vars:
+    user: johnny
+  roles:
+  - ubuntu_server
+  - physical
+  - kvm

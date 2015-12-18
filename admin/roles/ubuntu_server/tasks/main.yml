@@ -1,0 +1,26 @@
+
+# bring system up to date and make sure rest of ansible can work correctly
+- include: upgrade.yml
+- include: ansible_dependencies.yml
+
+# allow passwordless acess via keys
+- include: authorized_keys.yml
+- include: passwordless_sudoers.yml
+
+# install usefull tools
+- include: tools.yml
+
+# configure ntp
+- include: ntp.yml
+
+# make sure this system is livable :)
+- include: sweeten.yml
+- include: fancy_profile.yml profile_file="/home/{{user}}/.profile"
+- include: fancy_profile.yml profile_file="/root/.profile"
+
+# firewall
+- include: fw.yml
+
+# secure ssh access 
+#XXX: keep this last.. maybe we'll cut ourselves out
+- include: secure_ssh.yml
