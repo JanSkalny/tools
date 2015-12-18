@@ -1,0 +1,20 @@
+#! /bin/bash
+
+function proc() {
+	echo -n "$1 "
+	while read line; do
+		awk '{ print $4 " " $2+$3 }' | egrep $3 "$2" | awk 'BEGIN{sum=0}{sum+=$2}END{printf "%.2f\n", sum/(1024*1024) }' 
+	done
+}
+
+EU="(BE|EL|LT|PT|BG|ES|LU|RO|CZ|FR|HU|SI|DK|HR|MT|DE|IT|NL|FI|EE|CY|AT|SE|IE|LV|PL|UK)"
+WORLD="(BE|EL|LT|PT|BG|ES|LU|RO|CZ|FR|HU|SI|SK|DK|HR|MT|DE|IT|NL|FI|EE|CY|AT|SE|IE|LV|PL|UK)"
+
+if [ $# -eq 0 ]; then
+	echo "usage ./total.sh /path/to/files*.stats"
+	exit 1
+fi
+
+cat "$@" | proc "SK" "SK"
+cat "$@" | proc "EU" "$EU"
+cat "$@" | proc "World" "$WORLD" -v

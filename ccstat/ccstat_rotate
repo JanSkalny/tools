@@ -1,0 +1,5 @@
+#! /bin/bash
+
+killall -USR1 ccstat
+sleep 0.1
+/usr/local/bin/ccstat &

@@ -1,0 +1,6 @@
+#! /bin/bash
+
+now=`date +'%s'`
+month=`date -d "@$now" +'%Y-%m'`
+
+/usr/local/bin/ccstat_total /var/lib/ccstat/$month-*.stats
