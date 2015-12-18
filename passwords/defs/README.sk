@@ -1,0 +1,207 @@
+	Slovenský slovník pre Ispell
+
+
+	Obsah
+	* O slovníku
+	* Spracovanie a in¹talácia slovníka
+	* Testované operaèné systémy
+	* Pou¾ívanie slovníka a pridávanie nových slov
+
+
+O slovníku
+==========
+
+Tento softvér je OSI Certified Open Source Software.
+OSI Certified je certifikaèné oznaèenie Open Source Initiative.
+
+V¹etky tieto súbory sú v ¹tádiu pomerne rýchlych zmien. Sledujte prosím
+http://rak.bb.euroweb.sk/~zdpo/, kde sú zverejòované ich najnov¹ie verzie.
+
+
+Spracovanie a in¹talácia slovníka
+=================================
+
+Spracovanie slovníka a gramatického súboru vykonáte príkazom make
+(bsd make alebo gnu make).  buildhash, súèas» programu Ispell musí
+by» v ceste.
+
+	$ make
+
+ktorý vytvorí slovník pre Ispell. In¹taláciu súborov slovak.aff a
+slovak.hash do adresára, v ktorom Ispell oèakáva slovníky (väè¹inou
+/usr/lib/ispell/), spustíte príkazom
+
+	# make install
+
+V prípade, ¾e chcete in¹talova» slovník do iného adresára, pou¾ite
+parameter $(DESTDIR), napr.
+
+	# make DESTDIR=/usr/local/lib/ispell/ install
+
+V prípade, ¾e nemáte na svojom systéme nain¹talovaný program 'make'
+alebo z iného dôvodu ho nechcete alebo nemô¾ete pou¾i», mô¾ete spusti»
+skript install.sh, ktorý vám pomô¾e slovník nain¹talova»:
+
+	# sh install.sh
+
+
+Testované operaèné systémy
+==========================
+
+Bohu¾iaµ nemáme prostriedky aby sme vytvárali v¹etky mo¾né typy
+balíèkov (.rpm, .deb, atï), na na¹ich stránkach nájdete len
+.tar.gz verziu.
+
+Operaèné systémy ktoré boli testované:
+ * Linux
+ * NetBSD (http://www.netbsd.org/) má balík
+ * OpenBSD (http://www.openbsd.org/) má port
+
+
+Pou¾ívanie slovníka a pridávanie nových slov
+============================================
+
+Teraz mô¾ete Ispell pou¾íva» príkazom:
+
+	$ ispell -d slovak kontrolovaný_súbor
+
+
+Vzhµadom na pou¾itú kódovaciu stránku (iso-8859-2) nie je mo¾né v Ispelle
+pou¾i» slová s písmenom ö (napr. föhn, göteborgský), hoci Pravidlá
+slovenského pravopisu tieto slová poznajú.
+
+Pokiaµ poèas kontroly pri nájdení neznámeho slova zvolíte mo¾nos»
+I(insert), bude slovo pridané do súboru $HOME/.ispell_slovak. Ak
+chcete pomôc» s vytváraním slovníka, za¹lite tento súbor (pokiaµ to
+bude mo¾né, tak vyèistený od nespisovných a cudzích slov) na adresu
+Zdenko Podobný <zdpo (at) mailbox (dot) sk>.
+
+
+Ak chcete iba prispie» k roz¹íreniu slovníka a nechcete text
+interaktívne kontrolova», mô¾ete pou¾i» príkaz
+
+	$ ispell -d slovak -l < kontrolovaný_súbor > výstup
+
+ktorý pracuje neinteraktívne a ulo¾í do súboru výstup v¹etky slová
+z kontrolovaného súboru, ktoré sa nenachádzajú v slovníku. Zasielajte
+nám prosím iba súbory, ktoré vznikli kontrolou súèasných spisovných
+textov.
+
+Pokiaµ chcete pridari» flag nejakému slovu (v základnom tvare) skúste
+najprv pohµada» najvhodnej¹í flag (¾iaµ nie pre v¹etky slová je vhodné
+pou¾i» flag podµa vzoru, ktorý sa pou¾íva podµa Pravidiel slovenského
+pravopisu, Napr.  podµa [1] by sa slovo motocykel mal skloòova» podµa
+vzoru dub (a teda by malo ma» flag B) a v lokále by malo konèi» na písmeno
+-i. Toto je v¹ak dos» problematické zabezpeèi» v pravidlách pre vzor dub.
+Oveµa jednoduch¹ie je priradi» slovo motocykel k vzoru stroj a teda pou¾i»
+flag J. Týmto je mo¾né zabezpeèi», ¾e pravidlá nebudú zbytoène
+komplikované. Mimochodom flag B je u¾ aj tak veµmi komplikovaný - obsahuje
+161 pravidiel a bude ho treba optimalizova»...
+
+Na otestovanie kombinácie flagu so slovom pou¾ite nasledovný príkaz:
+
+	$ echo slovo/flag | ispell -e -d slovak
+
+Príklad:
+
+	$ echo motocykel/B | ispell -e -d slovak
+	$ echo motocykel/J | ispell -e -d slovak
+
+Osobitne je vhodné takto skontrolova» slovesá, ktoré pre väè¹inu z nás
+je dos» »a¾ké zaradi» do správneho vzoru.
+
+
+Pou¾ité "flagy" v slovenskej verzii:
+            AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz
+ Obsadené   A B C D E F   H I J K L M N O P Q R S T U V W X Y Zz
+ Voµné	     a b c d e fGg h i j k l m n o p q r s t u v w x y
+
+       N       prefix ne
+
+       Z       ¾ena - mno¾né èíslo
+       z       ¾ena-iba jednotné èíslo (napr. látkové podst. mená-ropa,
+	       názvy jazykov-slovenèina prípadne ïal¹ie veci, pre ktoré sa
+	       nepou¾íva mno¾né èíslo....
+       U       ulica
+       D       dlaò
+       K       kos» a gazdiná
+       M       mesto
+       S       srdce
+       V       vysvedèenie
+       A       dievèa
+       C       chlap a kuli
+       H       hrdina
+       B       dub
+       O       dub - zámen hlások v koncovke
+       J       stroj
+       L       zvieracie podstatné mená mu¾ského rodu
+       Q       pomno¾né
+
+       Y       prídavné mená - v¹etky, kt. nie sú zakonèené na -í
+       I       prídavné mená zakonèené na -í
+       F       stupòovanie prídavných mien - 3. stupeò
+       P       stupòovanie prídavných mien - 2. stupeò
+
+       X       slovesá podµa vzorov chyta», robi» s krátkou koncovkou
+       E       slovesá podµa vzorov chyta», robi» s dlhou koncovkou
+       W       slovesá podµa vzorov pracova»
+       T       slovesá podµa vzorov èesa»
+       R       slovesá podµa vzorov krièa», bra»
+
+
+Poznámky k pridávaniu slov k flagu z/Z:
+---------------------------------------
+
+Pred pridaním slova k týmto flagom treba najprv otestova», èi sa
+vygenerujú v¹etky prípustné pády správne. Kµúèovými pádmi sú Genitív
+mno¾ného èísla (affix pravidlá pre tento pád vzoru ¾ena sú vytvorené
+príli¹ na mieru slovám, ktoré boli k dispozícií pri ich tvorbe. Na 98%
+nebude vytvorený tento pád pre slová s poètom písmen 4 a menej - treba
+ho potom podµa Pravidiel dopísa» do 'slovak-noflag.words' resp. posla»
+ich správcovi Ispellu s upozornením, ¾e v¹etko nie je v poriadku), Datív
+a Lokál mno¾ného èísla. Pri vzore ¾ena sa dôsledne dodr¾iava rytmický
+zákon - aj keï výnimky existujú (musia by» uvedené v Pravidlách).
+
+Do flagov z/Z patria v¹etky slová ¾enského rodu zakonèené na 'a', pred
+ktorou sa nachádza nemäkká spoluhláska a cudzie slová konèiace na -ea,
+-eu, -oa.  Rozhodnutie, èi má ma» slovo flag 'z' alebo 'Z' zavisí viac
+menej od citu.  Pokiaµ Pravidlá uvádzajú Gen. mno¾. èísla, tak slovo má
+ma» 'flag Z' - v ostatných prípadoch sa treba rozhodnú» (rad¹ej
+preferujte 'z' ako 'Z', lebo mno¾né èíslo je dos» komplikované a nemusí
+da» správne výsledky.
+
+Pokiaµ sú problémy pri generovaní mno¾ného èísla treba pou¾i» iba
+'flag z' a zvy¹ok ruène dopísa» do 'slovak-noflag.words' (toto sa stalo
+napríklad slovu 'màtvina').
+
+
+Rozdelenie hlások:
+-----------------
+samohlásky:
+	krátke: a ä o u i y e
+	dlhé: á ó ú í ý é (prípadne aj à å)
+
+dvojhlásky: ia ie iu ô (pova¾ované za dlhé)
+V niektorých prípadoch sa mô¾e vyskytnú» kombinácia 'io' - toto nie je
+pova¾ované za dvojhlásku a nie je mo¾né túto kombináciu pova¾ova»
+za 'dlhú hlásku'.
+
+spoluhlásky (na rozdiel od samohlások mô¾u tvori» slabiku - treba na to
+dáva» pozor pri rytmickom zákone):
+r, à, l, å 	- mô¾u vystupova» ako samohlásky,
+		  keï sú medzi spoluhláskami (zámlka)
+b, c, è, d, ï, dz, d¾, f, g, h, ch, j, k, l, µ, m, n, r, s, ¹, t, », v,
+z, ¾
+
+Delenie:
+	mäkké: c, dz, j, µ, ¹, è, », ¾, ò, ï
+	tvrdé: g, h, ch, k, d, t, n, l
+	obojaké: b, m, p, v, f, r, s, z
+
+Pou¾itá literatúra:
+
+[1] Ladislav Navrátil: Skloòovanie podstatných mien, Enigma 1996
+[2] Pravidlá slovenského pravopisu, Jazykovedný ústav
+    ¥udovíta ©túra Slovenskej akadémie vied, 2000
+[3] Jozef Mistrík, Slovenèina pre ka¾dého, Slovenské pedagogické
+    nakladateµstvo Bratislava, 1967
