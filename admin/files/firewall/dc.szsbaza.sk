@@ -1,0 +1,133 @@
+#! /bin/sh
+
+IT=/sbin/iptables
+
+modprobe ip_conntrack
+modprobe ip_conntrack_ftp
+
+echo 0 > /proc/sys/net/ipv4/ip_forward
+echo 1 > /proc/sys/net/ipv4/tcp_syncookies
+echo 1 > /proc/sys/net/ipv4/conf/all/rp_filter
+echo 1 > /proc/sys/net/ipv4/conf/all/log_martians
+echo 1 > /proc/sys/net/ipv4/icmp_echo_ignore_broadcasts
+echo 1 > /proc/sys/net/ipv4/icmp_ignore_bogus_error_responses
+echo 0 > /proc/sys/net/ipv4/conf/all/send_redirects
+echo 0 > /proc/sys/net/ipv4/conf/all/accept_source_route
+
+for TABLE in filter nat mangle; do
+	$IT -t $TABLE -F
+	$IT -t $TABLE -X
+done
+
+$IT -P INPUT DROP
+$IT -P OUTPUT ACCEPT
+$IT -P FORWARD DROP
+
+$IT -N log_reject
+	$IT -A log_reject -m limit --limit 5/sec --limit-burst 8 -j LOG --log-ip-options --log-tcp-options --log-prefix fw-reject_ --log-level debug
+	$IT -A log_reject -m limit --limit 5/sec --limit-burst 8 -j REJECT --reject-with icmp-port-unreachable
+	$IT -A log_reject -j DROP
+
+$IT -N log_drop
+	$IT -A log_drop -m limit --limit 5/sec --limit-burst 8 -j LOG --log-ip-options --log-tcp-options --log-prefix fw-drop_ --log-level debug
+	$IT -A log_drop -j DROP
+
+$IT -N log_accept
+	$IT -A log_accept -m limit --limit 10/sec --limit-burst 20 -j LOG --log-ip-options --log-tcp-options --log-prefix fw-accept_ --log-level debug
+	$IT -A log_accept -j ACCEPT
+
+$IT -N check_if
+	# whitelist
+	$IT -A check_if -s 92.240.244.25 -j RETURN
+	$IT -A check_if -s 87.197.159.3 -j RETURN
+
+	# block private and special ip ranges
+	$IT -A check_if -s 127.0.0.0/8 -j log_drop
+	$IT -A check_if -s 0.0.0.0/8 -j log_drop
+	$IT -A check_if -s 169.254.0.0/16 -j log_drop
+	$IT -A check_if -s 192.0.2.0/24 -j log_drop
+	$IT -A check_if -s 204.152.64.0/23 -j log_drop
+	$IT -A check_if -s 224.0.0.0/3 -j log_drop
+
+	# public interface
+	$IT -A check_if -j RETURN
+	#$IT -A check_if -i eth0 \! -s FIXME -j RETURN
+
+	#
+	#$IT -A check_if -i eth0 \! -s 192.168.0.0/16 -j RETURN
+	#$IT -A check_if -i eth1 -s 192.168.30.0/24 -j RETURN
+
+	# everything else
+	$IT -A check_if -j log_drop
+
+# vsetko z AD sieti
+$IT -N AD 
+	# kerberos
+	$IT -A AD -p tcp --dport 88 -j ACCEPT
+	$IT -A AD -p udp --dport 88 -j ACCEPT
+	$IT -A AD -p tcp --dport 464 -j ACCEPT
+	$IT -A AD -p udp --dport 464 -j ACCEPT
+
+	# RPC 
+	$IT -A AD -p tcp --dport 135 -j ACCEPT
+	$IT -A AD -p tcp --dport 1024:5000 -j ACCEPT
+
+	# NetBIOS 
+	$IT -A AD -p udp --dport 137 -j ACCEPT
+	$IT -A AD -p udp --dport 138 -j ACCEPT
+	$IT -A AD -p tcp --dport 139 -j ACCEPT
+
+	# LDAP a LDAP SSL
+	$IT -A AD -p tcp --dport 389 -j ACCEPT
+	$IT -A AD -p udp --dport 389 -j ACCEPT
+	$IT -A AD -p tcp --dport 636 -j ACCEPT
+
+	# SMB over TCP 
+	$IT -A AD -p tcp --dport 445 -j ACCEPT
+
+	# Global Cataloge 
+	$IT -A AD -p tcp --dport 3268 -j ACCEPT
+	$IT -A AD -p tcp --dport 3269 -j ACCEPT
+
+	# DNS
+	$IT -A AD -p tcp --dport 53 -j ACCEPT
+	$IT -A AD -p udp --dport 53 -j ACCEPT
+
+	# MDNS
+	$IT -A AD -p tcp --dport 5353 -j ACCEPT
+
+	# NTP
+	$IT -A AD -p udp --dport 123 -j ACCEPT
+
+############################################################
+
+# loopback is allowed
+$IT -A INPUT -i lo -j ACCEPT
+
+# verify source address / interface
+$IT -A INPUT -j check_if
+
+# connection state
+$IT -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+$IT -A INPUT -m state --state INVALID -j log_drop
+
+### input ruleset
+
+# ssh and https from everywhere
+$IT -A INPUT -p tcp --dport ssh -j ACCEPT
+
+# monitor
+$IT -A INPUT -p tcp -s 192.168.254.134 --dport 5666 -j ACCEPT
+$IT -A INPUT -p udp -s 192.168.254.134 --dport 161 -j ACCEPT
+
+# do AD sa dostanu ludia ucebne, ucitelia a VPN-ka
+$IT -A INPUT -s 192.168.21.0/24 -j AD
+$IT -A INPUT -s 192.168.56.0/24 -j AD
+$IT -A INPUT -s 172.20.101.0/24 -j AD
+
+### icmp
+$IT -A INPUT -p icmp -m limit --limit 10/second -j ACCEPT
+$IT -A INPUT -p icmp -j log_drop 
+
+### default rule
+$IT -A INPUT -j log_accept

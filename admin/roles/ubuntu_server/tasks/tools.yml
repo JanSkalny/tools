@@ -1,5 +1,5 @@
   - name: install some usefull tools
-    apt: name="{{item}}"
+    apt: name="{{item}}" state=present
     with_items:
     - vim-nox
     - tcpdump
@@ -18,3 +18,4 @@
     - openssl-blacklist
     - mtr
     - netsniff-ng
+    - git

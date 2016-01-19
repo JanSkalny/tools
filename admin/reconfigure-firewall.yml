@@ -1,0 +1,4 @@
+---
+- hosts: cerise
+  roles:
+  - firewall

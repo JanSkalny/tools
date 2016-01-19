@@ -1,8 +1,0 @@
-#XXX: maintain firewall throught ansible?
-- stat: path=/etc/init.d/fw.sh
-  register: st
-- copy: src=fw.sh dest=/etc/init.d/fw.sh owner=root group=root mode=0550
-  when: not st.stat.exists
-- file: src=/etc/init.d/fw.sh dest=/etc/rc2.d/S19fw owner=root group=root state=link
-  when: not st.stat.exists
-

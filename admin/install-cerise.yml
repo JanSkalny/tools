@@ -1,0 +1,8 @@
+---
+- hosts: cerise
+  sudo: yes
+  vars:
+    user: johnny
+  roles:
+  - ubuntu_server
+  - { role: admins, users: ['johnny','kauchman','castor'] }

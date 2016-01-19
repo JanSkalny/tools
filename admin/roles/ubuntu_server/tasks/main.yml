@@ -18,8 +18,8 @@
 - include: fancy_profile.yml profile_file="/home/{{user}}/.profile"
 - include: fancy_profile.yml profile_file="/root/.profile"
 
-# firewall
-- include: fw.yml
+# fail2ban
+- include: fail2ban.yml
 
 # secure ssh access 
 #XXX: keep this last.. maybe we'll cut ourselves out

@@ -1,0 +1,114 @@
+#! /bin/sh
+
+IT=/sbin/iptables
+NET_VPN0=192.168.153.0/24
+
+modprobe ip_conntrack
+modprobe ip_conntrack_ftp
+
+echo 0 > /proc/sys/net/ipv4/ip_forward
+echo 1 > /proc/sys/net/ipv4/tcp_syncookies
+echo 1 > /proc/sys/net/ipv4/conf/all/rp_filter
+echo 1 > /proc/sys/net/ipv4/conf/all/log_martians
+echo 1 > /proc/sys/net/ipv4/icmp_echo_ignore_broadcasts
+echo 1 > /proc/sys/net/ipv4/icmp_ignore_bogus_error_responses
+echo 0 > /proc/sys/net/ipv4/conf/all/send_redirects
+echo 0 > /proc/sys/net/ipv4/conf/all/accept_source_route
+
+for TABLE in filter nat mangle; do
+	$IT -t $TABLE -F
+	$IT -t $TABLE -X
+done
+
+$IT -P INPUT DROP
+$IT -P OUTPUT ACCEPT
+$IT -P FORWARD DROP
+
+
+
+
+
+$IT -N log_reject
+	$IT -A log_reject -m limit --limit 5/sec --limit-burst 8 -j LOG --log-ip-options --log-tcp-options --log-prefix fw-reject_ --log-level debug
+	$IT -A log_reject -m limit --limit 5/sec --limit-burst 8 -j REJECT --reject-with icmp-port-unreachable
+	$IT -A log_reject -j DROP
+
+$IT -N log_drop
+	$IT -A log_drop -m limit --limit 5/sec --limit-burst 8 -j LOG --log-ip-options --log-tcp-options --log-prefix fw-drop_ --log-level debug
+	$IT -A log_drop -j DROP
+
+$IT -N log_accept
+	$IT -A log_accept -m limit --limit 10/sec --limit-burst 20 -j LOG --log-ip-options --log-tcp-options --log-prefix fw-accept_ --log-level debug
+	$IT -A log_accept -j ACCEPT
+
+$IT -N check_if
+	# whitelist
+	$IT -A check_if -s 92.240.244.25 -j RETURN
+	$IT -A check_if -s 87.197.159.3 -j RETURN
+
+	# block private and special ip ranges
+	#$IT -A check_if -s 10.0.0.0/8 -j log_drop
+	#$IT -A check_if -s 172.16.0.0/12 -j log_drop
+	#$IT -A check_if -s 192.168.0.0/16 -j log_drop
+	$IT -A check_if -s 127.0.0.0/8 -j log_drop
+	$IT -A check_if -s 0.0.0.0/8 -j log_drop
+	$IT -A check_if -s 169.254.0.0/16 -j log_drop
+	$IT -A check_if -s 192.0.2.0/24 -j log_drop
+	$IT -A check_if -s 204.152.64.0/23 -j log_drop
+	$IT -A check_if -s 224.0.0.0/3 -j log_drop
+
+	# public interface
+	$IT -A check_if -i eth0 -j RETURN
+
+	# everything else
+	$IT -A check_if -j log_drop
+
+############################################################
+
+# loopback is allowed
+$IT -A INPUT -i lo -j ACCEPT
+
+# verify source address / interface
+$IT -A INPUT -j check_if
+
+# connection state
+$IT -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+$IT -A INPUT -m state --state INVALID -j log_drop
+
+### input ruleset
+
+# ssh and https from everywhere
+$IT -A INPUT -p tcp --dport ssh -j ACCEPT
+
+##temp http
+$IT -A INPUT -p tcp --dport 80 -j ACCEPT
+
+#Https
+$IT -A INPUT -p tcp --dport 443 -j ACCEPT
+
+### ruby debugging server
+$IT -A INPUT -p tcp --dport 3000 -j ACCEPT
+### icmp
+$IT -A INPUT -p icmp -m limit --limit 10/second -j ACCEPT
+$IT -A INPUT -p icmp -j log_drop 
+
+# zabbix agent
+$IT -A INPUT -p tcp --dport 10050 -s 92.240.244.36 -j ACCEPT
+$IT -A INPUT -p tcp --dport 10050 -s 192.168.153.1 -j ACCEPT
+
+### ejabered
+	#webinterface
+	$IT -A INPUT -p tcp --dport 5280 -j ACCEPT
+	#cleartext messanging
+	$IT -A INPUT -p tcp --dport 7777 -j ACCEPT
+	#Client to server SSL connection
+	$IT -A INPUT -p tcp --dport 5222 -j ACCEPT
+
+##redirnet
+	#proxy
+	$IT -A INPUT -p tcp --dport 8889 -j ACCEPT
+
+
+
+### default rule
+$IT -A INPUT -j log_drop

@@ -1,0 +1,121 @@
+#! /bin/sh
+
+IT=/sbin/iptables
+
+BACKUP="194.160.5.138"
+MONITOR="192.168.254.134"
+WIFI_AP0="192.168.200.32"
+WIFI_AP1="192.168.200.33"
+WIFI_AP2="192.168.200.34"
+WIFI_AP3="192.168.200.35"
+WIFI_AP4="192.168.200.36"
+
+modprobe ip_conntrack
+modprobe ip_conntrack_ftp
+
+echo 0 > /proc/sys/net/ipv4/ip_forward
+echo 1 > /proc/sys/net/ipv4/tcp_syncookies
+echo 1 > /proc/sys/net/ipv4/conf/all/rp_filter
+echo 1 > /proc/sys/net/ipv4/conf/all/log_martians
+echo 1 > /proc/sys/net/ipv4/icmp_echo_ignore_broadcasts
+echo 1 > /proc/sys/net/ipv4/icmp_ignore_bogus_error_responses
+echo 0 > /proc/sys/net/ipv4/conf/all/send_redirects
+echo 0 > /proc/sys/net/ipv4/conf/all/accept_source_route
+
+for TABLE in filter nat mangle; do
+	$IT -t $TABLE -F
+	$IT -t $TABLE -X
+done
+
+$IT -P INPUT DROP
+$IT -P OUTPUT ACCEPT
+$IT -P FORWARD DROP
+
+$IT -N log_reject
+	$IT -A log_reject -m limit --limit 5/sec --limit-burst 8 -j LOG --log-ip-options --log-tcp-options --log-prefix fw-reject_ --log-level debug
+	$IT -A log_reject -m limit --limit 5/sec --limit-burst 8 -j REJECT --reject-with icmp-port-unreachable
+	$IT -A log_reject -j DROP
+
+$IT -N log_drop
+	$IT -A log_drop -m limit --limit 5/sec --limit-burst 8 -j LOG --log-ip-options --log-tcp-options --log-prefix fw-drop_ --log-level debug
+	$IT -A log_drop -j DROP
+
+$IT -N log_accept
+	$IT -A log_accept -m limit --limit 10/sec --limit-burst 20 -j LOG --log-ip-options --log-tcp-options --log-prefix fw-accept_ --log-level debug
+	$IT -A log_accept -j ACCEPT
+
+$IT -N check_if
+	# whitelist
+	$IT -A check_if -s 92.240.244.25 -j RETURN
+	$IT -A check_if -s 87.197.159.3 -j RETURN
+
+	# vpn
+	$IT -A check_if -s 172.20.101.0/24 -j RETURN
+
+	# block private and special ip ranges
+	$IT -A check_if -s 10.0.0.0/8 -j log_drop
+	$IT -A check_if -s 172.16.0.0/12 -j log_drop
+	#$IT -A check_if -s 192.168.0.0/16 -j log_drop
+	$IT -A check_if -s 127.0.0.0/8 -j log_drop
+	$IT -A check_if -s 0.0.0.0/8 -j log_drop
+	$IT -A check_if -s 169.254.0.0/16 -j log_drop
+	$IT -A check_if -s 192.0.2.0/24 -j log_drop
+	$IT -A check_if -s 204.152.64.0/23 -j log_drop
+	$IT -A check_if -s 224.0.0.0/3 -j log_drop
+
+	# public interface
+	$IT -A check_if -i eth0 -j RETURN
+
+	#
+	#$IT -A check_if -i eth0 \! -s 192.168.0.0/16 -j RETURN
+	#$IT -A check_if -i eth1 -s 192.168.30.0/24 -j RETURN
+
+	# everything else
+	$IT -A check_if -j log_drop
+
+############################################################
+
+# loopback is allowed
+$IT -A INPUT -i lo -j ACCEPT
+
+# verify source address / interface
+$IT -A INPUT -j check_if
+
+# connection state
+$IT -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+$IT -A INPUT -m state --state INVALID -j log_drop
+
+### input ruleset
+
+# ssh and https from everywhere
+$IT -A INPUT -p tcp --dport ssh -j ACCEPT
+$IT -A INPUT -p tcp --dport http -j ACCEPT
+$IT -A INPUT -p tcp --dport https -j ACCEPT
+
+# backup (bacula)
+$IT -A INPUT -p tcp --dport 9102 -s $BACKUP -j ACCEPT
+
+# freeradius
+$IT -A INPUT -p udp -s $WIFI_AP0 --dport 1812 -j ACCEPT
+$IT -A INPUT -p udp -s $WIFI_AP1 --dport 1812 -j ACCEPT
+$IT -A INPUT -p udp -s $WIFI_AP2 --dport 1812 -j ACCEPT
+$IT -A INPUT -p udp -s $WIFI_AP3 --dport 1812 -j ACCEPT
+$IT -A INPUT -p udp -s $WIFI_AP4 --dport 1812 -j ACCEPT
+$IT -A INPUT -p udp -s $MONITOR --dport 1812 -j ACCEPT
+
+# nrpe z monitor-u
+$IT -A INPUT -p tcp -s $MONITOR --dport 5666 -j ACCEPT
+
+# syslog od ap-ciek
+$IT -A INPUT -p udp -s $WIFI_AP0 --dport syslog -j ACCEPT
+$IT -A INPUT -p udp -s $WIFI_AP1 --dport syslog -j ACCEPT
+$IT -A INPUT -p udp -s $WIFI_AP2 --dport syslog -j ACCEPT
+$IT -A INPUT -p udp -s $WIFI_AP3 --dport syslog -j ACCEPT
+$IT -A INPUT -p udp -s $WIFI_AP4 --dport syslog -j ACCEPT
+
+### icmp
+$IT -A INPUT -p icmp -m limit --limit 10/second -j ACCEPT
+$IT -A INPUT -p icmp -j log_drop 
+
+### default rule
+$IT -A INPUT -j log_drop

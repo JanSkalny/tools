@@ -1,5 +1,7 @@
 - name: install ntp
   apt: name=ntp
+
+- name: install datentp
   apt: name=ntpdate
 
 - name: stop ntp

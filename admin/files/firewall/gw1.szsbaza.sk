@@ -1,0 +1,469 @@
+#! /bin/sh
+
+IT=/sbin/iptables
+
+modprobe ip_conntrack
+modprobe ip_conntrack_ftp
+
+SKOLA="192.168.0.0/16"
+
+
+# siete
+UCEBNA21="192.168.21/24"
+ZIACI="192.168.56.0/24"
+UCITELIA="192.168.100.0/24"
+EKONOM="192.168.110.0/24"
+VEDENIE="192.168.120.0/24"
+WIFI="192.168.200.0/24"
+AD="192.168.253.0/24"
+DMZ="192.168.254.0/24"
+MGMT="192.168.255.0/24"
+VPN="172.20.101.0/24"
+VPNVEDENIE="172.20.222.0/24"
+
+# sietove zariadenia
+WIFI_AP_0="192.168.200.32"
+WIFI_AP_1="192.168.200.33"
+WIFI_AP_2="192.168.200.34"
+WIFI_AP_3="192.168.200.35"
+WIFI_AP="$WIFI_AP_0 $WIFI_AP_1 $WIFI_AP_2 $WIFI_AP_3"
+WIFI_AP_VEDENIE="192.168.120.10"
+
+# servery 
+RADIUS="192.168.254.133"
+RADIUS_INET="194.160.5.133"
+WEBHOSTING="192.168.254.136"
+WEBHOSTING_INET="194.160.5.136"
+CUBE="192.168.254.99"
+TSUBAKI="192.168.254.138"
+TSUBAKI_INET="194.160.5.138"
+MONITOR="192.168.254.134"
+MONITOR_INET="194.160.5.134"
+HOLLY="192.168.254.10"
+HOLLY_INET="194.160.5.132"
+BACKUP="194.160.5.138"
+DOCHADZKA="192.168.120.32"
+TP="192.168.254.140"
+TP_INET="194.160.5.140"
+NOD="192.168.254.135"
+NOD_INET="194.160.5.135"
+DC="192.168.253.10"
+
+GW1="192.168.254.254"
+GW2="192.168.254.253"
+
+GW1_INET="194.160.5.130"
+GW2_INET="194.160.5.131"
+
+#XXX: TSUBAKI chodi skrz nas
+SERVERS_INET="$RADIUS_INET $WEBHOSTING_INET $TP_INET $NOD_INET $MONITOR_INET $HOLLY_INET"
+
+echo 1 > /proc/sys/net/ipv4/ip_forward
+echo 1 > /proc/sys/net/ipv4/tcp_syncookies
+echo 0 > /proc/sys/net/ipv4/conf/all/rp_filter
+echo 1 > /proc/sys/net/ipv4/conf/all/log_martians
+echo 1 > /proc/sys/net/ipv4/icmp_echo_ignore_broadcasts
+echo 1 > /proc/sys/net/ipv4/icmp_ignore_bogus_error_responses
+echo 0 > /proc/sys/net/ipv4/conf/all/send_redirects
+echo 0 > /proc/sys/net/ipv4/conf/all/accept_source_route
+
+for TABLE in filter nat mangle; do
+	$IT -t $TABLE -F
+	$IT -t $TABLE -X
+done
+
+$IT -P INPUT DROP
+$IT -P OUTPUT ACCEPT
+$IT -P FORWARD DROP
+
+$IT -N log_reject
+	$IT -A log_reject -m limit --limit 5/sec --limit-burst 8 -j LOG --log-ip-options --log-tcp-options --log-prefix fw-reject_ --log-level debug
+	$IT -A log_reject -m limit --limit 5/sec --limit-burst 8 -j REJECT --reject-with icmp-port-unreachable
+	$IT -A log_reject -j DROP
+
+$IT -N log_drop
+	$IT -A log_drop -m limit --limit 5/sec --limit-burst 8 -j LOG --log-ip-options --log-tcp-options --log-prefix fw-drop_ --log-level debug
+	$IT -A log_drop -j DROP
+
+$IT -N log_accept
+	$IT -A log_accept -m limit --limit 10/sec --limit-burst 20 -j LOG --log-ip-options --log-tcp-options --log-prefix fw-accept_ --log-level debug
+	$IT -A log_accept -j ACCEPT
+
+$IT -N check_if
+	# whitelist
+	$IT -A check_if -s 92.240.244.25 -j RETURN
+	$IT -A check_if -s 87.197.159.3 -j RETURN
+
+	# z vlan rozhrani mozu pochadzat len ip-adresy, ktore tam patria
+	$IT -A check_if -i vlan21 -s 192.168.21.0/24 -j RETURN
+	$IT -A check_if -i vlan56 -s 192.168.56.0/24 -j RETURN
+	$IT -A check_if -i vlan100 -s 192.168.100.0/24 -j RETURN
+	$IT -A check_if -i vlan110 -s 192.168.110.0/24 -j RETURN
+	$IT -A check_if -i vlan120 -s 192.168.120.0/24 -j RETURN
+	$IT -A check_if -i vlan200 -s 192.168.200.0/24 -j RETURN
+	$IT -A check_if -i vlan253 -s 192.168.253.0/24 -j RETURN
+	$IT -A check_if -i vlan254 -s 192.168.254.0/24 -j RETURN
+	$IT -A check_if -i vlan254 -s 172.20.101.0/24 -j RETURN # vpn z gw1 
+	$IT -A check_if -i vlan255 -s 192.168.255.0/24 -j RETURN
+
+	# vpn (admini)
+	$IT -A check_if -i tun0 -s $VPN -j RETURN
+
+	# vpn (remove access pre vedenie)
+	$IT -A check_if -i tun1 -s $VPNVEDENIE -j RETURN
+
+	# RFC 1918 a obdobna haved
+	$IT -A check_if -s 192.168.0.0/16 -j log_drop
+	$IT -A check_if -s 172.16.0.0/12 -j log_drop
+	$IT -A check_if -s 10.0.0.0/8 -j log_drop
+	$IT -A check_if -s 127.0.0.0/8 -j log_drop
+	$IT -A check_if -s 169.254.0.0/16 -j log_drop
+	$IT -A check_if -s 192.0.2.0/24 -j log_drop
+	$IT -A check_if -s 224.0.0.0/3 -j log_drop
+	$IT -A check_if -s 0.0.0.0/8 -i upl0 -j log_drop
+
+	# nase stroje nemaju co chodit z vonku!
+	for HOST in $SERVERS_INET; do
+		$IT -A check_if -s $HOST -i upl0 -j log_drop
+	done
+
+	# vsetko ostatne je ok?
+	$IT -A check_if -j RETURN
+
+# doverujeme
+$IT -N krabica
+	$IT -A krabica -s 92.240.244.25 -j ACCEPT
+	$IT -A krabica -s 92.240.244.36 -j ACCEPT
+	$IT -A krabica -s 87.197.159.3 -j ACCEPT
+	$IT -A krabica -j RETURN
+
+############################################################
+# loopback
+$IT -A INPUT -i lo -j ACCEPT
+
+############################################################
+# INPUT
+
+# verify source address / interface
+$IT -A INPUT -j check_if
+
+# connection state
+$IT -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+$IT -A INPUT -m state --state INVALID -j log_drop
+
+# vrrp na vsetkych rozhraniach
+$IT -A INPUT -p vrrp -j ACCEPT
+
+# ssh from everywhere
+$IT -A INPUT -p tcp --dport 22 -j ACCEPT
+
+# ssh from intranet and from safe hosts
+$IT -A INPUT -p tcp --dport 22 -j krabica
+$IT -A INPUT -s $SKOLA -p tcp --dport 22 -j ACCEPT
+$IT -A INPUT -s $VPN -p tcp --dport 22 -j ACCEPT
+
+# gw1 a gw2 na seba mozu ssh
+$IT -A INPUT -p tcp --dport 22 -s $GW1_INET -j ACCEPT
+$IT -A INPUT -p tcp --dport 22 -s $GW2_INET -j ACCEPT
+
+# dhcp, dns, ntp
+$IT -A INPUT -s 0.0.0.0 -p udp --dport 67 -j ACCEPT
+$IT -A INPUT -s $SKOLA -p udp --dport 67 -j ACCEPT
+$IT -A INPUT -s $SKOLA -p udp --dport 53 -j ACCEPT
+$IT -A INPUT -s $SKOLA -p udp --dport 123 -j ACCEPT
+
+# dns z VPN
+$IT -A INPUT -s $VPN -p udp --dport 53 -j  ACCEPT
+$IT -A INPUT -s $VPNVEDENIE -p udp --dport 53 -j  ACCEPT
+
+# squid (zo skoly a cez VPN)
+$IT -A INPUT -s $SKOLA -p tcp --dport 3128 -j ACCEPT
+$IT -A INPUT -s $VPN -p tcp --dport 3128 -j ACCEPT
+$IT -A INPUT -s $VPNVEDENIE -p tcp --dport 3128 -j ACCEPT
+
+# openvpn
+$IT -A INPUT -p tcp --dport 1194 -j ACCEPT
+$IT -A INPUT -p tcp --dport 1195 -j ACCEPT
+
+# icmp
+$IT -A INPUT -p icmp -m limit --limit 10/second -j ACCEPT
+$IT -A INPUT -p icmp -j log_drop 
+
+# monitor (nrpe)
+$IT -A INPUT -s $MONITOR -p tcp --dport 5666 -j ACCEPT
+
+# monitor (snmp)
+$IT -A INPUT -s $MONITOR -p udp --dport 161 -j ACCEPT
+
+# zahodme samba broadcasty
+$IT -A INPUT -p tcp --dport 137 -j DROP
+$IT -A INPUT -p udp --dport 137 -j DROP
+
+# default
+$IT -A INPUT -j log_reject
+
+
+############################################################
+# FORWARD 
+
+$IT -N SKOLA_TO_DMZ
+	# radius - web management
+	$IT -A SKOLA_TO_DMZ -d $RADIUS -p tcp --dport 443 -j ACCEPT
+
+	# wifi - radius z celej wifi a z monitoru
+	for HOST in $WIFI $MONITOR; do
+		$IT -A SKOLA_TO_DMZ -s $HOST -d $RADIUS -p udp --dport 1812 -j ACCEPT
+	done
+	# wifi - ap-cka mozu syslog na radius
+	for HOST in $WIFI_AP; do
+		$IT -A SKOLA_TO_DMZ -s $HOST -d $RADIUS -p udp --dport 514 -j ACCEPT
+	done
+
+	# webhosting
+	for PORT in 21 25 465 993 80 443 8008 8443; do 
+		$IT -A SKOLA_TO_DMZ -d $WEBHOSTING -p tcp --dport $PORT -j ACCEPT
+	done
+	$IT -A SKOLA_TO_DMZ -d $WEBHOSTING -p tcp --dport 53100:53200 -j ACCEPT
+
+	# eset remote administrator
+	$IT -A SKOLA_TO_DMZ -d $NOD -p tcp --dport 2222 -j ACCEPT
+	$IT -A SKOLA_TO_DMZ -d $NOD_INET -p tcp --dport 2222 -j ACCEPT
+
+	# eset update server
+	$IT -A SKOLA_TO_DMZ -d $NOD -p tcp --dport 8080 -j ACCEPT
+	$IT -A SKOLA_TO_DMZ -d $NOD_INET -p tcp --dport 8080 -j ACCEPT
+
+	# DNS na ns1 a ns2
+	$IT -A SKOLA_TO_DMZ -d $GW1 -p udp --dport 53 -j ACCEPT
+	$IT -A SKOLA_TO_DMZ -d $GW2 -p udp --dport 53 -j ACCEPT
+	$IT -A SKOLA_TO_DMZ -d $GW1 -p tcp --dport 53 -j ACCEPT
+	$IT -A SKOLA_TO_DMZ -d $GW2 -p tcp --dport 53 -j ACCEPT
+
+	# dc na webhosting
+	$IT -A SKOLA_TO_DMZ -s $DC -d $WEBHOSTING -p tcp --dport 3306 -j ACCEPT
+
+
+$IT -N SKOLA_TO_INET
+	# vsetci mozu ftp, http/https, imaps, smtps a ssh vsade
+	$IT -A SKOLA_TO_INET -p tcp --dport 21 -j ACCEPT
+	$IT -A SKOLA_TO_INET -p tcp --dport 80 -j ACCEPT		# XXX: netreba ak funguje squid
+	$IT -A SKOLA_TO_INET -p tcp --dport 443 -j ACCEPT
+	$IT -A SKOLA_TO_INET -p tcp --dport 993 -j ACCEPT
+	$IT -A SKOLA_TO_INET -p tcp --dport 465 -j ACCEPT
+	$IT -A SKOLA_TO_INET -p tcp --dport 22 -j ACCEPT
+
+	# ntp na time.windows.com
+	$IT -A SKOLA_TO_INET -d 65.55.21.17 -p udp --dport 123 -j ACCEPT
+	$IT -A SKOLA_TO_INET -p udp --dport 123 -j ACCEPT
+
+	######### vynimky #########
+
+	# ekonomicke - otp
+	$IT -A SKOLA_TO_INET -s $EKONOM -d 212.24.129.227 -p tcp --dport 4147 -j ACCEPT
+	$IT -A SKOLA_TO_INET -s $EKONOM -d 212.5.211.52 -p tcp --dport 2586 -j ACCEPT
+
+	#ekonomicke - vpn bsk
+	$IT -A SKOLA_TO_INET -s $EKONOM -d 62.152.229.162 -p tcp --dport 10000 -j ACCEPT
+
+	# vedenie e-tlaciva
+	$IT -A SKOLA_TO_INET -s $VEDENIE -d 83.168.146.244 -p tcp --dport 80 -j ACCEPT
+
+	# http://www.rozhlas.sk/inetportal/2007/projects/autor/index.php?page=heller (ondr0uskova)
+	$IT -A SKOLA_TO_INET -s $VEDENIE -d 213.215.116.181 -p tcp --dport 8000 -j ACCEPT
+	$IT -A SKOLA_TO_INET -s $WIFI -d 213.215.116.181 -p tcp --dport 8000 -j ACCEPT
+
+	# http://jemnemelodie.sk. (staiglova)
+	$IT -A SKOLA_TO_INET -s $VEDENIE -d 93.184.69.143 -p tcp --dport 8000 -j ACCEPT
+	$IT -A SKOLA_TO_INET -s $VEDENIE -d 62.168.92.250 -p tcp --dport 8000 -j ACCEPT
+
+	# vsetci mozu openvpn von
+	$IT -A SKOLA_TO_INET -p tcp --dport 1194 -j ACCEPT
+	$IT -A SKOLA_TO_INET -p udp --dport 1194 -j ACCEPT
+
+
+$IT -N INET_TO_DMZ
+	# bacula
+	$IT -A INET_TO_DMZ -s $BACKUP -p tcp --dport 9102 -j ACCEPT
+	
+	# tsubaki je neblokovany
+	$IT -A INET_TO_DMZ -d $TSUBAKI -j ACCEPT
+
+	# webhosting
+	for PORT in 21 25 465 993 80 443; do 
+		$IT -A INET_TO_DMZ -d $WEBHOSTING -p tcp --dport $PORT -j ACCEPT
+	done
+	$IT -A INET_TO_DMZ -d $WEBHOSTING -p tcp --dport 53100:53200 -j ACCEPT
+
+	# monitor - nagios
+	$IT -A INET_TO_DMZ -d $MONITOR -p tcp --dport 443 -j krabica
+	
+	# radius - management
+	$IT -A INET_TO_DMZ -d $RADIUS -p tcp --dport 443 -j krabica
+
+	# TP ssh
+	$IT -A INET_TO_DMZ -d $TP -p tcp --dport 22 -j ACCEPT
+
+	# eset remote administrator
+	$IT -A INET_TO_DMZ -d $NOD -p tcp --dport 2222 -j ACCEPT
+	$IT -A INET_TO_DMZ -d $NOD_INET -p tcp --dport 2222 -j ACCEPT
+
+	# eset update server
+	$IT -A INET_TO_DMZ -d $NOD -p tcp --dport 8080 -j ACCEPT
+	$IT -A INET_TO_DMZ -d $NOD_INET -p tcp --dport 8080 -j ACCEPT
+
+
+$IT -N DMZ_TO_INET
+	# vsetky stroje mozu http/https/smtp a ntp
+	$IT -A DMZ_TO_INET -p tcp --dport 80 -j ACCEPT
+	$IT -A DMZ_TO_INET -p tcp --dport 443 -j ACCEPT
+	$IT -A DMZ_TO_INET -p tcp --dport 25 -j ACCEPT
+	$IT -A DMZ_TO_INET -p udp --dport 123 -j ACCEPT
+	
+	# ubuntu key-server
+	$IT -A DMZ_TO_INET -p tcp --dport 11371 -j ACCEPT
+
+	# git
+	$IT -A DMZ_TO_INET -p tcp --dport 9418 -j ACCEPT
+
+	# cube moze VPN na netvora
+	$IT -A DMZ_TO_INET -s $CUBE -d 92.240.244.36 -p tcp --dport 1194 -j ACCEPT
+
+	# bacula storage daemon
+	$IT -A DMZ_TO_INET -d $BACKUP -p tcp --dport 9103 -j ACCEPT
+
+	# webhosting - razor
+	$IT -A DMZ_TO_INET -s $WEBHOSTING -p tcp --dport 2703 -j ACCEPT
+	$IT -A DMZ_TO_INET -s $WEBHOSTING -p tcp --dport 8 -j ACCEPT
+
+	# webhosting - pyzor
+	$IT -A DMZ_TO_INET -s $WEBHOSTING -p tcp --dport 24441 -j ACCEPT
+	$IT -A DMZ_TO_INET -s $WEBHOSTING -p udp --dport 24441 -j ACCEPT
+
+	# tsubaki moze vsetko
+	$IT -A DMZ_TO_INET -s $TSUBAKI -j ACCEPT
+
+	# holly moze vpn na netvora
+	$IT -A DMZ_TO_INET -s $HOLLY -p udp --dport 1195 -d 92.240.244.36 -j ACCEPT
+
+$IT -N DMZ_TO_SKOLA 
+	# monitor - nrpe
+	$IT -A DMZ_TO_SKOLA -s $MONITOR -p tcp --dport 5666 -j ACCEPT
+
+	# monitor - dochadzka (vnc)
+	$IT -A DMZ_TO_SKOLA -s $MONITOR -d $DOCHADZKA -p tcp --dport 5900 -j ACCEPT
+
+	# monitor - snmp
+	$IT -A DMZ_TO_SKOLA -s $MONITOR -p udp --dport 161 -j ACCEPT
+
+	# monitor - ssh
+	$IT -A DMZ_TO_SKOLA -s $MONITOR -p tcp --dport 22 -j ACCEPT
+
+	# monitor - wifi-ap-* (snmp)
+	for HOST in $WIFI_AP; do
+		$IT -A DMZ_TO_SKOLA -s $MONITOR -d $HOST -p udp --dport 161 -j ACCEPT
+	done
+
+
+$IT -N VPN_TO_INET
+	$IT -A VPN_TO_INET -p tcp --dport 22 -j ACCEPT
+	$IT -A VPN_TO_INET -p tcp --dport 80 -j ACCEPT
+	$IT -A VPN_TO_INET -p tcp --dport 443 -j ACCEPT
+	$IT -A VPN_TO_INET -p tcp --dport 993 -j ACCEPT
+	$IT -A VPN_TO_INET -p tcp --dport 465 -j ACCEPT
+	$IT -A VPN_TO_INET -p udp --dport 1194 -j ACCEPT
+	$IT -A VPN_TO_INET -p tcp --dport 1194 -j ACCEPT
+	$IT -A VPN_TO_INET -p tcp --dport 5222 -j ACCEPT
+
+$IT -N VPN_TO_SKOLA
+	# ap-cka
+	for HOST in $WIFI_AP $WIFI_AP_VEDENIE; do
+		$IT -A VPN_TO_SKOLA -d $HOST -p tcp --dport 80 -j ACCEPT
+		$IT -A VPN_TO_SKOLA -d $HOST -p tcp --dport 22 -j ACCEPT
+		$IT -A VPN_TO_SKOLA -d $HOST -p tcp --dport 443 -j ACCEPT
+	done
+	# ucebna
+	$IT -A VPN_TO_SKOLA -d $UCEBNA21 -p tcp --dport 5900 -j ACCEPT
+	$IT -A VPN_TO_SKOLA -d $UCEBNA21 -p tcp --dport 3389 -j ACCEPT
+
+	# dochadzka
+	$IT -A VPN_TO_SKOLA -d $DOCHADZKA -p tcp --dport 5900 -j ACCEPT
+
+	# management (ssh)
+	$IT -A VPN_TO_SKOLA -d $MGMT -p tcp --dport 22 -j ACCEPT
+
+	# nod
+	$IT -A VPN_TO_SKOLA -d $NOD -p tcp --dport 8080 -j ACCEPT
+	$IT -A VPN_TO_SKOLA -d $NOD_INET -p tcp --dport 8080 -j ACCEPT
+
+
+############################################################
+# FORWARD
+
+# verify source address / interface mapping
+$IT -A FORWARD -j check_if
+
+# connection state
+$IT -A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
+$IT -A FORWARD -m state --state INVALID -j log_drop
+
+$IT -A FORWARD -s $SKOLA	\! -d $SKOLA	-j SKOLA_TO_INET
+$IT -A FORWARD -s $SKOLA	-d $DMZ			-j SKOLA_TO_DMZ
+$IT -A FORWARD -s $DMZ		\! -d $SKOLA	-j DMZ_TO_INET
+$IT -A FORWARD -s $DMZ		-d $SKOLA		-j DMZ_TO_SKOLA
+$IT -A FORWARD \! -s $SKOLA	-d $DMZ			-j INET_TO_DMZ 
+$IT -A FORWARD -s $VPN		-d $SKOLA		-j VPN_TO_SKOLA
+$IT -A FORWARD -s $VPN		-d $DMZ			-j ACCEPT
+$IT -A FORWARD -s $VPN		\! -d $SKOLA	-j VPN_TO_INET
+$IT -A FORWARD -s $UCEBNA21 -d $AD			-j ACCEPT
+$IT -A FORWARD -s $VPN		-d $AD			-j ACCEPT
+$IT -A FORWARD -s $VPNVEDENIE	-d $VEDENIE		-j ACCEPT
+$IT -A FORWARD -s $VPNVEDENIE	-d $DMZ			-j ACCEPT
+$IT -A FORWARD -s $VPNVEDENIE	\! -d $SKOLA	-j VPN_TO_INET
+
+# povolime icmp 
+$IT -A FORWARD -p icmp -m limit --limit 10/second -j ACCEPT
+$IT -A FORWARD -p icmp -j log_drop 
+
+# hack pre asymetricke smerovanie :/ (LB problem)
+$IT -I FORWARD -p tcp --dport 5666 -s $MONITOR -j ACCEPT
+$IT -I FORWARD -p tcp --sport 5666 -d $MONITOR -j ACCEPT
+
+# default
+$IT -A FORWARD -j log_reject
+
+
+############################################################
+# NAT
+
+# squid
+######$IT -t nat -A PREROUTING -i vlan+ -p tcp -m tcp --dport 80 -j REDIRECT --to-port 3128
+#$IT -t nat -N SQUID 
+#	$IT -t nat -A SQUID -d 83.168.146.244 -j RETURN
+#	$IT -t nat -A SQUID -p tcp -j REDIRECT --to-port 3128
+#$IT -t nat -A PREROUTING -i vlan+ -p tcp --dport 80 -j SQUID
+#$IT -t nat -A PREROUTING -i tun0 -p tcp --dport 80 -j SQUID
+#$IT -t nat -A OUTPUT -p tcp --dport 80 -m owner --gid-owner `id -g proxy` -j ACCEPT
+#$IT -t nat -A OUTPUT -p tcp --dport 80 -j DNAT --to-destination 194.160.5.130:3128
+
+# 1-1 mapovanie verejnych strojov
+$IT -t nat -A POSTROUTING -o upl0 -s $WEBHOSTING -j SNAT --to-source $WEBHOSTING_INET 
+$IT -t nat -A POSTROUTING -o upl0 -s $HOLLY -j SNAT --to-source $HOLLY_INET
+$IT -t nat -A POSTROUTING -o upl0 -s $RADIUS -j SNAT --to-source $RADIUS_INET
+$IT -t nat -A POSTROUTING -o upl0 -s $NOD -j SNAT --to-source $NOD_INET
+$IT -t nat -A POSTROUTING -o upl0 -s $TP -j SNAT --to-source $TP_INET
+$IT -t nat -A POSTROUTING -o upl0 -s $MONITOR -j SNAT --to-source $MONITOR_INET
+$IT -t nat -A POSTROUTING -o upl0 -s $TSUBAKI -j SNAT --to-source $TSUBAKI_INET
+$IT -t nat -A PREROUTING -i upl0 -d $WEBHOSTING_INET -j DNAT --to-destination $WEBHOSTING
+$IT -t nat -A PREROUTING -i upl0 -d $HOLLY_INET -j DNAT --to-destination $HOLLY
+$IT -t nat -A PREROUTING -i upl0 -d $RADIUS_INET -j DNAT --to-destination $RADIUS
+$IT -t nat -A PREROUTING -i upl0 -d $NOD_INET -j DNAT --to-destination $NOD
+$IT -t nat -A PREROUTING -i upl0 -d $TP_INET -j DNAT --to-destination $TP
+$IT -t nat -A PREROUTING -i upl0 -d $MONITOR_INET -j DNAT --to-destination $MONITOR
+$IT -t nat -A PREROUTING -i upl0 -d $TSUBAKI_INET -j DNAT --to-destination $TSUBAKI
+
+# vsetci von
+$IT -t nat -A POSTROUTING -o upl0 -s $SKOLA -j MASQUERADE
+$IT -t nat -A POSTROUTING -o upl0 -s $VPN -j MASQUERADE
+$IT -t nat -A POSTROUTING -o upl0 -s $VPNVEDENIE -j MASQUERADE
+
+

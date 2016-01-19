@@ -1,0 +1,158 @@
+#! /bin/sh
+
+IF_INET=br0
+IF_VPN=tun0
+VPN="172.20.0.0/16"
+
+IT=/sbin/iptables
+
+modprobe ip_conntrack
+modprobe ip_conntrack_ftp
+
+echo 1 > /proc/sys/net/ipv4/ip_forward
+echo 1 > /proc/sys/net/ipv4/tcp_syncookies
+echo 1 > /proc/sys/net/ipv4/conf/all/rp_filter
+echo 0 > /proc/sys/net/ipv4/conf/all/log_martians
+echo 1 > /proc/sys/net/ipv4/icmp_echo_ignore_broadcasts
+echo 1 > /proc/sys/net/ipv4/icmp_ignore_bogus_error_responses
+echo 0 > /proc/sys/net/ipv4/conf/all/send_redirects
+echo 0 > /proc/sys/net/ipv4/conf/all/accept_source_route
+
+# XXX: log martains only on br0 and em1 interfaces
+echo 1 > /proc/sys/net/ipv4/conf/br0/log_martians
+echo 1 > /proc/sys/net/ipv4/conf/em1/log_martians
+echo 0 > /proc/sys/net/ipv4/conf/br1/log_martians
+
+for TABLE in filter nat mangle; do
+	$IT -t $TABLE -F
+	$IT -t $TABLE -X
+done
+
+$IT -P INPUT DROP
+$IT -P OUTPUT ACCEPT
+$IT -P FORWARD DROP
+
+
+############################################################
+### custom ACCEPT / REJECT / DROP actions
+
+$IT -N LOG_REJECT
+	$IT -A LOG_REJECT -m limit --limit 5/sec --limit-burst 8 -j LOG \
+		--log-ip-options --log-tcp-options --log-prefix fw-reject_ --log-level debug
+	$IT -A LOG_REJECT -m limit --limit 5/sec --limit-burst 8 -j REJECT \
+		--reject-with icmp-port-unreachable
+	$IT -A LOG_REJECT -j DROP
+
+$IT -N LOG_DROP
+	$IT -A LOG_DROP -m limit --limit 5/sec --limit-burst 8 -j LOG \
+	   	--log-ip-options --log-tcp-options --log-prefix fw-drop_ --log-level debug
+	$IT -A LOG_DROP -j DROP
+
+$IT -N LOG_ACCEPT
+	$IT -A LOG_ACCEPT -m limit --limit 10/sec --limit-burst 20 -j LOG \
+		--log-ip-options --log-tcp-options --log-prefix fw-accept_ --log-level debug
+	$IT -A LOG_ACCEPT -j ACCEPT
+
+
+############################################################
+### verify source address of packet (RFC 2827, RFC 1918)
+
+$IT -N check_if
+	# whitelist
+	$IT -A check_if -s 92.240.244.25 -j RETURN
+	$IT -A check_if -s 87.197.159.3 -j RETURN
+
+	# no-one can send from special address ranges!
+	$IT -A check_if -s 127.0.0.0/8 -j LOG_DROP		# loopback
+	$IT -A check_if -s 0.0.0.0/8 -j LOG_DROP		# DHCP
+	$IT -A check_if -s 169.254.0.0/16 -j DROP		# APIPA
+	$IT -A check_if -s 192.0.2.0/24 -j LOG_DROP		# RFC 3330
+	$IT -A check_if -s 204.152.64.0/23 -j LOG_DROP	# RFC 3330
+	$IT -A check_if -s 224.0.0.0/3 -j DROP			# multicast
+	$IT -A check_if -s 100.64.0.0/10 -j LOG_DROP	# RFC 6598
+
+	# VPN na netvor.sk
+	$IT -A check_if -i $IF_VPN -s $VPN -j RETURN
+
+	# public interface MUST NOT containt any private address
+	$IT -A check_if -i $IF_INET -s $VPN -j LOG_DROP
+	$IT -A check_if -i $IF_INET -j RETURN
+
+	# everything else is dropped!
+	$IT -A check_if -j LOG_DROP
+
+
+############################################################
+### INPUT_* rulesets
+
+
+############################################################
+### INPUT ruleset
+
+# loopback is allowed
+$IT -A INPUT -i lo -j ACCEPT
+
+# verify source address / interface
+$IT -A INPUT -j check_if
+
+# connection tracking:
+# - allow all related/established traffic
+# - invalid packets MUST be dropped!
+for CHAIN in INPUT FORWARD; do
+	$IT -A $CHAIN -m state --state ESTABLISHED,RELATED -j ACCEPT
+	$IT -A $CHAIN -m state --state INVALID -j LOG_DROP
+done
+
+# ssh from everywhere
+$IT -A INPUT -p tcp --dport 22 -j ACCEPT
+
+# http(s)
+$IT -A INPUT -p tcp --dport 80 -j ACCEPT
+$IT -A INPUT -p tcp --dport 443 -j ACCEPT
+
+# OVPN z krabica.net
+$IT -A INPUT -p udp --dport 67 -j ACCEPT
+$IT -A INPUT -p udp --dport 68 -j ACCEPT
+
+# NRPE z krabice (nagios)
+$IT -A INPUT -s 92.240.244.36 -p tcp --dport 5666 -j ACCEPT
+$IT -A INPUT -s 172.20.0.1 -p tcp --dport 5666 -j ACCEPT
+
+# vnc z celej lanky
+$IT -A INPUT -p tcp --dport 5901:5910 -s 192.168.30.0/24 -j ACCEPT
+
+# telnet
+$IT -A INPUT -p tcp --dport 10000:19999 -s 193.87.2.14 -j ACCEPT
+
+# icmp
+$IT -A INPUT -p icmp -m limit --limit 10/second -j ACCEPT
+$IT -A INPUT -p icmp -j LOG_DROP 
+
+# default rule
+$IT -A INPUT -j LOG_DROP
+
+
+
+############################################################
+### INPUT ruleset
+
+# six tunnel
+$IT -A FORWARD -i br1 -d 147.175.204.0/24 -j ACCEPT 
+$IT -A FORWARD -i br1 \! -s $VPN -j ACCEPT 
+
+# VMs
+$IT -A FORWARD -i br0 -s 192.168.30.88 -j ACCEPT
+$IT -A FORWARD -i br0 -d 192.168.30.88 -j ACCEPT
+$IT -A FORWARD -i br0 -s 192.168.30.201 -j ACCEPT
+$IT -A FORWARD -i br0 -d 192.168.30.201 -j ACCEPT
+$IT -A FORWARD -i br0 -s 192.168.30.202 -j ACCEPT
+$IT -A FORWARD -i br0 -d 192.168.30.202 -j ACCEPT
+$IT -A FORWARD -i br0 -s 192.168.30.203 -j ACCEPT
+$IT -A FORWARD -i br0 -d 192.168.30.203 -j ACCEPT
+$IT -A FORWARD -i br0 -s 192.168.30.222 -j ACCEPT
+$IT -A FORWARD -i br0 -d 192.168.30.222 -j ACCEPT
+
+# default rule
+$IT -A FORWARD -j LOG_DROP
+
+

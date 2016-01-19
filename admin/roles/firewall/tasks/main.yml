@@ -1,0 +1,13 @@
+- name: install fw.sh
+  copy: 
+    src=files/firewall/{{ inventory_hostname }} 
+    dest=/etc/init.d/fw.sh 
+    owner=root group=root mode=0550
+
+- name: load fw.sh on boot
+  file: 
+    src=/etc/init.d/fw.sh 
+    dest=/etc/rc2.d/S19fw 
+    owner=root group=root state=link
+
+#XXX: reload fw.sh
