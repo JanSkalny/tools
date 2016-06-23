@@ -1,9 +1,13 @@
 #example ansible_ssh_pass=password ask_sudo_pass=Yes ansible_sudo_pass=password
-
 [cerise]
 data.cerise.io
 service.cerise.io
 www.cerise.io
+vvn.cerise.io 
+builder.cerise.io ansible_ssh_extra_args=-A
+
+[cerise-endpoints]
+data.cerise.io
 
 [netvor]
 kurobara.netvor.sk
@@ -15,9 +19,6 @@ hinagiku.netvor.sk
 [binarity]
 true.binarity.cz
 bitwise.binarity.cz
-
-[sportbetmedia]
-alfa.sportbetmedia.info
 
 [szsbaza]
 gw1.szsbaza.sk
@@ -36,3 +37,4 @@ gatekeeper.verdesro.sk
 backup.verdesro.sk
 dev.verdesro.sk
 intranet.verdesro.sk
+

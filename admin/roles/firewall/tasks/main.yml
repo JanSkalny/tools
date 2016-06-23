@@ -10,4 +10,5 @@
     dest=/etc/rc2.d/S19fw 
     owner=root group=root state=link
 
-#XXX: reload fw.sh
+- name: reconfigure firewall
+  raw: /etc/init.d/fw.sh

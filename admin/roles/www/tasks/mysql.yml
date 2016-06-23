@@ -1,0 +1,31 @@
+
+# install packages
+- name: install packages
+  apt: name={{ item }}
+  with_items:
+  - php5-mysql 
+  - mysql-server 
+  - mysqltuner
+  - phpmyadmin 
+ 
+# configure my.cnf in mysql
+
+# configure phpmyadmin in apache
+
+# increase fd limits for mysqld
+- name: increase limits for mysqld
+  lineinfile: 
+    dest: "/etc/security/limits.conf"
+    line: "{{ item }}"
+  with_items:
+  - "mysql             soft    nofile           32000"
+  - "mysql             hard    nofile           48000"
+
+# restart affected services
+- name: restart mysql
+  service: name=mysql state=restarted
+- name: restart apache2
+  service: name=apache2 state=restarted
+- name: restart php5-fpm
+  service: name=php5-fpm state=restarted
+

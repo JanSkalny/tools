@@ -1,0 +1,24 @@
+- name: install required packages
+  apt: name="{{item}}" state=present
+  with_items:
+  - npm 
+  - nodejs-legacy
+  - postfix
+
+
+- name: install composer
+  raw: curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
+
+- name: install laravel
+  raw: composer global require "laravel/installer=~1.1"
+
+- name: checkout repository
+  git: repo=git@gitlab.ctrdn.net:cerise/cerise-portal.git
+       dest=/opt/cerise-portal
+       accept_hostkey=yes
+
+- name: install bower and gulp
+  raw: npm install -g bower gulp
+
+- name: install project depdendencies
+  raw: npm install

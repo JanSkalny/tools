@@ -100,10 +100,9 @@ $IT -A INPUT -m state --state INVALID -j LOG_DROP
 $IT -A INPUT -p tcp --dport 22 -j ACCEPT
 
 # publicly accessible services
-#XXX:
-#for PORT in 25 465 80 443; do
-#	$IT -A INPUT -p tcp --dport $PORT -j ACCEPT
-#done
+for PORT in 80 443; do
+	$IT -A INPUT -p tcp --dport $PORT -j ACCEPT
+done
 
 # bacula FD from backup server
 $IT -A INPUT -p tcp --dport 9102 -s $BACKUP -j ACCEPT

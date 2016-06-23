@@ -18,6 +18,9 @@
 - include: fancy_profile.yml profile_file="/home/{{user}}/.profile"
 - include: fancy_profile.yml profile_file="/root/.profile"
 
+# tune everything! 
+- include: sysctl.yml
+
 # fail2ban
 - include: fail2ban.yml
 

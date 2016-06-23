@@ -1,9 +1,3 @@
-- name: reboot on panic
-  lineinfile:
-    dest: "/etc/sysctl.conf"
-    regexp: "^kernel.panic"
-    line: "kernel.panic = 10"
-
 - name: vim is default editor
   command: update-alternatives --set editor /usr/bin/vim.nox
 

@@ -1,0 +1,37 @@
+Alias /php5-fcgi-{{ www_user }} /usr/lib/cgi-bin/php5-fcgi-{{ www_user }}
+FastCgiExternalServer /usr/lib/cgi-bin/php5-fcgi-{{ www_user }} \
+  -socket /var/run/php5-fpm-{{ www_user }}.sock \
+  -pass-header Authorization \
+  -idle-timeout 3600
+
+<Directory "/var/www/{{ www_domain }}">
+  AllowOverride All
+  Order Allow,Deny
+  Allow from All
+  Options SymLinksIfOwnerMatch
+
+  AddHandler php5-fcgi-{{ www_user }} .php
+  Action php5-fcgi-{{ www_user }} /php5-fcgi-{{ www_user }}
+</Directory>
+
+<VirtualHost *:80>
+  ServerName {{ www_domain }}
+  ServerAlias *.{{ www_domain }}
+  VirtualDocumentRoot /var/www/{{ www_domain }}/%-3.0+
+
+  ErrorLog /var/log/apache2/{{ www_domain }}_error.log
+  CustomLog /var/log/apache2/{{ www_domain }}_access.log combined
+</VirtualHost>
+
+<VirtualHost *:443>
+  ServerName {{ www_domain }}:443
+  ServerAlias *.{{ www_domain }}:443
+  VirtualDocumentRoot /var/www/{{ www_domain }}/%-3.0+
+
+  ErrorLog /var/log/apache2/{{ www_domain }}_error.log
+  CustomLog /var/log/apache2/{{ www_domain }}_access.log combined
+
+  SSLEngine on
+  SSLCertificateFile /etc/apache2/ssl/{{ www_domain }}.crt
+  SSLCertificateKeyFile /etc/apache2/ssl/{{ www_domain }}.key
+</VirtualHost>

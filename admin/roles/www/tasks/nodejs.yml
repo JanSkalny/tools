@@ -1,0 +1,11 @@
+- name: install packages
+  apt: name={{ item }}
+  with_items:
+  - npm
+
+- name: enable apache2 modules
+  raw: a2enmod {{ item }}
+  with_items:
+  - proxy_http
+
+

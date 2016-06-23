@@ -1,0 +1,48 @@
+- name: create user
+  user: 
+    name={{ www_user }}
+    home="/var/www/{{ www_domain }}"
+    groups="www-data"
+    shell="/bin/false"
+    createhome=no state=present
+
+- name: create domain directories
+  file: 
+    path="/var/www/{{ www_domain }}/{{ item }}" 
+    state=directory owner={{ www_user }} group={{ www_user }}
+  with_items:
+    - "/"
+    - "public_html/"
+    - "public_html/www/"
+    - "public_html/_/"
+    - "logs/"
+  
+- name: create redirection via .htaccess
+  template: 
+    src="htaccess_redirect.j2" 
+    dst="/var/www/{{ www_domain }}/_/.htaccess"
+    owner={{ www_user }} group={{ www_user }}
+
+- name: create php5-fpm pool
+  template:
+    src="pool.conf.j2"
+    dst="/etc/php5/fpm/pool.d/{{ www_user }}.conf"
+  notify:
+    - restart php
+
+- name: create vhost 
+  template:
+    src="domain.conf.j2"
+    dst="/etc/apache2/sites-available/400-{{ www_domain }}.conf"
+  notify:
+    - restart apache
+
+- name: enable vhost
+  raw: a2ensite "400-{{ www_domain }}.conf"
+
+
+handlers:
+  - name: restart apache
+    service: name=apache2 state=restarted
+  - name: restart php
+    service: name=php5-fpm state=restarted

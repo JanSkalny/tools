@@ -1,4 +1,3 @@
----
 - hosts: cerise
   sudo: yes
   vars:
@@ -6,3 +5,20 @@
   roles:
   - ubuntu_server
   - { role: admins, users: ['johnny','kauchman','castor'] }
+
+- hosts: service.cerise.io
+  sudo: yes
+  roles:
+  #- firewall
+  - cerise-controller
+
+- hosts: www.cerise.io
+  sudo: yes
+  roles:
+  #- firewall
+  - www
+
+- hosts: cerise-endpoints
+  sudo: yes
+  roles:
+  - cerise-endpoint

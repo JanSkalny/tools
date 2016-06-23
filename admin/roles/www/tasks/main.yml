@@ -1,0 +1,9 @@
+
+# install and secure basic apache, php, mysql setup
+- include: base.yml
+
+# create domains as requested
+#TODO:
+
+# install anc configure mysql
+- include: mysql.yml
