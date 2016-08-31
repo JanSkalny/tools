@@ -1,23 +1,22 @@
 
 - name: check if zabbix-release is available
   command: dpkg-query -W zabbix-release
-  register: zabbix-release
-  failed_when: zabbix-release.rc > 1
-  changed_when: zabbix-release.rc == 1
+  register: res
+  failed_when: False
 
 - name: download zabbix release packae
   get_url: 
     url="http://repo.zabbix.com/zabbix/2.4/ubuntu/pool/main/z/zabbix-release/zabbix-release_2.4-1+trusty_all.deb"
-    dest="/home/{{ ansible_env.USER }}/zabbix-release_2.4-1+trusty_all.deb"
-  when: zabbix-release.rc == 1
+    dest="/tmp/zabbix-release_2.4-1+trusty_all.deb"
+  when: res.rc == 1
 
 - name: install zabbix-release_2.4-1+trusty_all.deb
-  apt: deb="/home/{{ ansible_env.USER }}/zabbix-release_2.4-1+trusty_all.deb"
-  when: zabbix-release.rc == 1
+  apt: deb="/tmp/zabbix-release_2.4-1+trusty_all.deb"
+  when: res.rc == 1
 
 - name: apt-get update
   apt: update_cache=yes
-  when: zabbix-release.rc == 1
+  when: res.rc == 1
 
 - name: install zabbix-agent
   apt: name=zabbix-agent state=present

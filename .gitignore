@@ -30,3 +30,7 @@
 
 # Debug files
 *.dSYM/
+admin/files/backup/*
+admin/host_vars/*
+admin/ansible.log
+admin/*.retry
