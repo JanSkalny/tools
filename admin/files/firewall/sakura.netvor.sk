@@ -2,7 +2,8 @@
 
 IT=/sbin/iptables
 
-VPN=172.20.0.0/16
+VPN="172.20.0.0/16"
+BACKUP="194.160.5.138"
 
 modprobe ip_conntrack
 modprobe ip_conntrack_ftp
@@ -113,12 +114,8 @@ $IT -A INPUT -p tcp --dport 5666 -s $VPN -j ACCEPT
 $IT -A INPUT -p tcp --dport 10050 -s 92.240.244.36 -j ACCEPT
 $IT -A INPUT -p tcp --dport 10050 -s $VPN -j ACCEPT
 
-# backup (bacula) od vsetkych klientov
-$IT -A INPUT -p tcp --dport 9103 -s 92.240.244.25 -j ACCEPT
-$IT -A INPUT -p tcp --dport 9103 -s 92.240.244.36 -j ACCEPT
-$IT -A INPUT -p tcp --dport 9103 -s 92.240.244.37 -j ACCEPT
-$IT -A INPUT -p tcp --dport 9103 -s 92.240.244.42 -j ACCEPT
-$IT -A INPUT -p tcp --dport 9103 -s 194.160.5.128/28 -j ACCEPT
+# zalohovanie (bacula)
+$IT -A INPUT -p tcp --dport 9102 -s $BACKUP -j ACCEPT
 
 # icmp
 $IT -A INPUT -p icmp -m limit --limit 10/second -j ACCEPT
