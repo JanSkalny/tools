@@ -1,16 +1,18 @@
 #!/bin/bash
 
-SINK=shodan
-SINK_DEV=em0
+SINK=slowpoke
+SINK_DEV=em1
 
-GEN=disco-stu
+GEN=nuc
 GEN_DEV=em0
 
-DURATION=20
+DURATION=30
 WAIT=5
 DURATION=$( expr $DURATION - $WAIT )
 
-GEN_ARGS=""
+GEN_ARGS="-S b8:ae:ed:73:25:69 -D 00:90:0b:40:c9:97 -d 10.20.10.100 -s 10.20.20.100"
+SINK_ARGS=""
+#GEN_ARGS="-S 00:1b:21:13:db:d4 -D 00:00:24:d1:66:a5 -d 1.1.1.10 -s 2.2.2.20"
 #GEN_ARGS="-S 00:1b:21:13:db:d4 -D AC:22:0B:8D:4C:8A -s 1.1.1.10 -d 2.2.2.20"
 COMMON_ARGS="-w $WAIT -T 100"
 
@@ -39,7 +41,7 @@ for LEN in 64 128 256 512 1024 1280 1518; do
 
 	# start measurement 
 	echo "starting sink"
-	ssh $SINK "/usr/src/tools/tools/netmap/pkt-gen -i $SINK_DEV -f rx $COMMON_ARGS" > measurements/$TEST/rx/$LEN 2>&1 &
+	ssh $SINK "/usr/src/tools/tools/netmap/pkt-gen -i $SINK_DEV -f rx $SINK_ARGS $COMMON_ARGS" > measurements/$TEST/rx/$LEN 2>&1 &
 	SINK_PID=$!
 
 	# testing in progress
