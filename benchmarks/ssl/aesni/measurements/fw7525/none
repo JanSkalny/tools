@@ -1,0 +1,121 @@
+
+Doing aes-128-ecb for 3s on 16 size blocks: 29629193 aes-128-ecb's in 3.00s
+Doing aes-128-ecb for 3s on 64 size blocks: 15106911 aes-128-ecb's in 3.00s
+Doing aes-128-ecb for 3s on 256 size blocks: 4724757 aes-128-ecb's in 3.00s
+Doing aes-128-ecb for 3s on 1024 size blocks: 1301432 aes-128-ecb's in 3.00s
+Doing aes-128-ecb for 3s on 8192 size blocks: 167301 aes-128-ecb's in 3.00s
+OpenSSL 1.0.1k 8 Jan 2015
+built on: Thu Dec  3 18:28:10 2015
+options:bn(64,32) rc4(4x,int) des(ptr,risc1,16,long) aes(partial) blowfish(idx) 
+compiler: -I. -I.. -I../include  -fPIC -DOPENSSL_PIC -DOPENSSL_THREADS -D_REENTRANT -DDSO_DLFCN -DHAVE_DLFCN_H -DL_ENDIAN -DTERMIO -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -Wl,-z,relro -Wa,--noexecstack -Wall -march=i686 -DOPENSSL_BN_ASM_PART_WORDS -DOPENSSL_IA32_SSE2 -DOPENSSL_BN_ASM_MONT -DOPENSSL_BN_ASM_GF2m -DSHA1_ASM -DSHA256_ASM -DSHA512_ASM -DMD5_ASM -DRMD160_ASM -DAES_ASM -DVPAES_ASM -DWHIRLPOOL_ASM -DGHASH_ASM
+The 'numbers' are in 1000s of bytes per second processed.
+type             16 bytes     64 bytes    256 bytes   1024 bytes   8192 bytes
+aes-128-ecb     158022.36k   322280.77k   403179.26k   444222.12k   456843.26k
+Doing aes-128-ecb for 3s on 16 size blocks: 29630389 aes-128-ecb's in 3.00s
+Doing aes-128-ecb for 3s on 64 size blocks: 15051317 aes-128-ecb's in 3.00s
+Doing aes-128-ecb for 3s on 256 size blocks: 4724915 aes-128-ecb's in 3.00s
+Doing aes-128-ecb for 3s on 1024 size blocks: 1301409 aes-128-ecb's in 3.00s
+Doing aes-128-ecb for 3s on 8192 size blocks: 167303 aes-128-ecb's in 3.00s
+OpenSSL 1.0.1k 8 Jan 2015
+built on: Thu Dec  3 18:28:10 2015
+options:bn(64,32) rc4(4x,int) des(ptr,risc1,16,long) aes(partial) blowfish(idx) 
+compiler: -I. -I.. -I../include  -fPIC -DOPENSSL_PIC -DOPENSSL_THREADS -D_REENTRANT -DDSO_DLFCN -DHAVE_DLFCN_H -DL_ENDIAN -DTERMIO -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -Wl,-z,relro -Wa,--noexecstack -Wall -march=i686 -DOPENSSL_BN_ASM_PART_WORDS -DOPENSSL_IA32_SSE2 -DOPENSSL_BN_ASM_MONT -DOPENSSL_BN_ASM_GF2m -DSHA1_ASM -DSHA256_ASM -DSHA512_ASM -DMD5_ASM -DRMD160_ASM -DAES_ASM -DVPAES_ASM -DWHIRLPOOL_ASM -DGHASH_ASM
+The 'numbers' are in 1000s of bytes per second processed.
+type             16 bytes     64 bytes    256 bytes   1024 bytes   8192 bytes
+aes-128-ecb     158028.74k   321094.76k   403192.75k   444214.27k   456848.73k
+Doing aes-128-ecb for 3s on 16 size blocks: 29630076 aes-128-ecb's in 3.00s
+Doing aes-128-ecb for 3s on 64 size blocks: 15026856 aes-128-ecb's in 3.00s
+Doing aes-128-ecb for 3s on 256 size blocks: 4724930 aes-128-ecb's in 3.00s
+Doing aes-128-ecb for 3s on 1024 size blocks: 1301399 aes-128-ecb's in 3.00s
+Doing aes-128-ecb for 3s on 8192 size blocks: 167303 aes-128-ecb's in 3.00s
+OpenSSL 1.0.1k 8 Jan 2015
+built on: Thu Dec  3 18:28:10 2015
+options:bn(64,32) rc4(4x,int) des(ptr,risc1,16,long) aes(partial) blowfish(idx) 
+compiler: -I. -I.. -I../include  -fPIC -DOPENSSL_PIC -DOPENSSL_THREADS -D_REENTRANT -DDSO_DLFCN -DHAVE_DLFCN_H -DL_ENDIAN -DTERMIO -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -Wl,-z,relro -Wa,--noexecstack -Wall -march=i686 -DOPENSSL_BN_ASM_PART_WORDS -DOPENSSL_IA32_SSE2 -DOPENSSL_BN_ASM_MONT -DOPENSSL_BN_ASM_GF2m -DSHA1_ASM -DSHA256_ASM -DSHA512_ASM -DMD5_ASM -DRMD160_ASM -DAES_ASM -DVPAES_ASM -DWHIRLPOOL_ASM -DGHASH_ASM
+The 'numbers' are in 1000s of bytes per second processed.
+type             16 bytes     64 bytes    256 bytes   1024 bytes   8192 bytes
+aes-128-ecb     158027.07k   320572.93k   403194.03k   444210.86k   456848.73k
+Doing aes-128-ecb for 3s on 16 size blocks: 29629904 aes-128-ecb's in 3.00s
+Doing aes-128-ecb for 3s on 64 size blocks: 15130813 aes-128-ecb's in 3.00s
+Doing aes-128-ecb for 3s on 256 size blocks: 4725010 aes-128-ecb's in 3.00s
+Doing aes-128-ecb for 3s on 1024 size blocks: 1301379 aes-128-ecb's in 3.00s
+Doing aes-128-ecb for 3s on 8192 size blocks: 167305 aes-128-ecb's in 3.00s
+OpenSSL 1.0.1k 8 Jan 2015
+built on: Thu Dec  3 18:28:10 2015
+options:bn(64,32) rc4(4x,int) des(ptr,risc1,16,long) aes(partial) blowfish(idx) 
+compiler: -I. -I.. -I../include  -fPIC -DOPENSSL_PIC -DOPENSSL_THREADS -D_REENTRANT -DDSO_DLFCN -DHAVE_DLFCN_H -DL_ENDIAN -DTERMIO -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -Wl,-z,relro -Wa,--noexecstack -Wall -march=i686 -DOPENSSL_BN_ASM_PART_WORDS -DOPENSSL_IA32_SSE2 -DOPENSSL_BN_ASM_MONT -DOPENSSL_BN_ASM_GF2m -DSHA1_ASM -DSHA256_ASM -DSHA512_ASM -DMD5_ASM -DRMD160_ASM -DAES_ASM -DVPAES_ASM -DWHIRLPOOL_ASM -DGHASH_ASM
+The 'numbers' are in 1000s of bytes per second processed.
+type             16 bytes     64 bytes    256 bytes   1024 bytes   8192 bytes
+aes-128-ecb     158026.15k   322790.68k   403200.85k   444204.03k   456854.19k
+Doing aes-128-ecb for 3s on 16 size blocks: 29626655 aes-128-ecb's in 3.00s
+Doing aes-128-ecb for 3s on 64 size blocks: 15065021 aes-128-ecb's in 3.00s
+Doing aes-128-ecb for 3s on 256 size blocks: 4724468 aes-128-ecb's in 3.00s
+Doing aes-128-ecb for 3s on 1024 size blocks: 1301247 aes-128-ecb's in 3.00s
+Doing aes-128-ecb for 3s on 8192 size blocks: 167284 aes-128-ecb's in 3.00s
+OpenSSL 1.0.1k 8 Jan 2015
+built on: Thu Dec  3 18:28:10 2015
+options:bn(64,32) rc4(4x,int) des(ptr,risc1,16,long) aes(partial) blowfish(idx) 
+compiler: -I. -I.. -I../include  -fPIC -DOPENSSL_PIC -DOPENSSL_THREADS -D_REENTRANT -DDSO_DLFCN -DHAVE_DLFCN_H -DL_ENDIAN -DTERMIO -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -Wl,-z,relro -Wa,--noexecstack -Wall -march=i686 -DOPENSSL_BN_ASM_PART_WORDS -DOPENSSL_IA32_SSE2 -DOPENSSL_BN_ASM_MONT -DOPENSSL_BN_ASM_GF2m -DSHA1_ASM -DSHA256_ASM -DSHA512_ASM -DMD5_ASM -DRMD160_ASM -DAES_ASM -DVPAES_ASM -DWHIRLPOOL_ASM -DGHASH_ASM
+The 'numbers' are in 1000s of bytes per second processed.
+type             16 bytes     64 bytes    256 bytes   1024 bytes   8192 bytes
+aes-128-ecb     158008.83k   321387.11k   403154.60k   444158.98k   456796.84k
+Doing aes-128-ecb for 3s on 16 size blocks: 29629269 aes-128-ecb's in 3.00s
+Doing aes-128-ecb for 3s on 64 size blocks: 15040075 aes-128-ecb's in 3.00s
+Doing aes-128-ecb for 3s on 256 size blocks: 4724791 aes-128-ecb's in 3.00s
+Doing aes-128-ecb for 3s on 1024 size blocks: 1301412 aes-128-ecb's in 3.00s
+Doing aes-128-ecb for 3s on 8192 size blocks: 167300 aes-128-ecb's in 3.00s
+OpenSSL 1.0.1k 8 Jan 2015
+built on: Thu Dec  3 18:28:10 2015
+options:bn(64,32) rc4(4x,int) des(ptr,risc1,16,long) aes(partial) blowfish(idx) 
+compiler: -I. -I.. -I../include  -fPIC -DOPENSSL_PIC -DOPENSSL_THREADS -D_REENTRANT -DDSO_DLFCN -DHAVE_DLFCN_H -DL_ENDIAN -DTERMIO -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -Wl,-z,relro -Wa,--noexecstack -Wall -march=i686 -DOPENSSL_BN_ASM_PART_WORDS -DOPENSSL_IA32_SSE2 -DOPENSSL_BN_ASM_MONT -DOPENSSL_BN_ASM_GF2m -DSHA1_ASM -DSHA256_ASM -DSHA512_ASM -DMD5_ASM -DRMD160_ASM -DAES_ASM -DVPAES_ASM -DWHIRLPOOL_ASM -DGHASH_ASM
+The 'numbers' are in 1000s of bytes per second processed.
+type             16 bytes     64 bytes    256 bytes   1024 bytes   8192 bytes
+aes-128-ecb     158022.77k   320854.93k   403182.17k   444215.30k   456840.53k
+Doing aes-128-ecb for 3s on 16 size blocks: 29626644 aes-128-ecb's in 3.00s
+Doing aes-128-ecb for 3s on 64 size blocks: 15091370 aes-128-ecb's in 3.00s
+Doing aes-128-ecb for 3s on 256 size blocks: 4724270 aes-128-ecb's in 3.00s
+Doing aes-128-ecb for 3s on 1024 size blocks: 1301232 aes-128-ecb's in 3.00s
+Doing aes-128-ecb for 3s on 8192 size blocks: 167282 aes-128-ecb's in 3.00s
+OpenSSL 1.0.1k 8 Jan 2015
+built on: Thu Dec  3 18:28:10 2015
+options:bn(64,32) rc4(4x,int) des(ptr,risc1,16,long) aes(partial) blowfish(idx) 
+compiler: -I. -I.. -I../include  -fPIC -DOPENSSL_PIC -DOPENSSL_THREADS -D_REENTRANT -DDSO_DLFCN -DHAVE_DLFCN_H -DL_ENDIAN -DTERMIO -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -Wl,-z,relro -Wa,--noexecstack -Wall -march=i686 -DOPENSSL_BN_ASM_PART_WORDS -DOPENSSL_IA32_SSE2 -DOPENSSL_BN_ASM_MONT -DOPENSSL_BN_ASM_GF2m -DSHA1_ASM -DSHA256_ASM -DSHA512_ASM -DMD5_ASM -DRMD160_ASM -DAES_ASM -DVPAES_ASM -DWHIRLPOOL_ASM -DGHASH_ASM
+The 'numbers' are in 1000s of bytes per second processed.
+type             16 bytes     64 bytes    256 bytes   1024 bytes   8192 bytes
+aes-128-ecb     158008.77k   321949.23k   403137.71k   444153.86k   456791.38k
+Doing aes-128-ecb for 3s on 16 size blocks: 29629462 aes-128-ecb's in 3.00s
+Doing aes-128-ecb for 3s on 64 size blocks: 15024366 aes-128-ecb's in 3.00s
+Doing aes-128-ecb for 3s on 256 size blocks: 4724795 aes-128-ecb's in 3.00s
+Doing aes-128-ecb for 3s on 1024 size blocks: 1301418 aes-128-ecb's in 3.00s
+Doing aes-128-ecb for 3s on 8192 size blocks: 167303 aes-128-ecb's in 3.00s
+OpenSSL 1.0.1k 8 Jan 2015
+built on: Thu Dec  3 18:28:10 2015
+options:bn(64,32) rc4(4x,int) des(ptr,risc1,16,long) aes(partial) blowfish(idx) 
+compiler: -I. -I.. -I../include  -fPIC -DOPENSSL_PIC -DOPENSSL_THREADS -D_REENTRANT -DDSO_DLFCN -DHAVE_DLFCN_H -DL_ENDIAN -DTERMIO -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -Wl,-z,relro -Wa,--noexecstack -Wall -march=i686 -DOPENSSL_BN_ASM_PART_WORDS -DOPENSSL_IA32_SSE2 -DOPENSSL_BN_ASM_MONT -DOPENSSL_BN_ASM_GF2m -DSHA1_ASM -DSHA256_ASM -DSHA512_ASM -DMD5_ASM -DRMD160_ASM -DAES_ASM -DVPAES_ASM -DWHIRLPOOL_ASM -DGHASH_ASM
+The 'numbers' are in 1000s of bytes per second processed.
+type             16 bytes     64 bytes    256 bytes   1024 bytes   8192 bytes
+aes-128-ecb     158023.80k   320519.81k   403182.51k   444217.34k   456848.73k
+Doing aes-128-ecb for 3s on 16 size blocks: 29629823 aes-128-ecb's in 3.00s
+Doing aes-128-ecb for 3s on 64 size blocks: 15081693 aes-128-ecb's in 3.00s
+Doing aes-128-ecb for 3s on 256 size blocks: 4724862 aes-128-ecb's in 3.00s
+Doing aes-128-ecb for 3s on 1024 size blocks: 1301396 aes-128-ecb's in 3.00s
+Doing aes-128-ecb for 3s on 8192 size blocks: 167304 aes-128-ecb's in 3.00s
+OpenSSL 1.0.1k 8 Jan 2015
+built on: Thu Dec  3 18:28:10 2015
+options:bn(64,32) rc4(4x,int) des(ptr,risc1,16,long) aes(partial) blowfish(idx) 
+compiler: -I. -I.. -I../include  -fPIC -DOPENSSL_PIC -DOPENSSL_THREADS -D_REENTRANT -DDSO_DLFCN -DHAVE_DLFCN_H -DL_ENDIAN -DTERMIO -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -Wl,-z,relro -Wa,--noexecstack -Wall -march=i686 -DOPENSSL_BN_ASM_PART_WORDS -DOPENSSL_IA32_SSE2 -DOPENSSL_BN_ASM_MONT -DOPENSSL_BN_ASM_GF2m -DSHA1_ASM -DSHA256_ASM -DSHA512_ASM -DMD5_ASM -DRMD160_ASM -DAES_ASM -DVPAES_ASM -DWHIRLPOOL_ASM -DGHASH_ASM
+The 'numbers' are in 1000s of bytes per second processed.
+type             16 bytes     64 bytes    256 bytes   1024 bytes   8192 bytes
+aes-128-ecb     158025.72k   321742.78k   403188.22k   444209.83k   456851.46k
+Doing aes-128-ecb for 3s on 16 size blocks: 29629610 aes-128-ecb's in 3.00s
+Doing aes-128-ecb for 3s on 64 size blocks: 14996919 aes-128-ecb's in 3.00s
+Doing aes-128-ecb for 3s on 256 size blocks: 4724856 aes-128-ecb's in 3.00s
+Doing aes-128-ecb for 3s on 1024 size blocks: 1301381 aes-128-ecb's in 3.00s
+Doing aes-128-ecb for 3s on 8192 size blocks: 167302 aes-128-ecb's in 3.00s
+OpenSSL 1.0.1k 8 Jan 2015
+built on: Thu Dec  3 18:28:10 2015
+options:bn(64,32) rc4(4x,int) des(ptr,risc1,16,long) aes(partial) blowfish(idx) 
+compiler: -I. -I.. -I../include  -fPIC -DOPENSSL_PIC -DOPENSSL_THREADS -D_REENTRANT -DDSO_DLFCN -DHAVE_DLFCN_H -DL_ENDIAN -DTERMIO -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -Wl,-z,relro -Wa,--noexecstack -Wall -march=i686 -DOPENSSL_BN_ASM_PART_WORDS -DOPENSSL_IA32_SSE2 -DOPENSSL_BN_ASM_MONT -DOPENSSL_BN_ASM_GF2m -DSHA1_ASM -DSHA256_ASM -DSHA512_ASM -DMD5_ASM -DRMD160_ASM -DAES_ASM -DVPAES_ASM -DWHIRLPOOL_ASM -DGHASH_ASM
+The 'numbers' are in 1000s of bytes per second processed.
+type             16 bytes     64 bytes    256 bytes   1024 bytes   8192 bytes
+aes-128-ecb     158024.59k   319934.27k   403187.71k   444204.71k   456845.99k

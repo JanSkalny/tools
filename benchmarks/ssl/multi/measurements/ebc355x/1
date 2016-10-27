@@ -1,0 +1,181 @@
+
++DT:aes-128-ecb:3:16
++R:33587030:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:64
++R:15273418:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:256
++R:4897333:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:1024
++R:1317269:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:8192
++R:168426:aes-128-ecb:3.000000
+Forked child 0
+Got: +H:16:64:256:1024:8192 from 0
+Got: +F:22:aes-128-ecb:179130826.67:325832917.33:417905749.33:449627818.67:459915264.00 from 0
+OpenSSL 1.0.1e 11 Feb 2013
+built on: Sat Jun 13 10:26:40 UTC 2015
+options:bn(64,64) rc4(16x,int) des(idx,cisc,16,int) aes(partial) blowfish(idx) 
+compiler: gcc -fPIC -DOPENSSL_PIC -DZLIB -DOPENSSL_THREADS -D_REENTRANT -DDSO_DLFCN -DHAVE_DLFCN_H -m64 -DL_ENDIAN -DTERMIO -g -O2 -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -Wl,-z,relro -Wa,--noexecstack -Wall -DMD32_REG_T=int -DOPENSSL_IA32_SSE2 -DOPENSSL_BN_ASM_MONT -DOPENSSL_BN_ASM_MONT5 -DOPENSSL_BN_ASM_GF2m -DSHA1_ASM -DSHA256_ASM -DSHA512_ASM -DMD5_ASM -DAES_ASM -DVPAES_ASM -DBSAES_ASM -DWHIRLPOOL_ASM -DGHASH_ASM
+evp             179130.83k   325832.92k   417905.75k   449627.82k   459915.26k
++DT:aes-128-ecb:3:16
++R:33604355:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:64
++R:15270358:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:256
++R:4897650:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:1024
++R:1317198:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:8192
++R:168421:aes-128-ecb:3.000000
+Forked child 0
+Got: +H:16:64:256:1024:8192 from 0
+Got: +F:22:aes-128-ecb:179223226.67:325767637.33:417932800.00:449603584.00:459901610.67 from 0
+OpenSSL 1.0.1e 11 Feb 2013
+built on: Sat Jun 13 10:26:40 UTC 2015
+options:bn(64,64) rc4(16x,int) des(idx,cisc,16,int) aes(partial) blowfish(idx) 
+compiler: gcc -fPIC -DOPENSSL_PIC -DZLIB -DOPENSSL_THREADS -D_REENTRANT -DDSO_DLFCN -DHAVE_DLFCN_H -m64 -DL_ENDIAN -DTERMIO -g -O2 -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -Wl,-z,relro -Wa,--noexecstack -Wall -DMD32_REG_T=int -DOPENSSL_IA32_SSE2 -DOPENSSL_BN_ASM_MONT -DOPENSSL_BN_ASM_MONT5 -DOPENSSL_BN_ASM_GF2m -DSHA1_ASM -DSHA256_ASM -DSHA512_ASM -DMD5_ASM -DAES_ASM -DVPAES_ASM -DBSAES_ASM -DWHIRLPOOL_ASM -DGHASH_ASM
+evp             179223.23k   325767.64k   417932.80k   449603.58k   459901.61k
++DT:aes-128-ecb:3:16
++R:33607409:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:64
++R:15268882:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:256
++R:4898343:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:1024
++R:1317310:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:8192
++R:168427:aes-128-ecb:3.000000
+Forked child 0
+Got: +H:16:64:256:1024:8192 from 0
+Got: +F:22:aes-128-ecb:179239514.67:325736149.33:417991936.00:449641813.33:459917994.67 from 0
+OpenSSL 1.0.1e 11 Feb 2013
+built on: Sat Jun 13 10:26:40 UTC 2015
+options:bn(64,64) rc4(16x,int) des(idx,cisc,16,int) aes(partial) blowfish(idx) 
+compiler: gcc -fPIC -DOPENSSL_PIC -DZLIB -DOPENSSL_THREADS -D_REENTRANT -DDSO_DLFCN -DHAVE_DLFCN_H -m64 -DL_ENDIAN -DTERMIO -g -O2 -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -Wl,-z,relro -Wa,--noexecstack -Wall -DMD32_REG_T=int -DOPENSSL_IA32_SSE2 -DOPENSSL_BN_ASM_MONT -DOPENSSL_BN_ASM_MONT5 -DOPENSSL_BN_ASM_GF2m -DSHA1_ASM -DSHA256_ASM -DSHA512_ASM -DMD5_ASM -DAES_ASM -DVPAES_ASM -DBSAES_ASM -DWHIRLPOOL_ASM -DGHASH_ASM
+evp             179239.51k   325736.15k   417991.94k   449641.81k   459917.99k
++DT:aes-128-ecb:3:16
++R:33595428:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:64
++R:15258820:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:256
++R:4897992:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:1024
++R:1317018:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:8192
+Forked child 0
+Got: +H:16:64:256:1024:8192 from 0
+Got: +F:22:aes-128-ecb:179175616.00:325521493.33:417961984.00:449542144.00:459893418.67 from 0
+OpenSSL 1.0.1e 11 Feb 2013
+built on: Sat Jun 13 10:26:40 UTC 2015
+options:bn(64,64) rc4(16x,int) des(idx,cisc,16,int) aes(partial) blowfish(idx) 
+compiler: gcc -fPIC -DOPENSSL_PIC -DZLIB -DOPENSSL_THREADS -D_REENTRANT -DDSO_DLFCN -DHAVE_DLFCN_H -m64 -DL_ENDIAN -DTERMIO -g -O2 -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -Wl,-z,relro -Wa,--noexecstack -Wall -DMD32_REG_T=int -DOPENSSL_IA32_SSE2 -DOPENSSL_BN_ASM_MONT -DOPENSSL_BN_ASM_MONT5 -DOPENSSL_BN_ASM_GF2m -DSHA1_ASM -DSHA256_ASM -DSHA512_ASM -DMD5_ASM -DAES_ASM -DVPAES_ASM -DBSAES_ASM -DWHIRLPOOL_ASM -DGHASH_ASM
+evp             179175.62k   325521.49k   417961.98k   449542.14k   459893.42k
++R:168418:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:16
++R:33582173:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:64
++R:15262780:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:256
++R:4897314:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:1024
++R:1317180:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:8192
++R:168419:aes-128-ecb:3.000000
+Forked child 0
+Got: +H:16:64:256:1024:8192 from 0
+Got: +F:22:aes-128-ecb:179104922.67:325605973.33:417904128.00:449597440.00:459896149.33 from 0
+OpenSSL 1.0.1e 11 Feb 2013
+built on: Sat Jun 13 10:26:40 UTC 2015
+options:bn(64,64) rc4(16x,int) des(idx,cisc,16,int) aes(partial) blowfish(idx) 
+compiler: gcc -fPIC -DOPENSSL_PIC -DZLIB -DOPENSSL_THREADS -D_REENTRANT -DDSO_DLFCN -DHAVE_DLFCN_H -m64 -DL_ENDIAN -DTERMIO -g -O2 -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -Wl,-z,relro -Wa,--noexecstack -Wall -DMD32_REG_T=int -DOPENSSL_IA32_SSE2 -DOPENSSL_BN_ASM_MONT -DOPENSSL_BN_ASM_MONT5 -DOPENSSL_BN_ASM_GF2m -DSHA1_ASM -DSHA256_ASM -DSHA512_ASM -DMD5_ASM -DAES_ASM -DVPAES_ASM -DBSAES_ASM -DWHIRLPOOL_ASM -DGHASH_ASM
+evp             179104.92k   325605.97k   417904.13k   449597.44k   459896.15k
++DT:aes-128-ecb:3:16
++R:33393108:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:64
++R:15264407:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:256
++R:4898180:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:1024
++R:1317215:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:8192
++R:168422:aes-128-ecb:3.000000
+Forked child 0
+Got: +H:16:64:256:1024:8192 from 0
+Got: +F:22:aes-128-ecb:178096576.00:325640682.67:417978026.67:449609386.67:459904341.33 from 0
+OpenSSL 1.0.1e 11 Feb 2013
+built on: Sat Jun 13 10:26:40 UTC 2015
+options:bn(64,64) rc4(16x,int) des(idx,cisc,16,int) aes(partial) blowfish(idx) 
+compiler: gcc -fPIC -DOPENSSL_PIC -DZLIB -DOPENSSL_THREADS -D_REENTRANT -DDSO_DLFCN -DHAVE_DLFCN_H -m64 -DL_ENDIAN -DTERMIO -g -O2 -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -Wl,-z,relro -Wa,--noexecstack -Wall -DMD32_REG_T=int -DOPENSSL_IA32_SSE2 -DOPENSSL_BN_ASM_MONT -DOPENSSL_BN_ASM_MONT5 -DOPENSSL_BN_ASM_GF2m -DSHA1_ASM -DSHA256_ASM -DSHA512_ASM -DMD5_ASM -DAES_ASM -DVPAES_ASM -DBSAES_ASM -DWHIRLPOOL_ASM -DGHASH_ASM
+evp             178096.58k   325640.68k   417978.03k   449609.39k   459904.34k
++DT:aes-128-ecb:3:16
++R:33596267:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:64
++R:15268440:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:256
++R:4895088:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:1024
++R:1316889:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:8192
++R:168381:aes-128-ecb:3.000000
+Forked child 0
+Got: +H:16:64:256:1024:8192 from 0
+Got: +F:22:aes-128-ecb:179180090.67:325726720.00:417714176.00:449498112.00:459792384.00 from 0
+OpenSSL 1.0.1e 11 Feb 2013
+built on: Sat Jun 13 10:26:40 UTC 2015
+options:bn(64,64) rc4(16x,int) des(idx,cisc,16,int) aes(partial) blowfish(idx) 
+compiler: gcc -fPIC -DOPENSSL_PIC -DZLIB -DOPENSSL_THREADS -D_REENTRANT -DDSO_DLFCN -DHAVE_DLFCN_H -m64 -DL_ENDIAN -DTERMIO -g -O2 -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -Wl,-z,relro -Wa,--noexecstack -Wall -DMD32_REG_T=int -DOPENSSL_IA32_SSE2 -DOPENSSL_BN_ASM_MONT -DOPENSSL_BN_ASM_MONT5 -DOPENSSL_BN_ASM_GF2m -DSHA1_ASM -DSHA256_ASM -DSHA512_ASM -DMD5_ASM -DAES_ASM -DVPAES_ASM -DBSAES_ASM -DWHIRLPOOL_ASM -DGHASH_ASM
+evp             179180.09k   325726.72k   417714.18k   449498.11k   459792.38k
++DT:aes-128-ecb:3:16
++R:33586485:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:64
++R:15264488:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:256
++R:4897732:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:1024
++R:1317258:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:8192
++R:168424:aes-128-ecb:3.000000
+Forked child 0
+Got: +H:16:64:256:1024:8192 from 0
+Got: +F:22:aes-128-ecb:179127920.00:325642410.67:417939797.33:449624064.00:459909802.67 from 0
+OpenSSL 1.0.1e 11 Feb 2013
+built on: Sat Jun 13 10:26:40 UTC 2015
+options:bn(64,64) rc4(16x,int) des(idx,cisc,16,int) aes(partial) blowfish(idx) 
+compiler: gcc -fPIC -DOPENSSL_PIC -DZLIB -DOPENSSL_THREADS -D_REENTRANT -DDSO_DLFCN -DHAVE_DLFCN_H -m64 -DL_ENDIAN -DTERMIO -g -O2 -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -Wl,-z,relro -Wa,--noexecstack -Wall -DMD32_REG_T=int -DOPENSSL_IA32_SSE2 -DOPENSSL_BN_ASM_MONT -DOPENSSL_BN_ASM_MONT5 -DOPENSSL_BN_ASM_GF2m -DSHA1_ASM -DSHA256_ASM -DSHA512_ASM -DMD5_ASM -DAES_ASM -DVPAES_ASM -DBSAES_ASM -DWHIRLPOOL_ASM -DGHASH_ASM
+evp             179127.92k   325642.41k   417939.80k   449624.06k   459909.80k
++DT:aes-128-ecb:3:16
++R:33589066:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:64
++R:15269303:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:256
++R:4897569:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:1024
++R:1317273:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:8192
++R:168421:aes-128-ecb:3.000000
+Forked child 0
+Got: +H:16:64:256:1024:8192 from 0
+Got: +F:22:aes-128-ecb:179141685.33:325745130.67:417925888.00:449629184.00:459901610.67 from 0
+OpenSSL 1.0.1e 11 Feb 2013
+built on: Sat Jun 13 10:26:40 UTC 2015
+options:bn(64,64) rc4(16x,int) des(idx,cisc,16,int) aes(partial) blowfish(idx) 
+compiler: gcc -fPIC -DOPENSSL_PIC -DZLIB -DOPENSSL_THREADS -D_REENTRANT -DDSO_DLFCN -DHAVE_DLFCN_H -m64 -DL_ENDIAN -DTERMIO -g -O2 -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -Wl,-z,relro -Wa,--noexecstack -Wall -DMD32_REG_T=int -DOPENSSL_IA32_SSE2 -DOPENSSL_BN_ASM_MONT -DOPENSSL_BN_ASM_MONT5 -DOPENSSL_BN_ASM_GF2m -DSHA1_ASM -DSHA256_ASM -DSHA512_ASM -DMD5_ASM -DAES_ASM -DVPAES_ASM -DBSAES_ASM -DWHIRLPOOL_ASM -DGHASH_ASM
+evp             179141.69k   325745.13k   417925.89k   449629.18k   459901.61k
++DT:aes-128-ecb:3:16
++R:33586993:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:64
++R:15268014:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:256
++R:4898258:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:1024
++R:1317190:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:8192
+Forked child 0
+Got: +H:16:64:256:1024:8192 from 0
+Got: +F:22:aes-128-ecb:179130629.33:325717632.00:417984682.67:449600853.33:459904341.33 from 0
+OpenSSL 1.0.1e 11 Feb 2013
+built on: Sat Jun 13 10:26:40 UTC 2015
+options:bn(64,64) rc4(16x,int) des(idx,cisc,16,int) aes(partial) blowfish(idx) 
+compiler: gcc -fPIC -DOPENSSL_PIC -DZLIB -DOPENSSL_THREADS -D_REENTRANT -DDSO_DLFCN -DHAVE_DLFCN_H -m64 -DL_ENDIAN -DTERMIO -g -O2 -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -Wl,-z,relro -Wa,--noexecstack -Wall -DMD32_REG_T=int -DOPENSSL_IA32_SSE2 -DOPENSSL_BN_ASM_MONT -DOPENSSL_BN_ASM_MONT5 -DOPENSSL_BN_ASM_GF2m -DSHA1_ASM -DSHA256_ASM -DSHA512_ASM -DMD5_ASM -DAES_ASM -DVPAES_ASM -DBSAES_ASM -DWHIRLPOOL_ASM -DGHASH_ASM
+evp             179130.63k   325717.63k   417984.68k   449600.85k   459904.34k
++R:168422:aes-128-ecb:3.000000

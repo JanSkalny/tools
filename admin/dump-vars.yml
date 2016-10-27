@@ -1,5 +1,4 @@
----
-- hosts: cerise
+- hosts: netvor
   tasks:
     - debug: var=vars
     - debug: var=hostvars[inventory_hostname]

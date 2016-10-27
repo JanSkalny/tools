@@ -1,0 +1,1091 @@
+
+Forked child 0
+Forked child 1
+Forked child 2
+Forked child 3
+Forked child 4
+Forked child 5
+Forked child 6
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++R:7411282:aes-128-ecb:3.000000
++R:7384957:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:64
++DT:aes-128-ecb:3:64
++R:7407827:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:64
++R:7402234:aes-128-ecb:3.020000
++R:7402013:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:64
++DT:aes-128-ecb:3:64
++R:7401200:aes-128-ecb:3.000000
++R:7412303:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:64
++DT:aes-128-ecb:3:64
++R:7418442:aes-128-ecb:3.020000
++DT:aes-128-ecb:3:64
++R:3805107:aes-128-ecb:3.010000
++R:3803623:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:256
++DT:aes-128-ecb:3:256
++R:3796518:aes-128-ecb:3.000000
++R:3796626:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:256
++DT:aes-128-ecb:3:256
++R:3789077:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:256
++R:3798163:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:256
++R:3799396:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:256
++R:3797400:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:256
++R:1183620:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:1024
++R:1183508:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:1024
++R:1183696:aes-128-ecb:3.010000
++R:1183350:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:1024
++DT:aes-128-ecb:3:1024
++R:1183316:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:1024
++R:1182977:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:1024
++R:1183700:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:1024
++R:1183637:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:1024
++R:325969:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:8192
++R:326026:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:8192
++R:326014:aes-128-ecb:3.010000
++R:325875:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:8192
++DT:aes-128-ecb:3:8192
++R:326349:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:8192
++R:325091:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:8192
++R:326019:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:8192
++R:325997:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:8192
++R:41904:aes-128-ecb:3.010000
++R:41896:aes-128-ecb:3.010000
++R:41911:aes-128-ecb:3.000000
++R:41898:aes-128-ecb:3.000000
++R:41900:aes-128-ecb:3.000000
++R:41940:aes-128-ecb:3.000000
++R:42064:aes-128-ecb:3.000000
++R:42303:aes-128-ecb:3.000000
+Forked child 7
+Got: +H:16:64:256:1024:8192 from 0
+Got: +F:22:aes-128-ecb:39217133.77:80992384.00:100673148.17:110909746.18:114444970.67 from 0
+Got: +H:16:64:256:1024:8192 from 1
+Got: +F:22:aes-128-ecb:39532282.67:80758283.06:100611997.34:110964394.67:114524160.00 from 1
+Got: +H:16:64:256:1024:8192 from 2
+Got: +F:22:aes-128-ecb:39526837.33:81143957.33:100666684.39:110894437.21:114045703.65 from 2
+Got: +H:16:64:256:1024:8192 from 3
+Got: +F:22:aes-128-ecb:39346248.50:80833642.67:100640829.24:110862458.47:114409472.00 from 3
+Got: +H:16:64:256:1024:8192 from 4
+Got: +F:22:aes-128-ecb:39473066.67:80784499.67:100673488.37:110911447.18:114862762.67 from 4
+Got: +H:16:64:256:1024:8192 from 5
+Got: +F:22:aes-128-ecb:39508410.67:80725602.66:100643720.93:111023712.96:114414933.33 from 5
+Got: +H:16:64:256:1024:8192 from 6
+Got: +F:22:aes-128-ecb:39303003.97:80742059.80:100668130.23:110903962.79:115515392.00 from 6
+Got: +H:16:64:256:1024:8192 from 7
+Got: +F:22:aes-128-ecb:39386437.33:80905929.57:100992682.67:110913828.57:114023930.90 from 7
+OpenSSL 1.0.1k 8 Jan 2015
+built on: Thu Dec  3 18:28:10 2015
+options:bn(64,32) rc4(8x,mmx) des(ptr,risc1,16,long) aes(partial) blowfish(idx) 
+compiler: -I. -I.. -I../include  -fPIC -DOPENSSL_PIC -DOPENSSL_THREADS -D_REENTRANT -DDSO_DLFCN -DHAVE_DLFCN_H -DL_ENDIAN -DTERMIO -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -Wl,-z,relro -Wa,--noexecstack -Wall -march=i686 -DOPENSSL_BN_ASM_PART_WORDS -DOPENSSL_IA32_SSE2 -DOPENSSL_BN_ASM_MONT -DOPENSSL_BN_ASM_GF2m -DSHA1_ASM -DSHA256_ASM -DSHA512_ASM -DMD5_ASM -DRMD160_ASM -DAES_ASM -DVPAES_ASM -DWHIRLPOOL_ASM -DGHASH_ASM
+evp             315293.42k   646886.36k   805570.68k   887383.99k   916241.33k
+Forked child 0
+Forked child 1
+Forked child 2
+Forked child 3
+Forked child 4
+Forked child 5
+Forked child 6
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++R:7422803:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:64
++R:7399932:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:64
++R:7417501:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:64
++R:7421749:aes-128-ecb:3.010000
++R:7416624:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:64
++DT:aes-128-ecb:3:64
++R:7419342:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:64
++R:7415923:aes-128-ecb:3.010000
++R:7420012:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:64
++DT:aes-128-ecb:3:64
++R:3769347:aes-128-ecb:3.010000
++R:3793260:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:256
++DT:aes-128-ecb:3:256
++R:3777398:aes-128-ecb:3.000000
++R:3801758:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:256
++DT:aes-128-ecb:3:256
++R:3771688:aes-128-ecb:3.000000
++R:3804402:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:256
++DT:aes-128-ecb:3:256
++R:3783599:aes-128-ecb:3.010000
++R:3813392:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:256
++DT:aes-128-ecb:3:256
++R:1183503:aes-128-ecb:3.010000
++R:1183349:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:1024
++DT:aes-128-ecb:3:1024
++R:1183646:aes-128-ecb:3.010000
++R:1183633:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:1024
++DT:aes-128-ecb:3:1024
++R:1183575:aes-128-ecb:3.010000
++R:1183457:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:1024
++DT:aes-128-ecb:3:1024
++R:1183728:aes-128-ecb:3.010000
++R:1183367:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:1024
++DT:aes-128-ecb:3:1024
++R:326001:aes-128-ecb:3.010000
++R:325957:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:8192
++DT:aes-128-ecb:3:8192
++R:326051:aes-128-ecb:3.010000
++R:325942:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:8192
++DT:aes-128-ecb:3:8192
++R:325947:aes-128-ecb:3.010000
++R:325989:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:8192
++DT:aes-128-ecb:3:8192
++R:326015:aes-128-ecb:3.010000
++R:325875:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:8192
++DT:aes-128-ecb:3:8192
++R:41826:aes-128-ecb:3.000000
++R:41899:aes-128-ecb:3.000000
++R:41904:aes-128-ecb:3.000000
++R:42012:aes-128-ecb:3.000000
++R:41910:aes-128-ecb:3.010000
++R:42143:aes-128-ecb:3.000000
++R:42063:aes-128-ecb:3.000000
++R:42123:aes-128-ecb:3.000000
+Forked child 7
+Got: +H:16:64:256:1024:8192 from 0
+Got: +F:22:aes-128-ecb:39451157.48:80584490.67:100667790.03:110922333.55:114425856.00 from 0
+Got: +H:16:64:256:1024:8192 from 1
+Got: +F:22:aes-128-ecb:39420188.70:81352362.67:100645166.78:110862458.47:115023872.00 from 1
+Got: +H:16:64:256:1024:8192 from 2
+Got: +F:22:aes-128-ecb:39588282.67:80145584.05:100656733.55:110905323.59:114212864.00 from 2
+Got: +H:16:64:256:1024:8192 from 3
+Got: +F:22:aes-128-ecb:39423914.95:80890939.53:100652821.26:110886952.82:114860032.00 from 3
+Got: +H:16:64:256:1024:8192 from 4
+Got: +F:22:aes-128-ecb:39441924.25:80462677.33:100662857.14:110901241.20:114720768.00 from 4
+Got: +H:16:64:256:1024:8192 from 5
+Got: +F:22:aes-128-ecb:39560005.33:80834721.59:100668895.68:110885251.83:114062033.22 from 5
+Got: +H:16:64:256:1024:8192 from 6
+Got: +F:22:aes-128-ecb:39438362.79:80448616.61:100675869.77:110910086.38:115078485.33 from 6
+Got: +H:16:64:256:1024:8192 from 7
+Got: +F:22:aes-128-ecb:39335186.71:80922880.00:100643635.88:110890354.82:114412202.67 from 7
+OpenSSL 1.0.1k 8 Jan 2015
+built on: Thu Dec  3 18:28:10 2015
+options:bn(64,32) rc4(8x,mmx) des(ptr,risc1,16,long) aes(partial) blowfish(idx) 
+compiler: -I. -I.. -I../include  -fPIC -DOPENSSL_PIC -DOPENSSL_THREADS -D_REENTRANT -DDSO_DLFCN -DHAVE_DLFCN_H -DL_ENDIAN -DTERMIO -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -Wl,-z,relro -Wa,--noexecstack -Wall -march=i686 -DOPENSSL_BN_ASM_PART_WORDS -DOPENSSL_IA32_SSE2 -DOPENSSL_BN_ASM_MONT -DOPENSSL_BN_ASM_GF2m -DSHA1_ASM -DSHA256_ASM -DSHA512_ASM -DMD5_ASM -DRMD160_ASM -DAES_ASM -DVPAES_ASM -DWHIRLPOOL_ASM -DGHASH_ASM
+evp             315659.02k   645642.27k   805273.77k   887164.00k   916796.11k
+Forked child 0
+Forked child 1
+Forked child 2
+Forked child 3
+Forked child 4
++DT:aes-128-ecb:3:16
+Forked child 5
+Forked child 6
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++R:7420329:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:64
++R:7395534:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:64
++R:7422874:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:64
++R:7420320:aes-128-ecb:3.010000
++R:7416747:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:64
++DT:aes-128-ecb:3:64
++R:7419138:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:64
++R:7417011:aes-128-ecb:3.010000
++R:7418123:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:64
++DT:aes-128-ecb:3:64
++R:3819015:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:256
++R:3834332:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:256
++R:3825608:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:256
++R:3830883:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:256
++R:3828669:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:256
++R:3838033:aes-128-ecb:3.020000
++R:3819041:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:256
++DT:aes-128-ecb:3:256
++R:3777989:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:256
++R:1183556:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:1024
++R:1183336:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:1024
++R:1183472:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:1024
++R:1183107:aes-128-ecb:3.010000
++R:1183170:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:1024
++DT:aes-128-ecb:3:1024
++R:1183783:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:1024
++R:1183439:aes-128-ecb:3.010000
++R:1183610:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:1024
++DT:aes-128-ecb:3:1024
++R:325911:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:8192
++R:325917:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:8192
++R:325950:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:8192
++R:325957:aes-128-ecb:3.010000
++R:325989:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:8192
++DT:aes-128-ecb:3:8192
++R:326004:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:8192
++R:325944:aes-128-ecb:3.010000
++R:325994:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:8192
++DT:aes-128-ecb:3:8192
++R:41894:aes-128-ecb:3.010000
++R:41902:aes-128-ecb:3.010000
++R:42008:aes-128-ecb:3.010000
++R:42054:aes-128-ecb:3.010000
++R:41886:aes-128-ecb:3.010000
++R:42017:aes-128-ecb:3.010000
++R:42138:aes-128-ecb:3.000000
++R:42011:aes-128-ecb:3.000000
+Forked child 7
+Got: +H:16:64:256:1024:8192 from 0
+Got: +F:22:aes-128-ecb:39443561.46:81453990.70:100623053.82:110890354.82:114453942.86 from 0
+Got: +H:16:64:256:1024:8192 from 1
+Got: +F:22:aes-128-ecb:39425972.09:81678272.00:100628411.96:110901241.20:113996714.95 from 1
+Got: +H:16:64:256:1024:8192 from 2
+Got: +F:22:aes-128-ecb:39575088.00:81472320.00:100996778.67:110874705.65:114018487.71 from 2
+Got: +H:16:64:256:1024:8192 from 3
+Got: +F:22:aes-128-ecb:39555984.00:81335798.68:100651290.37:110885932.23:115064832.00 from 3
+Got: +H:16:64:256:1024:8192 from 4
+Got: +F:22:aes-128-ecb:39431883.06:81202200.66:101016149.33:110906344.19:114353243.85 from 4
+Got: +H:16:64:256:1024:8192 from 5
+Got: +F:22:aes-128-ecb:39588661.33:81341831.23:100654097.01:111257600.00:114040260.47 from 5
+Got: +H:16:64:256:1024:8192 from 6
+Got: +F:22:aes-128-ecb:39437278.41:80329334.22:100665833.89:110902942.19:114718037.33 from 6
+Got: +H:16:64:256:1024:8192 from 7
+Got: +F:22:aes-128-ecb:39442848.00:81527324.92:100642530.23:110876746.84:114328749.50 from 7
+OpenSSL 1.0.1k 8 Jan 2015
+built on: Thu Dec  3 18:28:10 2015
+options:bn(64,32) rc4(8x,mmx) des(ptr,risc1,16,long) aes(partial) blowfish(idx) 
+compiler: -I. -I.. -I../include  -fPIC -DOPENSSL_PIC -DOPENSSL_THREADS -D_REENTRANT -DDSO_DLFCN -DHAVE_DLFCN_H -DL_ENDIAN -DTERMIO -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -Wl,-z,relro -Wa,--noexecstack -Wall -march=i686 -DOPENSSL_BN_ASM_PART_WORDS -DOPENSSL_IA32_SSE2 -DOPENSSL_BN_ASM_MONT -DOPENSSL_BN_ASM_GF2m -DSHA1_ASM -DSHA256_ASM -DSHA512_ASM -DMD5_ASM -DRMD160_ASM -DAES_ASM -DVPAES_ASM -DWHIRLPOOL_ASM -DGHASH_ASM
+evp             315901.28k   650341.07k   805878.15k   887495.87k   914974.27k
+Forked child 0
+Forked child 1
+Forked child 2
+Forked child 3
+Forked child 4
++DT:aes-128-ecb:3:16
+Forked child 5
+Forked child 6
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++R:7437631:aes-128-ecb:3.020000
++R:7421870:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:64
++DT:aes-128-ecb:3:64
++R:7421261:aes-128-ecb:3.010000
++R:7421868:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:64
++DT:aes-128-ecb:3:64
++R:7419049:aes-128-ecb:3.000000
++R:7417816:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:64
++DT:aes-128-ecb:3:64
++R:7418347:aes-128-ecb:3.010000
++R:7416986:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:64
++DT:aes-128-ecb:3:64
++R:3786730:aes-128-ecb:3.000000
++R:3795145:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:256
++DT:aes-128-ecb:3:256
++R:3800804:aes-128-ecb:3.010000
++R:3799433:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:256
++DT:aes-128-ecb:3:256
++R:3790469:aes-128-ecb:3.010000
++R:3794197:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:256
++DT:aes-128-ecb:3:256
++R:3810967:aes-128-ecb:3.020000
++R:3788631:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:256
++DT:aes-128-ecb:3:256
++R:1183279:aes-128-ecb:3.010000
++R:1182660:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:1024
++DT:aes-128-ecb:3:1024
++R:1183643:aes-128-ecb:3.010000
++R:1182875:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:1024
++DT:aes-128-ecb:3:1024
++R:1179761:aes-128-ecb:3.000000
++R:1183558:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:1024
++DT:aes-128-ecb:3:1024
++R:1183505:aes-128-ecb:3.000000
++R:1188103:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:1024
++DT:aes-128-ecb:3:1024
++R:325958:aes-128-ecb:3.010000
++R:325976:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:8192
++DT:aes-128-ecb:3:8192
++R:325945:aes-128-ecb:3.000000
++R:325997:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:8192
++DT:aes-128-ecb:3:8192
++R:326024:aes-128-ecb:3.010000
++R:326017:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:8192
++DT:aes-128-ecb:3:8192
++R:325905:aes-128-ecb:3.010000
++R:325963:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:8192
++DT:aes-128-ecb:3:8192
++R:41768:aes-128-ecb:3.000000
++R:41905:aes-128-ecb:3.010000
++R:41910:aes-128-ecb:3.000000
++R:41908:aes-128-ecb:3.010000
++R:41972:aes-128-ecb:3.010000
++R:41907:aes-128-ecb:3.000000
++R:41996:aes-128-ecb:3.000000
++R:41951:aes-128-ecb:3.000000
+Forked child 7
+Got: +H:16:64:256:1024:8192 from 0
+Got: +F:22:aes-128-ecb:39448563.46:80783573.33:100637682.39:110890695.02:114048425.25 from 0
+Got: +H:16:64:256:1024:8192 from 1
+Got: +F:22:aes-128-ecb:39425839.20:80942869.33:101047962.79:110892396.01:114677077.33 from 1
+Got: +H:16:64:256:1024:8192 from 2
+Got: +F:22:aes-128-ecb:39404667.55:80785286.38:100668640.53:111273642.67:114056590.03 from 2
+Got: +H:16:64:256:1024:8192 from 3
+Got: +F:22:aes-128-ecb:39561685.33:80762214.57:100672938.67:111255893.33:114230772.09 from 3
+Got: +H:16:64:256:1024:8192 from 4
+Got: +F:22:aes-128-ecb:39433073.75:80555609.30:100992426.67:110872664.45:114554197.33 from 4
+Got: +H:16:64:256:1024:8192 from 5
+Got: +F:22:aes-128-ecb:39451790.03:80814437.21:100603322.26:110910766.78:114442240.00 from 5
+Got: +H:16:64:256:1024:8192 from 6
+Got: +F:22:aes-128-ecb:39568261.33:80594689.70:100661411.30:110913148.17:114434048.00 from 6
+Got: +H:16:64:256:1024:8192 from 7
+Got: +F:22:aes-128-ecb:39451800.66:80963093.33:100585036.54:110896818.60:114054485.33 from 7
+OpenSSL 1.0.1k 8 Jan 2015
+built on: Thu Dec  3 18:28:10 2015
+options:bn(64,32) rc4(8x,mmx) des(ptr,risc1,16,long) aes(partial) blowfish(idx) 
+compiler: -I. -I.. -I../include  -fPIC -DOPENSSL_PIC -DOPENSSL_THREADS -D_REENTRANT -DDSO_DLFCN -DHAVE_DLFCN_H -DL_ENDIAN -DTERMIO -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -Wl,-z,relro -Wa,--noexecstack -Wall -march=i686 -DOPENSSL_BN_ASM_PART_WORDS -DOPENSSL_IA32_SSE2 -DOPENSSL_BN_ASM_MONT -DOPENSSL_BN_ASM_GF2m -DSHA1_ASM -DSHA256_ASM -DSHA512_ASM -DMD5_ASM -DRMD160_ASM -DAES_ASM -DVPAES_ASM -DWHIRLPOOL_ASM -DGHASH_ASM
+evp             315745.68k   646201.77k   805869.42k   887906.03k   914497.84k
+Forked child 0
+Forked child 1
+Forked child 2
+Forked child 3
+Forked child 4
++DT:aes-128-ecb:3:16
+Forked child 5
+Forked child 6
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++R:7418906:aes-128-ecb:3.010000
++R:7436489:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:64
++DT:aes-128-ecb:3:64
++R:7420582:aes-128-ecb:3.010000
++R:7421611:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:64
++DT:aes-128-ecb:3:64
++R:7418376:aes-128-ecb:3.010000
++R:7417571:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:64
++DT:aes-128-ecb:3:64
++R:7416849:aes-128-ecb:3.000000
++R:7417851:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:64
++DT:aes-128-ecb:3:64
++R:3808762:aes-128-ecb:3.010000
++R:3823768:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:256
++DT:aes-128-ecb:3:256
++R:3827950:aes-128-ecb:3.000000
++R:3811434:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:256
++DT:aes-128-ecb:3:256
++R:3819569:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:256
++R:3797126:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:256
++R:3801723:aes-128-ecb:3.010000
++R:3830984:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:256
++DT:aes-128-ecb:3:256
++R:1180096:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:1024
++R:1183121:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:1024
++R:1181642:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:1024
++R:1183778:aes-128-ecb:3.010000
++R:1181973:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:1024
++DT:aes-128-ecb:3:1024
++R:1183671:aes-128-ecb:3.010000
++R:1183338:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:1024
++DT:aes-128-ecb:3:1024
++R:1183014:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:1024
++R:325936:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:8192
++R:325952:aes-128-ecb:3.010000
++R:325849:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:8192
++DT:aes-128-ecb:3:8192
++R:326002:aes-128-ecb:3.010000
++R:325848:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:8192
++DT:aes-128-ecb:3:8192
++R:326025:aes-128-ecb:3.010000
++R:325981:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:8192
++DT:aes-128-ecb:3:8192
++R:325994:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:8192
++R:41755:aes-128-ecb:3.000000
++R:41956:aes-128-ecb:3.000000
++R:41879:aes-128-ecb:3.000000
++R:41810:aes-128-ecb:3.000000
++R:41950:aes-128-ecb:3.000000
++R:42049:aes-128-ecb:3.000000
++R:41887:aes-128-ecb:3.010000
++R:42059:aes-128-ecb:3.000000
+Forked child 7
+Got: +H:16:64:256:1024:8192 from 0
+Got: +F:22:aes-128-ecb:39444954.15:81310592.00:100680122.26:110905663.79:114169173.33 from 0
+Got: +H:16:64:256:1024:8192 from 1
+Got: +F:22:aes-128-ecb:39561872.00:81484138.67:100833450.67:110853613.29:114018986.67 from 1
+Got: +H:16:64:256:1024:8192 from 2
+Got: +F:22:aes-128-ecb:39529509.63:80983643.85:100959658.67:110888653.82:113999436.54 from 2
+Got: +H:16:64:256:1024:8192 from 3
+Got: +F:22:aes-128-ecb:39428948.84:81456138.21:100861696.00:110913488.37:114821802.67 from 3
+Got: +H:16:64:256:1024:8192 from 4
+Got: +F:22:aes-128-ecb:39556528.00:81005354.67:100642700.33:110898519.60:114551466.67 from 4
+Got: +H:16:64:256:1024:8192 from 5
+Got: +F:22:aes-128-ecb:39450423.92:81662933.33:100671021.93:110853273.09:114357589.33 from 5
+Got: +H:16:64:256:1024:8192 from 6
+Got: +F:22:aes-128-ecb:39433227.91:80833977.41:100615144.19:111272618.67:114849109.33 from 6
+Got: +H:16:64:256:1024:8192 from 7
+Got: +F:22:aes-128-ecb:39436045.18:81302708.31:100701525.33:110883210.63:114567850.67 from 7
+OpenSSL 1.0.1k 8 Jan 2015
+built on: Thu Dec  3 18:28:10 2015
+options:bn(64,32) rc4(8x,mmx) des(ptr,risc1,16,long) aes(partial) blowfish(idx) 
+compiler: -I. -I.. -I../include  -fPIC -DOPENSSL_PIC -DOPENSSL_THREADS -D_REENTRANT -DDSO_DLFCN -DHAVE_DLFCN_H -DL_ENDIAN -DTERMIO -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -Wl,-z,relro -Wa,--noexecstack -Wall -march=i686 -DOPENSSL_BN_ASM_PART_WORDS -DOPENSSL_IA32_SSE2 -DOPENSSL_BN_ASM_MONT -DOPENSSL_BN_ASM_GF2m -DSHA1_ASM -DSHA256_ASM -DSHA512_ASM -DMD5_ASM -DRMD160_ASM -DAES_ASM -DVPAES_ASM -DWHIRLPOOL_ASM -DGHASH_ASM
+evp             315841.51k   650039.49k   805965.32k   887469.04k   915335.42k
+Forked child 0
+Forked child 1
+Forked child 2
+Forked child 3
+Forked child 4
+Forked child 5
++DT:aes-128-ecb:3:16
+Forked child 6
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++R:7420237:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:64
++R:7389569:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:64
++R:7422526:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:64
++R:7422194:aes-128-ecb:3.010000
++R:7417671:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:64
++DT:aes-128-ecb:3:64
++R:7418736:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:64
++R:7418239:aes-128-ecb:3.010000
++R:7418285:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:64
++DT:aes-128-ecb:3:64
++R:3813570:aes-128-ecb:3.010000
++R:3800950:aes-128-ecb:3.020000
++DT:aes-128-ecb:3:256
++DT:aes-128-ecb:3:256
++R:3795087:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:256
++R:3807173:aes-128-ecb:3.010000
++R:3802421:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:256
++DT:aes-128-ecb:3:256
++R:3793933:aes-128-ecb:3.020000
++DT:aes-128-ecb:3:256
++R:3802018:aes-128-ecb:3.010000
++R:3789222:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:256
++DT:aes-128-ecb:3:256
++R:1183290:aes-128-ecb:3.000000
++R:1183691:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:1024
++DT:aes-128-ecb:3:1024
++R:1183277:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:1024
++R:1183453:aes-128-ecb:3.010000
++R:1183271:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:1024
++DT:aes-128-ecb:3:1024
++R:1183449:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:1024
++R:1183494:aes-128-ecb:3.010000
++R:1183720:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:1024
++DT:aes-128-ecb:3:1024
++R:325301:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:8192
++R:325942:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:8192
++R:326010:aes-128-ecb:3.020000
++DT:aes-128-ecb:3:8192
++R:324904:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:8192
++R:325927:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:8192
++R:325992:aes-128-ecb:3.010000
++R:325941:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:8192
++DT:aes-128-ecb:3:8192
++R:326054:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:8192
++R:41894:aes-128-ecb:3.010000
++R:41901:aes-128-ecb:3.010000
++R:41911:aes-128-ecb:3.000000
++R:41908:aes-128-ecb:3.000000
++R:41887:aes-128-ecb:3.010000
++R:42378:aes-128-ecb:3.000000
++R:41908:aes-128-ecb:3.000000
++R:42223:aes-128-ecb:3.000000
+Forked child 7
+Got: +H:16:64:256:1024:8192 from 0
+Got: +F:22:aes-128-ecb:39453522.92:80848818.60:100652481.06:111249749.33:113999436.54 from 0
+Got: +H:16:64:256:1024:8192 from 1
+Got: +F:22:aes-128-ecb:39432499.67:80840249.83:100655968.11:111254528.00:115720192.00 from 1
+Got: +H:16:64:256:1024:8192 from 2
+Got: +F:22:aes-128-ecb:39574597.33:80549933.77:101008298.67:110541139.07:114436778.67 from 2
+Got: +H:16:64:256:1024:8192 from 3
+Got: +F:22:aes-128-ecb:39560912.00:80961856.00:100637512.29:111254869.33:114037538.87 from 3
+Got: +H:16:64:256:1024:8192 from 4
+Got: +F:22:aes-128-ecb:39432744.19:80568175.42:100675189.37:110923354.15:115296938.67 from 4
+Got: +H:16:64:256:1024:8192 from 5
+Got: +F:22:aes-128-ecb:39455287.71:80949857.81:100637001.99:110900565.33:114444970.67 from 5
+Got: +H:16:64:256:1024:8192 from 6
+Got: +F:22:aes-128-ecb:39566592.00:80401229.14:100987648.00:110902261.79:114436778.67 from 6
+Got: +H:16:64:256:1024:8192 from 7
+Got: +F:22:aes-128-ecb:39280101.00:81085873.75:100974080.00:110667184.05:114018487.71 from 7
+OpenSSL 1.0.1k 8 Jan 2015
+built on: Thu Dec  3 18:28:10 2015
+options:bn(64,32) rc4(8x,mmx) des(ptr,risc1,16,long) aes(partial) blowfish(idx) 
+compiler: -I. -I.. -I../include  -fPIC -DOPENSSL_PIC -DOPENSSL_THREADS -D_REENTRANT -DDSO_DLFCN -DHAVE_DLFCN_H -DL_ENDIAN -DTERMIO -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -Wl,-z,relro -Wa,--noexecstack -Wall -march=i686 -DOPENSSL_BN_ASM_PART_WORDS -DOPENSSL_IA32_SSE2 -DOPENSSL_BN_ASM_MONT -DOPENSSL_BN_ASM_GF2m -DSHA1_ASM -DSHA256_ASM -DSHA512_ASM -DMD5_ASM -DRMD160_ASM -DAES_ASM -DVPAES_ASM -DWHIRLPOOL_ASM -DGHASH_ASM
+evp             315756.26k   646205.99k   806228.18k   887693.65k   916391.12k
+Forked child 0
+Forked child 1
+Forked child 2
+Forked child 3
+Forked child 4
++DT:aes-128-ecb:3:16
+Forked child 5
+Forked child 6
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++R:7422080:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:64
++R:7397510:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:64
++R:7420328:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:64
++R:7423219:aes-128-ecb:3.000000
++R:7428444:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:64
++DT:aes-128-ecb:3:64
++R:7418452:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:64
++R:7417024:aes-128-ecb:3.010000
++R:7419585:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:64
++DT:aes-128-ecb:3:64
++R:3830431:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:256
++R:3830232:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:256
++R:3822868:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:256
++R:3818383:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:256
++R:3831066:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:256
++R:3830629:aes-128-ecb:3.020000
++DT:aes-128-ecb:3:256
++R:3838230:aes-128-ecb:3.010000
++R:3838058:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:256
++DT:aes-128-ecb:3:256
++R:1183485:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:1024
++R:1181983:aes-128-ecb:3.000000
++R:1183177:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:1024
++R:1183396:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:1024
++DT:aes-128-ecb:3:1024
++R:1183431:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:1024
++R:1183452:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:1024
++R:1184683:aes-128-ecb:3.010000
++R:1183467:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:1024
++DT:aes-128-ecb:3:1024
++R:326006:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:8192
++R:325929:aes-128-ecb:3.010000
++R:326052:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:8192
++R:325935:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:8192
++DT:aes-128-ecb:3:8192
++R:325982:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:8192
++R:325996:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:8192
++R:325964:aes-128-ecb:3.010000
++R:325912:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:8192
++DT:aes-128-ecb:3:8192
++R:41909:aes-128-ecb:3.010000
++R:41913:aes-128-ecb:3.010000
++R:41894:aes-128-ecb:3.010000
++R:41905:aes-128-ecb:3.000000
++R:41906:aes-128-ecb:3.010000
++R:42054:aes-128-ecb:3.000000
++R:42224:aes-128-ecb:3.000000
++R:42404:aes-128-ecb:3.000000
+Forked child 7
+Got: +H:16:64:256:1024:8192 from 0
+Got: +F:22:aes-128-ecb:39443603.99:81554517.33:100964437.33:110922673.75:114070198.01 from 0
+Got: +H:16:64:256:1024:8192 from 1
+Got: +F:22:aes-128-ecb:39426041.20:81610205.98:100757092.36:110892736.21:115791189.33 from 1
+Got: +H:16:64:256:1024:8192 from 2
+Got: +F:22:aes-128-ecb:39584426.67:81444380.07:100655202.66:110907024.58:114059311.63 from 2
+Got: +H:16:64:256:1024:8192 from 3
+Got: +F:22:aes-128-ecb:39590501.33:81457881.73:100650609.97:111268522.67:114051146.84 from 3
+Got: +H:16:64:256:1024:8192 from 4
+Got: +F:22:aes-128-ecb:39439654.49:81606548.84:100653671.76:110875045.85:115299669.33 from 4
+Got: +H:16:64:256:1024:8192 from 5
+Got: +F:22:aes-128-ecb:39486745.51:81458837.33:100862549.33:110880829.24:114018487.71 from 5
+Got: +H:16:64:256:1024:8192 from 6
+Got: +F:22:aes-128-ecb:39565077.33:81178892.72:100987904.00:110903622.59:114835456.00 from 6
+Got: +H:16:64:256:1024:8192 from 7
+Got: +F:22:aes-128-ecb:39322312.29:81440148.84:100983125.33:111252480.00:114428586.67 from 7
+OpenSSL 1.0.1k 8 Jan 2015
+built on: Thu Dec  3 18:28:10 2015
+options:bn(64,32) rc4(8x,mmx) des(ptr,risc1,16,long) aes(partial) blowfish(idx) 
+compiler: -I. -I.. -I../include  -fPIC -DOPENSSL_PIC -DOPENSSL_THREADS -D_REENTRANT -DDSO_DLFCN -DHAVE_DLFCN_H -DL_ENDIAN -DTERMIO -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -Wl,-z,relro -Wa,--noexecstack -Wall -march=i686 -DOPENSSL_BN_ASM_PART_WORDS -DOPENSSL_IA32_SSE2 -DOPENSSL_BN_ASM_MONT -DOPENSSL_BN_ASM_GF2m -DSHA1_ASM -DSHA256_ASM -DSHA512_ASM -DMD5_ASM -DRMD160_ASM -DAES_ASM -DVPAES_ASM -DWHIRLPOOL_ASM -DGHASH_ASM
+evp             315858.36k   651751.41k   806514.59k   887902.93k   916554.05k
+Forked child 0
+Forked child 1
+Forked child 2
+Forked child 3
+Forked child 4
+Forked child 5
++DT:aes-128-ecb:3:16
+Forked child 6
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++R:7429466:aes-128-ecb:3.010000
++R:7416864:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:64
++DT:aes-128-ecb:3:64
++R:7423688:aes-128-ecb:3.010000
++R:7418447:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:64
++DT:aes-128-ecb:3:64
++R:7419153:aes-128-ecb:3.010000
++R:7418207:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:64
++DT:aes-128-ecb:3:64
++R:7418483:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:64
++R:7416582:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:64
++R:3797699:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:256
++R:3797457:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:256
++R:3789771:aes-128-ecb:3.010000
++R:3791757:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:256
++DT:aes-128-ecb:3:256
++R:3795833:aes-128-ecb:3.000000
++R:3804146:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:256
++DT:aes-128-ecb:3:256
++R:3793849:aes-128-ecb:3.000000
++R:3809028:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:256
++DT:aes-128-ecb:3:256
++R:1183752:aes-128-ecb:3.010000
++R:1183269:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:1024
++DT:aes-128-ecb:3:1024
++R:1183695:aes-128-ecb:3.000000
++R:1183196:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:1024
++DT:aes-128-ecb:3:1024
++R:1183742:aes-128-ecb:3.010000
++R:1183562:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:1024
++DT:aes-128-ecb:3:1024
++R:1183757:aes-128-ecb:3.010000
++R:1183187:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:1024
++DT:aes-128-ecb:3:1024
++R:325943:aes-128-ecb:3.010000
++R:325928:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:8192
++DT:aes-128-ecb:3:8192
++R:326022:aes-128-ecb:3.010000
++R:325926:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:8192
++DT:aes-128-ecb:3:8192
++R:326036:aes-128-ecb:3.010000
++R:326006:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:8192
++DT:aes-128-ecb:3:8192
++R:325914:aes-128-ecb:3.010000
++R:325976:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:8192
++DT:aes-128-ecb:3:8192
++R:41903:aes-128-ecb:3.010000
++R:41905:aes-128-ecb:3.010000
++R:41894:aes-128-ecb:3.010000
++R:41912:aes-128-ecb:3.010000
++R:41910:aes-128-ecb:3.000000
++R:41911:aes-128-ecb:3.000000
++R:41953:aes-128-ecb:3.000000
++R:41948:aes-128-ecb:3.000000
+Forked child 7
+Got: +H:16:64:256:1024:8192 from 0
+Got: +F:22:aes-128-ecb:39433605.32:80885496.35:100661751.50:110907024.58:114444970.67 from 0
+Got: +H:16:64:256:1024:8192 from 1
+Got: +F:22:aes-128-ecb:39433796.68:80977770.67:100677060.47:110917230.56:114442240.00 from 1
+Got: +H:16:64:256:1024:8192 from 2
+Got: +F:22:aes-128-ecb:39492178.07:80748417.28:100636831.89:110880489.04:114048425.25 from 2
+Got: +H:16:64:256:1024:8192 from 3
+Got: +F:22:aes-128-ecb:39437358.14:80989299.67:100678336.21:110896818.60:114559658.67 from 3
+Got: +H:16:64:256:1024:8192 from 4
+Got: +F:22:aes-128-ecb:39423691.69:80935445.33:100629857.81:110875726.25:114546005.33 from 4
+Got: +H:16:64:256:1024:8192 from 5
+Got: +F:22:aes-128-ecb:39461464.45:80579848.50:101008640.00:110912467.77:114067476.41 from 5
+Got: +H:16:64:256:1024:8192 from 6
+Got: +F:22:aes-128-ecb:39432329.57:80622075.75:100966058.67:110879808.64:114018487.71 from 6
+Got: +H:16:64:256:1024:8192 from 7
+Got: +F:22:aes-128-ecb:39556608.00:80743271.76:100677910.96:110885592.03:114042982.06 from 7
+OpenSSL 1.0.1k 8 Jan 2015
+built on: Thu Dec  3 18:28:10 2015
+options:bn(64,32) rc4(8x,mmx) des(ptr,risc1,16,long) aes(partial) blowfish(idx) 
+compiler: -I. -I.. -I../include  -fPIC -DOPENSSL_PIC -DOPENSSL_THREADS -D_REENTRANT -DDSO_DLFCN -DHAVE_DLFCN_H -DL_ENDIAN -DTERMIO -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -Wl,-z,relro -Wa,--noexecstack -Wall -march=i686 -DOPENSSL_BN_ASM_PART_WORDS -DOPENSSL_IA32_SSE2 -DOPENSSL_BN_ASM_MONT -DOPENSSL_BN_ASM_GF2m -DSHA1_ASM -DSHA256_ASM -DSHA512_ASM -DMD5_ASM -DRMD160_ASM -DAES_ASM -DVPAES_ASM -DWHIRLPOOL_ASM -DGHASH_ASM
+evp             315671.03k   646481.63k   805936.45k   887155.16k   914170.25k
+Forked child 0
+Forked child 1
++DT:aes-128-ecb:3:16
+Forked child 2
+Forked child 3
+Forked child 4
+Forked child 5
+Forked child 6
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++R:7417813:aes-128-ecb:3.000000
++R:7400926:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:64
++DT:aes-128-ecb:3:64
++R:7421104:aes-128-ecb:3.000000
++R:7417354:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:64
++DT:aes-128-ecb:3:64
++R:7417299:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:64
++R:7416944:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:64
++R:7419028:aes-128-ecb:3.010000
++R:7417179:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:64
++DT:aes-128-ecb:3:64
++R:3802803:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:256
++R:3804842:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:256
++R:3775969:aes-128-ecb:3.010000
++R:3802891:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:256
++DT:aes-128-ecb:3:256
++R:3803016:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:256
++R:3782976:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:256
++R:3797209:aes-128-ecb:3.020000
++DT:aes-128-ecb:3:256
++R:3802568:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:256
++R:1183380:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:1024
++R:1183422:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:1024
++R:1183300:aes-128-ecb:3.010000
++R:1183502:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:1024
++DT:aes-128-ecb:3:1024
++R:1182771:aes-128-ecb:3.010000
++R:1183545:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:1024
++DT:aes-128-ecb:3:1024
++R:1183723:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:1024
++R:1183416:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:1024
++R:325934:aes-128-ecb:3.010000
++R:325978:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:8192
++DT:aes-128-ecb:3:8192
++R:326045:aes-128-ecb:3.000000
++R:326004:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:8192
++DT:aes-128-ecb:3:8192
++R:325915:aes-128-ecb:3.010000
++R:326352:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:8192
++DT:aes-128-ecb:3:8192
++R:325990:aes-128-ecb:3.010000
++R:325510:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:8192
++DT:aes-128-ecb:3:8192
++R:41893:aes-128-ecb:3.010000
++R:41912:aes-128-ecb:3.010000
++R:41902:aes-128-ecb:3.010000
++R:41911:aes-128-ecb:3.010000
++R:41907:aes-128-ecb:3.000000
++R:41894:aes-128-ecb:3.000000
++R:41953:aes-128-ecb:3.000000
++R:41948:aes-128-ecb:3.000000
+Forked child 7
+Got: +H:16:64:256:1024:8192 from 0
+Got: +F:22:aes-128-ecb:39561669.33:80900295.02:100649844.52:110897499.00:114067476.41 from 0
+Got: +H:16:64:256:1024:8192 from 1
+Got: +F:22:aes-128-ecb:39426865.12:80851944.19:100649334.22:111107413.33:114559658.67 from 1
+Got: +H:16:64:256:1024:8192 from 2
+Got: +F:22:aes-128-ecb:39436693.69:80703488.00:100594477.08:110876066.45:114398549.33 from 2
+Got: +H:16:64:256:1024:8192 from 3
+Got: +F:22:aes-128-ecb:39558928.00:80858811.96:100639468.44:111024733.55:114434048.00 from 3
+Got: +H:16:64:256:1024:8192 from 4
+Got: +F:22:aes-128-ecb:39557034.67:80470654.30:101011029.33:110901581.40:114546005.33 from 4
+Got: +H:16:64:256:1024:8192 from 5
+Got: +F:22:aes-128-ecb:39579221.33:80861469.77:100660305.65:111276032.00:114064754.82 from 5
+Got: +H:16:64:256:1024:8192 from 6
+Got: +F:22:aes-128-ecb:39427795.35:80286384.05:100656648.50:111290026.67:114040260.47 from 6
+Got: +H:16:64:256:1024:8192 from 7
+Got: +F:22:aes-128-ecb:39471605.33:80856940.86:100646272.43:110882530.23:114015766.11 from 7
+OpenSSL 1.0.1k 8 Jan 2015
+built on: Thu Dec  3 18:28:10 2015
+options:bn(64,32) rc4(8x,mmx) des(ptr,risc1,16,long) aes(partial) blowfish(idx) 
+compiler: -I. -I.. -I../include  -fPIC -DOPENSSL_PIC -DOPENSSL_THREADS -D_REENTRANT -DDSO_DLFCN -DHAVE_DLFCN_H -DL_ENDIAN -DTERMIO -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -Wl,-z,relro -Wa,--noexecstack -Wall -march=i686 -DOPENSSL_BN_ASM_PART_WORDS -DOPENSSL_IA32_SSE2 -DOPENSSL_BN_ASM_MONT -DOPENSSL_BN_ASM_GF2m -DSHA1_ASM -DSHA256_ASM -DSHA512_ASM -DMD5_ASM -DRMD160_ASM -DAES_ASM -DVPAES_ASM -DWHIRLPOOL_ASM -DGHASH_ASM
+evp             316019.81k   645789.99k   805507.38k   888255.88k   914126.52k
+Forked child 0
+Forked child 1
+Forked child 2
+Forked child 3
+Forked child 4
++DT:aes-128-ecb:3:16
+Forked child 5
+Forked child 6
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++DT:aes-128-ecb:3:16
++R:7421415:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:64
++R:7391572:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:64
++R:7422616:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:64
++R:7421565:aes-128-ecb:3.010000
++R:7416588:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:64
++DT:aes-128-ecb:3:64
++R:7418125:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:64
++R:7417811:aes-128-ecb:3.010000
++R:7418342:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:64
++DT:aes-128-ecb:3:64
++R:3815279:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:256
++R:3830738:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:256
++R:3821829:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:256
++R:3823529:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:256
++R:3841818:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:256
++R:3827026:aes-128-ecb:3.010000
++R:3826698:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:256
++DT:aes-128-ecb:3:256
++R:3829635:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:256
++R:1183396:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:1024
++R:1183236:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:1024
++R:1183434:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:1024
++R:1183482:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:1024
++R:1183445:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:1024
++R:1183590:aes-128-ecb:3.000000
++R:1183431:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:1024
++DT:aes-128-ecb:3:1024
++R:1183646:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:1024
++R:325882:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:8192
++R:325896:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:8192
++R:325961:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:8192
++R:325974:aes-128-ecb:3.000000
++DT:aes-128-ecb:3:8192
++R:325550:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:8192
++R:325986:aes-128-ecb:3.010000
++R:325962:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:8192
++DT:aes-128-ecb:3:8192
++R:326342:aes-128-ecb:3.010000
++DT:aes-128-ecb:3:8192
++R:41899:aes-128-ecb:3.010000
++R:41791:aes-128-ecb:3.010000
++R:41904:aes-128-ecb:3.000000
++R:41903:aes-128-ecb:3.010000
++R:41913:aes-128-ecb:3.000000
++R:42170:aes-128-ecb:3.010000
++R:42122:aes-128-ecb:3.000000
++R:42368:aes-128-ecb:3.000000
+Forked child 7
+Got: +H:16:64:256:1024:8192 from 0
+Got: +F:22:aes-128-ecb:39450179.40:81686495.68:100651800.66:110892055.81:114450432.00 from 0
+Got: +H:16:64:256:1024:8192 from 1
+Got: +F:22:aes-128-ecb:39430224.58:81371981.40:100986112.00:110900220.60:115021141.33 from 1
+Got: +H:16:64:256:1024:8192 from 2
+Got: +F:22:aes-128-ecb:39580880.00:81392618.67:100647633.22:111234389.33:114032095.68 from 2
+Got: +H:16:64:256:1024:8192 from 3
+Got: +F:22:aes-128-ecb:39555136.00:81297626.58:100654947.51:111265792.00:114769647.84 from 3
+Got: +H:16:64:256:1024:8192 from 4
+Got: +F:22:aes-128-ecb:39433047.18:81365007.31:100999680.00:110751893.69:114425856.00 from 4
+Got: +H:16:64:256:1024:8192 from 5
+Got: +F:22:aes-128-ecb:39587285.33:81532352.00:100650865.12:110891715.61:114042982.06 from 5
+Got: +H:16:64:256:1024:8192 from 6
+Got: +F:22:aes-128-ecb:39431893.69:81427455.15:100668895.68:111021331.56:115692885.33 from 6
+Got: +H:16:64:256:1024:8192 from 7
+Got: +F:22:aes-128-ecb:39421717.33:81450907.64:100969472.00:110869602.66:113738163.46 from 7
+OpenSSL 1.0.1k 8 Jan 2015
+built on: Thu Dec  3 18:28:10 2015
+options:bn(64,32) rc4(8x,mmx) des(ptr,risc1,16,long) aes(partial) blowfish(idx) 
+compiler: -I. -I.. -I../include  -fPIC -DOPENSSL_PIC -DOPENSSL_THREADS -D_REENTRANT -DDSO_DLFCN -DHAVE_DLFCN_H -DL_ENDIAN -DTERMIO -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -Wl,-z,relro -Wa,--noexecstack -Wall -march=i686 -DOPENSSL_BN_ASM_PART_WORDS -DOPENSSL_IA32_SSE2 -DOPENSSL_BN_ASM_MONT -DOPENSSL_BN_ASM_GF2m -DSHA1_ASM -DSHA256_ASM -DSHA512_ASM -DMD5_ASM -DRMD160_ASM -DAES_ASM -DVPAES_ASM -DWHIRLPOOL_ASM -DGHASH_ASM
+evp             315890.36k   651524.44k   806229.41k   887827.00k   916173.20k
