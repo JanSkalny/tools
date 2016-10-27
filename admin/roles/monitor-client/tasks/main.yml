@@ -6,12 +6,12 @@
 
 - name: download zabbix release packae
   get_url: 
-    url="http://repo.zabbix.com/zabbix/2.4/ubuntu/pool/main/z/zabbix-release/zabbix-release_2.4-1+trusty_all.deb"
-    dest="/tmp/zabbix-release_2.4-1+trusty_all.deb"
+      url="http://repo.zabbix.com/zabbix/3.2/ubuntu/pool/main/z/zabbix-release/zabbix-release_3.2-1+xenial_all.deb"
+    dest="/tmp/zabbix-release.deb"
   when: res.rc == 1
 
-- name: install zabbix-release_2.4-1+trusty_all.deb
-  apt: deb="/tmp/zabbix-release_2.4-1+trusty_all.deb"
+- name: install zabbix-release.deb
+  apt: deb="/tmp/zabbix-release.deb"
   when: res.rc == 1
 
 - name: apt-get update
