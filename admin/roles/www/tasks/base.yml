@@ -3,35 +3,24 @@
   with_items:
   - apache2 
   - apache2-utils 
-  - php5 
-  - php5-common 
-  - php5-fpm 
-  - php5-gd 
-  - php5-cli 
   - libapache2-mod-fastcgi 
-  - php-auth 
-  - php5-mcrypt 
-  - mcrypt 
-  - php5-imagick 
+  - php-fpm 
+  - php-cli 
+  - php-curl 
+  - php-mcrypt
+  - php-mbstring
+  - php-gettext
+  - php-gd 
+  - php-zip 
+  - php-imagick 
   - imagemagick 
-  - php5-curl 
-  - php5-intl 
-  - php5-memcache 
-  - php5-memcached 
-  - php5-ming 
-  - php5-ps 
-  - php5-pspell 
-  - php5-recode 
-  - php5-sqlite 
-  - php5-tidy 
-  - php5-xmlrpc 
-  - php5-xsl 
-  - memcached 
+  - composer
 
-- name: enable php5 modules
-  raw: php5enmod {{ item }}
+- name: enable php modules
+  raw: phpenmod {{ item }}
   with_items:
   - mcrypt
+  - mbstring
 
 - name: enable apache2 modules
   raw: a2enmod {{ item }}
@@ -40,8 +29,6 @@
   - ssl 
   - actions 
   - include 
-  - dav_fs 
-  - dav 
   - auth_digest 
   - actions 
   - fastcgi 
@@ -50,7 +37,7 @@
 - name: configure apache2 
   copy: src="{{ item }}" dest="/etc/apache2/conf-available/{{ item }}"
   with_items:
-  - php5-fpm.conf
+  - php-fpm.conf
   - ssl.conf
 
 - name: configure apache default sites 
@@ -61,17 +48,18 @@
   with_items:
   - "/var/www/html/index.html"
   - "/etc/apache2/sites-available/default-ssl.conf"
+  - "/etc/apache2/sites-available/default-tls.conf"
 
 - name: enable apache2 configs
   raw: a2enconf {{ item }}
   with_items:
-  - php5-fpm
+  - php-fpm
 
 #- name: disable docs
 #  raw: a2disconf apache2-doc
 
 - name: disable autoindex
-  raw: a2dismod autoindex
+  raw: a2dismod autoindex -f
 
 - name: change apache security.conf
   lineinfile: 
@@ -84,6 +72,6 @@
 - name: restart apache2
   service: name=apache2 state=restarted
 
-- name: restart php5-fpm
-  service: name=php5-fpm state=restarted
+- name: restart php-fpm
+  service: name=php7.0-fpm state=restarted
 

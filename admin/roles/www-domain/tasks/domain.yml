@@ -6,43 +6,47 @@
     shell="/bin/false"
     createhome=no state=present
 
+- name: add www-data to new group
+  user:
+    name=www-data
+    groups={{ www_user }}
+    append=yes
+
 - name: create domain directories
   file: 
     path="/var/www/{{ www_domain }}/{{ item }}" 
     state=directory owner={{ www_user }} group={{ www_user }}
   with_items:
     - "/"
-    - "public_html/"
-    - "public_html/www/"
-    - "public_html/_/"
-    - "logs/"
+    - "www/"
+    - "_/"
   
 - name: create redirection via .htaccess
   template: 
     src="htaccess_redirect.j2" 
-    dst="/var/www/{{ www_domain }}/_/.htaccess"
+    dest="/var/www/{{ www_domain }}/_/.htaccess"
     owner={{ www_user }} group={{ www_user }}
 
-- name: create php5-fpm pool
+- name: create php-fpm pool
   template:
     src="pool.conf.j2"
-    dst="/etc/php5/fpm/pool.d/{{ www_user }}.conf"
+    dest="/etc/php/7.0/fpm/pool.d/{{ www_user }}.conf"
   notify:
     - restart php
 
 - name: create vhost 
   template:
     src="domain.conf.j2"
-    dst="/etc/apache2/sites-available/400-{{ www_domain }}.conf"
+    dest="/etc/apache2/sites-available/400-{{ www_domain }}.conf"
   notify:
     - restart apache
+
+- name: append extra vhost configuration
+  blockinfile:
+    dest: "/etc/apache2/sites-available/400-{{ www_domain }}.conf"
+    block: "{{ lookup('file', 'files/www-domain-append/{{ www_domain }}') }}"
+  ignore_errors: yes
 
 - name: enable vhost
   raw: a2ensite "400-{{ www_domain }}.conf"
 
-
-handlers:
-  - name: restart apache
-    service: name=apache2 state=restarted
-  - name: restart php
-    service: name=php5-fpm state=restarted

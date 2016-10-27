@@ -2,7 +2,7 @@
 user = {{ www_user }}
 group = {{ www_user }}
 
-listen = /var/run/php5-fpm-{{ www_user }}.sock
+listen = /var/run/php-fpm-{{ www_user }}.sock
 
 listen.owner = www-data
 listen.group = www-data
@@ -10,9 +10,9 @@ listen.group = www-data
 
 pm = dynamic
 pm.max_children = 32
-pm.start_servers = 4
-pm.min_spare_servers = 4
-pm.max_spare_servers = 8
+pm.start_servers = 2
+pm.min_spare_servers = 2
+pm.max_spare_servers = 4
 
 ;pm.process_idle_timeout = 10s;
 pm.max_requests = 100
@@ -33,7 +33,7 @@ security.limit_extensions = .php
 
 php_admin_value[open_basedir] = ".:/var/www/{{ www_domain }}:/var/tmp:/usr/share/php/:/usr/share/pear/:/tmp:/dev/urandom"
 php_admin_value[upload_tmp_dir] = "/var/tmp"
-php_admin_value[sendmail_path] = /usr/sbin/sendmail -t -i -f admin@{{ www_domain }}
+php_admin_value[sendmail_path] = /usr/bin/msmtp -a localhost -t -i -f webmaster@{{ www_domain }}
 
 ;php_flag[display_errors] = off
 ;php_admin_value[error_log] = /var/log/fpm-php.www.log
