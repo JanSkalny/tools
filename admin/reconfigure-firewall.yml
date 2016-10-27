@@ -1,4 +1,3 @@
----
-- hosts: cerise
+- hosts: gatekeeper.verdesro.sk intranet.verdesro.sk
   roles:
   - firewall

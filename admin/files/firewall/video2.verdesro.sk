@@ -15,16 +15,14 @@
 # Jan Skalny <jan@skalny.sk>
 #
 # UPDATE HISTORY:
-# 2014-08-23  initial fw.sh configuration
-# 2016-10-27  added LSB and unified update history
-#
+# 2016-10-27  added LSB info and update history
+# 
 
 IT=/sbin/iptables
 
-WAN_IF=eth0
-
 MONITOR=92.240.244.36
-BACKUP=194.160.5.138
+BACKUP=92.240.244.52
+INTRANET=92.240.244.52
 
 modprobe ip_conntrack
 modprobe ip_conntrack_ftp
@@ -82,11 +80,11 @@ $IT -N check_if
 	$IT -A check_if -s 224.0.0.0/3 -j DROP		# multicast
 	$IT -A check_if -s 100.64.0.0/10 -j LOG_DROP	# RFC 6598
 
-	# public interface (WAN_IF) MUST NOT containt any private address
-	$IT -A check_if -i $WAN_IF -s 192.168.0.0/16 -j LOG_DROP
-	$IT -A check_if -i $WAN_IF -s 172.16.0.0/12 -j LOG_DROP
-	$IT -A check_if -i $WAN_IF -s 10.0.0.0/8 -j LOG_DROP
-	$IT -A check_if -i $WAN_IF -j RETURN
+	# public interface (eth0) MUST NOT containt any private address
+	$IT -A check_if -i eth0 -s 192.168.0.0/16 -j LOG_DROP
+	$IT -A check_if -i eth0 -s 172.16.0.0/12 -j LOG_DROP
+	$IT -A check_if -i eth0 -s 10.0.0.0/8 -j LOG_DROP
+	$IT -A check_if -i eth0 -j RETURN
 
 	# everything else is dropped!
 	$IT -A check_if -j LOG_DROP
@@ -110,12 +108,16 @@ $IT -A INPUT -m state --state INVALID -j LOG_DROP
 # SSH
 $IT -A INPUT -p tcp --dport 22 -j ACCEPT
 
-# publicly accessible services
+# verejne dostupne sluzby
 for PORT in 80 443; do
 	$IT -A INPUT -p tcp --dport $PORT -j ACCEPT
 done
 
-# bacula FD from backup server
+# ftp upload zo stavby
+$IT -I INPUT -p tcp --dport 21 -j ACCEPT
+$IT -I INPUT -p tcp --dport 32100:32200 -j ACCEPT
+
+# bacula FD z backup.verdesro.sk
 $IT -A INPUT -p tcp --dport 9102 -s $BACKUP -j ACCEPT
 
 # zabbix agent
@@ -130,39 +132,5 @@ for PORT in 137 138; do
 	$IT -A INPUT -p udp --dport $PORT -j DROP
 done
 
-# default rule
+### default rule 
 $IT -A INPUT -j LOG_REJECT
-
-
-############################################################
-### FORWARD ruleset
-
-# verify source address <-> interface mapping
-$IT -A FORWARD -j check_if
-
-# connection tracking:
-# - allow all related/established traffic
-# - invalid packets MUST be dropped!
-$IT -A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
-$IT -A FORWARD -m state --state INVALID -j LOG_DROP
-
-## intranet zatial moze vsetko vsade
-##XXX: ak pribudnu siete, toto treba prerobit
-#$IT -A FORWARD -s $NET_VPN0 -j ACCEPT
-
-# niektore stroje mozu robit 9103 (bacula) na backup
-#for HOST in $NET_VPN0 92.240.244.101 92.240.244.104; do
-#  $IT -A FORWARD -s $HOST -d $BACKUP -p tcp --dport 9103 -j ACCEPT
-#done
-
-# default rule
-$IT -A FORWARD -j LOG_DROP
-
-############################################################
-### NAT ruleset
-
-# SNAT von
-#$IT -t nat -A POSTROUTING -s $NET_VPN0 -o wan0 -j SNAT --to 92.240.244.52
-
-# SNAT dnu
-#$IT -t nat -A PREROUTING -i wan0 -p tcp --dport 9103 -j DNAT --to-destination $BACKUP

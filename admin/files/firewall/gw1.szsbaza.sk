@@ -1,5 +1,23 @@
 #! /bin/sh
 
+### BEGIN INIT INFO
+# Provides:          fw.sh
+# Required-Start:    $local_fs $network
+# Required-Stop:     $local_fs
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: fw.sh
+# Description:       firewall
+### END INIT INFO
+
+#
+# Simple iptables management script (fw.sh)
+# Jan Skalny <jan@skalny.sk>
+#
+# UPDATE HISTORY:
+# 2016-10-27  add LSB information and history
+#
+
 IT=/sbin/iptables
 
 modprobe ip_conntrack
@@ -154,7 +172,7 @@ $IT -A INPUT -m state --state INVALID -j log_drop
 # vrrp na vsetkych rozhraniach
 $IT -A INPUT -p vrrp -j ACCEPT
 
-# ssh from everywhere
+# ssh from internet 
 $IT -A INPUT -p tcp --dport 22 -j ACCEPT
 
 # ssh from intranet and from safe hosts
@@ -170,6 +188,8 @@ $IT -A INPUT -p tcp --dport 22 -s $GW2_INET -j ACCEPT
 $IT -A INPUT -s 0.0.0.0 -p udp --dport 67 -j ACCEPT
 $IT -A INPUT -s $SKOLA -p udp --dport 67 -j ACCEPT
 $IT -A INPUT -s $SKOLA -p udp --dport 53 -j ACCEPT
+$IT -A INPUT -s $AD -p tcp --dport 53 -j ACCEPT
+$IT -A INPUT -s $DMZ -p tcp --dport 53 -j ACCEPT
 $IT -A INPUT -s $SKOLA -p udp --dport 123 -j ACCEPT
 
 # dns z VPN

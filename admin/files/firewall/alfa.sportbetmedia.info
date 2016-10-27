@@ -1,19 +1,25 @@
 #! /bin/sh
+
+### BEGIN INIT INFO
+# Provides:          fw.sh
+# Required-Start:    $local_fs $network
+# Required-Stop:     $local_fs
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: fw.sh
+# Description:       firewall
+### END INIT INFO
+
 #
 # Simple iptables management script (fw.sh)
 # Jan Skalny <jan@skalny.sk>
 #
 # UPDATE HISTORY:
+# 2014-12-11  initial fw.sh configuration
+# 2015-01-06  mysql diera pre migraciu 
+# 2015-04-30  otvorenie portov pre websocketie servery
+# 2016-10-27  added LSB info
 #
-# 2014-12-11 skalny
-#  - initial fw.sh configuration
-#
-# 2015-01-06 skalny
-#  - mysql diera pre migraciu 
-#
-# 2015-04-30 peter
-#  - otvorenie portov pre websocketie servery
-
 
 IT=/sbin/iptables
 

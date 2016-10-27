@@ -1,25 +1,28 @@
 #! /bin/sh
+
+### BEGIN INIT INFO
+# Provides:          fw.sh
+# Required-Start:    $local_fs $network
+# Required-Stop:     $local_fs
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: fw.sh
+# Description:       firewall
+### END INIT INFO
+
 #
 # Simple iptables management script (fw.sh)
 # Jan Skalny <jan@skalny.sk>
 #
 # UPDATE HISTORY:
+# 2011-09-15  script was created
+# 2012-03-12  configured NAT on public interface, DHCP on vpn0
+# 2014-08-23  added support for vpn1 interface (host1 to intranet)
+# 2014-09-13  migrated to different machine (changes in VPNs)
+# 2015-11-19  fixed hole in backup forwarding
+# 2016-10-26  remove backdoor for truvision
+# 2016-10-27  added backdoor for truvision and LSB info
 #
-# 2011-09-15 skalny 
-#  - script was created
-#
-# 2012-03-12 skalny
-#  - configured NAT on public interface
-#  - DHCP on vpn0 
-#
-# 2014-08-23 skalny
-#  - added support for vpn1 interface (host1 to intranet)
-#
-# 2014-0913 skalny
-#  - migrated to different machine (changes in VPNs)
-#
-# 2015-11-19 skalny
-#  - fixed hole in backup forwarding
 
 IT=/sbin/iptables
 
@@ -91,6 +94,9 @@ $IT -N check_if
 	$IT -A check_if -i wan0 -s 10.0.0.0/8 -j LOG_DROP
 	$IT -A check_if -i wan0 -j RETURN
 
+	# truvision
+	$IT -A check_if -i tun0 -s 10.8.0.0/30 -j RETURN
+
 	# vpn1 between host1 and intranet uses special range
 	$IT -A check_if -i vpn1 -s $NET_VPN1 -j RETURN
 
@@ -134,6 +140,9 @@ $IT -N INPUT_VPN1
 # loopback is always allowed
 $IT -A INPUT -i lo -j ACCEPT
 
+# Redirnet proxy service
+$IT -A INPUT -p tcp -d 92.240.244.52 --dport 8889 -j ACCEPT
+
 # verify source address <-> interface mapping
 $IT -A INPUT -j check_if
 
@@ -148,6 +157,7 @@ $IT -A INPUT -p tcp --dport ssh -j ACCEPT
 
 # openvpn access from everywhere
 $IT -A INPUT -p udp --dport 1194 -j ACCEPT
+$IT -A INPUT -p udp --dport 1195 -j ACCEPT
 
 # syslog server pre interne servery a zvolene verejne stroje
 $IT -A INPUT -p udp --dport 514 -s host1.verdesro.sk -j ACCEPT
@@ -202,6 +212,21 @@ for HOST in $NET_VPN0 92.240.244.101 92.240.244.104; do
 	$IT -A FORWARD -s $HOST -d $BACKUP -p tcp --dport 9103 -j ACCEPT
 done
 
+# DNAT hole for Redirnet Poertal (192.168.153.25)
+$IT -A FORWARD -p tcp -i wan0 -d 192.168.153.25 --dport 80 -j ACCEPT
+
+#DNAT hole for GPS service @dev
+$IT -A FORWARD -p udp -i wan0 -d 192.168.153.25 --dport 5006 -j ACCEPT
+$IT -A FORWARD -p udp -i wan0 -d 192.168.153.25 --dport 5007 -j ACCEPT
+$IT -A FORWARD -p udp -i wan0 -d 192.168.153.25 --dport 5008 -j ACCEPT
+$IT -A FORWARD -p udp -i wan0 -d 192.168.153.25 --dport 5009 -j ACCEPT
+
+$IT -A FORWARD -p tcp -i wan0 -d 192.168.153.23 --dport 5010 -j ACCEPT
+$IT -A FORWARD -p tcp -i wan0 -d 192.168.153.25 --dport 5011 -j ACCEPT
+$IT -A FORWARD -p tcp -i wan0 -d 192.168.153.25 --dport 5017 -j ACCEPT
+
+$IT -A FORWARD -s 10.8.0.0/30 -d 192.168.153.80 -j ACCEPT
+
 # default rule
 $IT -A FORWARD -j LOG_DROP
 
@@ -213,4 +238,21 @@ $IT -t nat -A POSTROUTING -s $NET_VPN0 -o wan0 -j SNAT --to 92.240.244.52
 
 # SNAT dnu
 $IT -t nat -A PREROUTING -i wan0 -p tcp --dport 9103 -j DNAT --to-destination $BACKUP
+
+#DNAT pre redirnet portal
+$IT -t nat -A PREROUTING -i wan0 -p tcp --dport 8080 -j DNAT --to 192.168.153.25:80
+
+#truvision
+$IT -t nat -A PREROUTING -i tun0 -d 10.8.0.1 -j DNAT --to 192.168.153.80
+$IT -t nat -A POSTROUTING -o tun0 -s 192.168.153.80 -j SNAT --to 10.8.0.1
+
+#DNAT pre GPS
+$IT -t nat -A PREROUTING -i wan0 -p udp --dport 5006 -j DNAT --to 192.168.153.23:5006
+$IT -t nat -A PREROUTING -i wan0 -p udp --dport 5007 -j DNAT --to 192.168.153.23:5007
+$IT -t nat -A PREROUTING -i wan0 -p udp --dport 5008 -j DNAT --to 192.168.153.23:5008
+$IT -t nat -A PREROUTING -i wan0 -p udp --dport 5009 -j DNAT --to 192.168.153.23:5009
+
+$IT -t nat -A PREROUTING -i wan0 -p tcp --dport 5010 -j DNAT --to 192.168.153.23:5010
+$IT -t nat -A PREROUTING -i wan0 -p tcp --dport 5011 -j DNAT --to 192.168.153.23:5011
+$IT -t nat -A PREROUTING -i wan0 -p tcp --dport 5017 -j DNAT --to 192.168.153.23:5017
 

@@ -1,23 +1,36 @@
 #! /bin/sh
+
+### BEGIN INIT INFO
+# Provides:          fw.sh
+# Required-Start:    $local_fs $network
+# Required-Stop:     $local_fs
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: fw.sh
+# Description:       firewall
+### END INIT INFO
+
 #
 # Simple iptables management script (fw.sh)
 # Jan Skalny <jan@skalny.sk>
 #
 # UPDATE HISTORY:
+# 2014-08-23  initial fw.sh configuration
+# 2017-10-27  added LSB info
 #
-# 2014-08-23 skalny
-#  - initial fw.sh configuration
 
 IT=/sbin/iptables
 
 MONITOR=92.240.244.36
 BACKUP=92.240.244.52
 INTRANET=92.240.244.52
+VPN="192.168.10.0/24"
+VPN_SUB1="192.168.8.0/24"
 
 modprobe ip_conntrack
 modprobe ip_conntrack_ftp
 
-echo 0 > /proc/sys/net/ipv4/ip_forward
+echo 1 > /proc/sys/net/ipv4/ip_forward
 echo 1 > /proc/sys/net/ipv4/tcp_syncookies
 echo 1 > /proc/sys/net/ipv4/conf/all/rp_filter
 echo 1 > /proc/sys/net/ipv4/conf/all/log_martians
@@ -76,9 +89,33 @@ $IT -N check_if
 	$IT -A check_if -i eth0 -s 10.0.0.0/8 -j LOG_DROP
 	$IT -A check_if -i eth0 -j RETURN
 
+	# vpn interface
+	$IT -A check_if -i tun0 -s $VPN -j RETURN
+	$IT -A check_if -i tun0 -s $VPN_SUB1 -j RETURN
+
+
 	# everything else is dropped!
 	$IT -A check_if -j LOG_DROP
 
+
+############################################################
+### FORWARD ruleset
+$IT -A FORWARD -j check_if
+
+# connection tracking:
+# - allow all related/established traffic
+# - invalid packets MUST be dropped!
+$IT -A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
+$IT -A FORWARD -m state --state INVALID -j LOG_DROP
+
+## VPN moze vsetko vsade
+$IT -A FORWARD -s $VPN -j ACCEPT
+
+## Chceme forwardovat aj do subsieti VPN
+$IT -A FORWARD -s $VPN_SUB1 -j ACCEPT
+
+# default rule
+$IT -A FORWARD -j LOG_DROP
 
 ############################################################
 ### INPUT ruleset
@@ -97,6 +134,13 @@ $IT -A INPUT -m state --state INVALID -j LOG_DROP
 
 # SSH
 $IT -A INPUT -p tcp --dport 22 -j ACCEPT
+
+# Openvpn
+$IT -A INPUT -p udp --dport 1194 -j ACCEPT
+
+# Video transcoder
+$IT -A INPUT -p tcp --dport 24615 -j ACCEPT
+$IT -A INPUT -p tcp --dport 35600 -j ACCEPT
 
 # verejne dostupne sluzby
 for PORT in 25 465 80 443; do

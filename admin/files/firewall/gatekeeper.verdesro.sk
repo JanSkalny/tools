@@ -1,5 +1,23 @@
 #! /bin/sh
 
+### BEGIN INIT INFO
+# Provides:          fw.sh
+# Required-Start:    $local_fs $network
+# Required-Stop:     $local_fs
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: fw.sh
+# Description:       firewall
+### END INIT INFO
+
+#
+# Simple iptables management script (fw.sh)
+# Jan Skalny <jan@skalny.sk>
+#
+# UPDATE HISTORY:
+# 2016-10-27  add LSB information and update history
+#
+
 IT=/sbin/iptables
 
 VPN="192.168.153.0/24"
@@ -48,7 +66,9 @@ $IT -N check_if
 	#### povolene
 	# VPN/LAN povolena z 192.168.153.0/24
 	$IT -A check_if -i br0 -s $VPN -j RETURN
+	$IT -A check_if -i br0 -s 10.8.0.0/30 -j RETURN
 	$IT -A check_if -i trunk0.100 -s $GUEST -j RETURN
+
 	# WAN uplink dava adresu 192.168.5.252/24
 	$IT -A check_if -i wan0 -s $WAN -j RETURN
 
@@ -122,6 +142,7 @@ $IT -A INPUT -p udp --dport 53 -s $VPN -j ACCEPT
 
 # zabbix agent
 $IT -A INPUT -p tcp --dport 10050 -s 92.240.244.36 -j ACCEPT
+$IT -A INPUT -p tcp --dport 10050 -s 192.168.153.1 -j ACCEPT
 
 #XXX:
 # ignore junk from windows servers (samba)
@@ -158,6 +179,8 @@ $IT -A FORWARD -s $VPN -j ACCEPT
 # povolime guest sieti ist na Internet, no nie do intranetu
 $IT -A FORWARD -s $GUEST -d $VPN -j log_drop
 $IT -A FORWARD -s $GUEST -j ACCEPT
+
+$IT -A FORWARD -s 10.8.0.0/30 -d 192.168.153.80 -j ACCEPT
 
 # vsetko ostatne drop!
 $IT -A FORWARD -j log_drop

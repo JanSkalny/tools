@@ -1,5 +1,23 @@
 #! /bin/sh
 
+### BEGIN INIT INFO
+# Provides:          fw.sh
+# Required-Start:    $local_fs $network
+# Required-Stop:     $local_fs
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: fw.sh
+# Description:       firewall
+### END INIT INFO
+
+#
+# Simple iptables management script (fw.sh)
+# Jan Skalny <jan@skalny.sk>
+#
+# UPDATE HISTORY:
+# 2016-10-27  add LSB information and history
+#
+
 IT=/sbin/iptables
 
 MONITOR="192.168.254.134"
@@ -52,13 +70,15 @@ $IT -N check_if
 	$IT -A check_if -s 169.254.0.0/16 -j log_drop
 	$IT -A check_if -s 192.0.2.0/24 -j log_drop
 	$IT -A check_if -s 204.152.64.0/23 -j log_drop
-	$IT -A check_if -s 224.0.0.0/3 -j log_drop
+	$IT -A check_if -s 224.0.0.0/3 -j DROP
 
 	# public interface
 	#$IT -A check_if -i eth0 \! -s FIXME -j RETURN
-	$IT -A check_if -i br0 -j RETURN
-	$IT -A check_if -i br1 -j RETURN
+	$IT -A check_if -i brDMZ -j RETURN
+	$IT -A check_if -i brDC -j RETURN
 	$IT -A check_if -i tap0 -j RETURN
+
+	$IT -A check_if -i brWAN \! -d 192.168.0.0/16 -j RETURN
 
 	#
 	#$IT -A check_if -i eth0 \! -s 192.168.0.0/16 -j RETURN
@@ -118,6 +138,14 @@ $IT -A FORWARD -d 192.168.253.10 -j ACCEPT		# dc
 $IT -A FORWARD -s 192.168.253.10 -j ACCEPT		# dc out
 $IT -A FORWARD -d 192.168.253.11 -j ACCEPT		# dc
 $IT -A FORWARD -s 192.168.253.11 -j ACCEPT		# dc out
+
+# widla
+$IT -A FORWARD -s 194.160.5.139 -j ACCEPT
+$IT -A FORWARD -d 194.160.5.139 -p tcp --dport 3389 -j ACCEPT
+
+# gatekeeper.szsbaza.sk
+$IT -A FORWARD -s 194.160.5.131 -j ACCEPT
+$IT -A FORWARD -d 194.160.5.131 -j ACCEPT
 
 ### default rule
 $IT -A INPUT -j log_reject

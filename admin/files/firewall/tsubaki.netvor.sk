@@ -1,5 +1,23 @@
 #! /bin/sh
 
+### BEGIN INIT INFO
+# Provides:          fw.sh
+# Required-Start:    $local_fs $network
+# Required-Stop:     $local_fs
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: fw.sh
+# Description:       firewall
+### END INIT INFO
+
+#
+# Simple iptables management script (fw.sh)
+# Jan Skalny <jan@skalny.sk>
+#
+# UPDATE HISTORY:
+# 2016-10-27  add LSB information and history
+#
+
 IT=/sbin/iptables
 
 modprobe ip_conntrack
@@ -109,6 +127,7 @@ $IT -A INPUT -p tcp --dport 9103 -s 92.240.244.25 -j ACCEPT
 $IT -A INPUT -p tcp --dport 9103 -s 92.240.244.36 -j ACCEPT
 $IT -A INPUT -p tcp --dport 9103 -s 92.240.244.37 -j ACCEPT
 $IT -A INPUT -p tcp --dport 9103 -s 92.240.244.42 -j ACCEPT
+$IT -A INPUT -p tcp --dport 9103 -s 87.197.159.3 -j ACCEPT
 $IT -A INPUT -p tcp --dport 9103 -s 194.160.5.128/28 -j ACCEPT
 $IT -A INPUT -p tcp --dport 9103 -s 147.175.204.0/24 -j ACCEPT
 

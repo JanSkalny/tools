@@ -1,12 +1,23 @@
 #! /bin/sh
+
+### BEGIN INIT INFO
+# Provides:          fw.sh
+# Required-Start:    $local_fs $network
+# Required-Stop:     $local_fs
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: fw.sh
+# Description:       firewall
+### END INIT INFO
+
 #
 # Simple iptables management script (fw.sh)
 # Jan Skalny <jan@skalny.sk>
 #
 # UPDATE HISTORY:
+# 2014-08-23  initial fw.sh configuration
+# 2016-10-27  added LSB and unified update history
 #
-# 2014-08-23 johnny
-#  - initial fw.sh configuration
 
 IT=/sbin/iptables
 
@@ -18,10 +29,10 @@ BACKUP=194.160.5.138
 modprobe ip_conntrack
 modprobe ip_conntrack_ftp
 
-echo 0 > /proc/sys/net/ipv4/ip_forward
+echo 1 > /proc/sys/net/ipv4/ip_forward
 echo 1 > /proc/sys/net/ipv4/tcp_syncookies
-echo 1 > /proc/sys/net/ipv4/conf/all/rp_filter
-echo 1 > /proc/sys/net/ipv4/conf/all/log_martians
+echo 0 > /proc/sys/net/ipv4/conf/all/rp_filter
+echo 0 > /proc/sys/net/ipv4/conf/all/log_martians
 echo 1 > /proc/sys/net/ipv4/icmp_echo_ignore_broadcasts
 echo 1 > /proc/sys/net/ipv4/icmp_ignore_bogus_error_responses
 echo 0 > /proc/sys/net/ipv4/conf/all/send_redirects
@@ -62,6 +73,8 @@ $IT -N LOG_ACCEPT
 ### verify source address of packet (RFC 2827, RFC 1918)
 
 $IT -N check_if
+	$IT -A check_if -j RETURN 
+
 	# no-one can send from special address ranges!
 	$IT -A check_if -s 127.0.0.0/8 -j LOG_DROP	# loopback
 	$IT -A check_if -s 0.0.0.0/8 -j DROP		# DHCP
@@ -77,11 +90,15 @@ $IT -N check_if
 	$IT -A check_if -i $WAN_IF -s 10.0.0.0/8 -j LOG_DROP
 	$IT -A check_if -i $WAN_IF -j RETURN
 
+	# TODO: firewall is disabled!
+	$IT -A check_if -j RETURN
+
 	# everything else is dropped!
 	$IT -A check_if -j LOG_DROP
 
 
 ############################################################
+
 ### INPUT ruleset
 
 # loopback is always allowed
@@ -104,6 +121,11 @@ $IT -A INPUT -p tcp --dport 22 -j ACCEPT
 #for PORT in 25 465 80 443; do
 #	$IT -A INPUT -p tcp --dport $PORT -j ACCEPT
 #done
+
+# cerise
+$IT -A INPUT -p tcp --dport 8811 -j ACCEPT
+$IT -A INPUT -p tcp --dport 8843 -j ACCEPT
+$IT -A INPUT -p tcp --dport 443 -j ACCEPT
 
 # bacula FD from backup server
 $IT -A INPUT -p tcp --dport 9102 -s $BACKUP -j ACCEPT

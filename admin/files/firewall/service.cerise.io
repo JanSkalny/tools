@@ -1,12 +1,23 @@
 #! /bin/sh
+
+### BEGIN INIT INFO
+# Provides:          fw.sh
+# Required-Start:    $local_fs $network
+# Required-Stop:     $local_fs
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: fw.sh
+# Description:       firewall
+### END INIT INFO
+
 #
 # Simple iptables management script (fw.sh)
 # Jan Skalny <jan@skalny.sk>
 #
 # UPDATE HISTORY:
+# 2014-08-23  initial fw.sh configuration
+# 2016-10-27  added LSB and unified update history
 #
-# 2014-08-23 johnny
-#  - initial fw.sh configuration
 
 IT=/sbin/iptables
 
@@ -100,10 +111,9 @@ $IT -A INPUT -m state --state INVALID -j LOG_DROP
 $IT -A INPUT -p tcp --dport 22 -j ACCEPT
 
 # publicly accessible services
-#XXX:
-#for PORT in 25 465 80 443; do
-#	$IT -A INPUT -p tcp --dport $PORT -j ACCEPT
-#done
+for PORT in 80 443 5000; do
+	$IT -A INPUT -p tcp --dport $PORT -j ACCEPT
+done
 
 # bacula FD from backup server
 $IT -A INPUT -p tcp --dport 9102 -s $BACKUP -j ACCEPT
