@@ -1,0 +1,19 @@
+<VirtualHost *:80>
+  ServerName www.adam.skalny.name
+  ServerAlias www.adam.skalny.sk
+  ServerAlias adam.skalny.name
+  Redirect / http://adam.skalny.sk/
+</VirtualHost>
+<VirtualHost *:80>
+  ServerName www.jan.skalny.name
+  ServerAlias www.jan.skalny.sk
+  ServerAlias jan.skalny.name
+  Redirect / http://jan.skalny.sk/
+</VirtualHost>
+<VirtualHost *:80>
+  ServerName skalny.name
+  ServerAlias *.skalny.name
+  Redirect / http://www.skalny.sk/
+</VirtualHost>
+
+# RedirectMatch /awstats.* http://stats.netvor.sk/awstats/awstats.pl?config=skalny.sk

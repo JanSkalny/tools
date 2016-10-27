@@ -1,0 +1,9 @@
+- hosts: gatekeeper.szsbaza.sk
+  vars:
+    user: johnny
+  roles:
+  - ubuntu_server
+  - { role: admins, users: ['johnny'] }
+  - { role: backup-client, backup_host: "szsbaza-gatekeeper" }
+  #- firewall
+  #- monitor-proxy

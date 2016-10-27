@@ -1,6 +1,6 @@
-- hosts: azami
+- hosts: lunex
   vars:
-    user: johnny
+    user: jsk
   roles:
   - ubuntu_server
   - physical

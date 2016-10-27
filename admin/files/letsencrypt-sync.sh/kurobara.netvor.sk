@@ -1,0 +1,29 @@
+# postfix @ sakura
+rsync -avPL --rsync-path="sudo rsync" \
+	/etc/letsencrypt/live/netvor.sk/fullchain.pem \
+	johnny@sakura.netvor.sk:/etc/ssl/certs/sakura.crt
+rsync -avPL --rsync-path="sudo rsync" \
+	/etc/letsencrypt/live/netvor.sk/privkey.pem \
+	johnny@sakura.netvor.sk:/etc/ssl/private/sakura.key
+ssh johnny@sakura.netvor.sk "sudo service postfix restart"
+
+# postfix @ tsubaki
+rsync -avPL --rsync-path="sudo rsync" \
+	/etc/letsencrypt/live/netvor.sk/fullchain.pem \
+	johnny@tsubaki.netvor.sk:/etc/ssl/certs/tsubaki.crt
+rsync -avPL --rsync-path="sudo rsync" \
+	/etc/letsencrypt/live/netvor.sk/privkey.pem \
+	johnny@tsubaki.netvor.sk:/etc/ssl/private/tsubaki.key
+ssh johnny@tsubaki.netvor.sk "sudo service postfix restart"
+
+# pure-ftpd @ localhost
+cp /etc/letsencrypt/live/netvor.sk/privkey.pem /etc/ssl/private/pure-ftpd.pem
+cat /etc/letsencrypt/live/netvor.sk/fullchain.pem >> /etc/ssl/private/pure-ftpd.pem
+service pure-ftpd-mysql restart
+
+# apache @ localhost
+service apache2 restart
+
+# postfix and dovecot @ localhost
+service postfix restart
+doveadm reload

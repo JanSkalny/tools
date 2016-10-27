@@ -1,13 +1,14 @@
 #example ansible_ssh_pass=password ask_sudo_pass=Yes ansible_sudo_pass=password
-[cerise]
-data.cerise.io
-service.cerise.io
-www.cerise.io
-vvn.cerise.io 
-builder.cerise.io ansible_ssh_extra_args=-A
 
-[cerise-endpoints]
-data.cerise.io
+#[cerise]
+#data.cerise.io
+#service.cerise.io
+#www.cerise.io
+#vvn.cerise.io 
+#builder.cerise.io ansible_ssh_extra_args=-A
+
+#[cerise-endpoints]
+#data.cerise.io
 
 [netvor]
 kurobara.netvor.sk
@@ -25,7 +26,7 @@ gw1.szsbaza.sk
 #gw2.szsbaza.sk
 holly.szsbaza.sk
 webhosting.szsbaza.sk
-monitor.szsbaza.sk
+#monitor.szsbaza.sk
 radius.szsbaza.sk
 dc.szsbaza.sk
 gatekeeper.szsbaza.sk
@@ -33,7 +34,9 @@ gatekeeper.szsbaza.sk
 [verde]
 mail.verdesro.sk
 host1.verdesro.sk
-video.verdesro.sk
+video1.verdesro.sk
+video2.verdesro.sk
+video-dev.verdesro.sk
 gatekeeper.verdesro.sk
 backup.verdesro.sk
 dev.verdesro.sk

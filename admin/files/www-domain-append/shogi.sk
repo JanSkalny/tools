@@ -1,0 +1,14 @@
+<VirtualHost *:80>
+  ServerName sogi.sk
+  ServerAlias *.sogi.sk
+  RewriteEngine On
+  RewriteCond %{HTTP_HOST} ^(www\.)?([^\.]+)\.sogi\.sk$
+  RewriteRule ^(.*)$ http://%2.shogi.sk$1 [QSA,L]
+  RewriteCond %{HTTP_HOST} ^(www\.)?sogi\.sk$
+  RewriteRule ^(.*)$ http://shogi.sk$1 [QSA,L]
+</VirtualHost>
+<VirtualHost *:80>
+  ServerName svetshogi.sk
+  ServerAlias *.svetshogi.sk
+  Redirect / http://svet.shogi.sk/
+</VirtualHost>

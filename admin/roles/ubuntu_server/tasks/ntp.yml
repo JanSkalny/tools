@@ -15,11 +15,11 @@
     regexp: "{{ item.regexp }}"
     line: "{{ item.line }}"
   with_items:
-  - { regexp: '^server 0.pool.ntp.org', line: 'server 0.pool.ntp.org burst iburst' }
-  - { regexp: '^server 1.pool.ntp.org', line: 'server 1.pool.ntp.org burst iburst' }
-  - { regexp: '^server 2.pool.ntp.org', line: 'server 2.pool.ntp.org burst iburst' }
-  - { regexp: '^server 3.pool.ntp.org', line: 'server 3.pool.ntp.org burst iburst' }
-  - { regexp: '^server europe.pool.ntp.org', line: 'server europe.pool.ntp.org burst iburst' }
+  - { regexp: '^pool 0.pool.ntp.org', line: 'pool 0.pool.ntp.org burst iburst' }
+  - { regexp: '^pool 1.pool.ntp.org', line: 'pool 1.pool.ntp.org burst iburst' }
+  - { regexp: '^pool 2.pool.ntp.org', line: 'pool 2.pool.ntp.org burst iburst' }
+  - { regexp: '^pool 3.pool.ntp.org', line: 'pool 3.pool.ntp.org burst iburst' }
+  - { regexp: '^pool europe.pool.ntp.org', line: 'pool europe.pool.ntp.org burst iburst' }
 
 - name: start ntp
   service: name=ntp state=restarted

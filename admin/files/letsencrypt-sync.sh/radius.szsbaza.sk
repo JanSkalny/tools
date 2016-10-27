@@ -1,0 +1,6 @@
+
+# apache @ localhost
+service apache2 restart
+
+# postfix @ localhost
+service postfix restart

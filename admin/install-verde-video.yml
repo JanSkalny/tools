@@ -1,0 +1,10 @@
+- hosts: video2.verdesro.sk
+  vars:
+    user: skalny
+  roles:
+  - ubuntu_server
+  - physical
+  - { role: admins, users: ['skalny','kalcok','homola'] }
+  - www
+  - letsencrypt
+  - firewall

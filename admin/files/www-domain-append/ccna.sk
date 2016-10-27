@@ -1,0 +1,11 @@
+<VirtualHost *:80>
+  ServerName ccnp.sk
+  ServerAlias *.ccnp.sk
+  Redirect / http://www.ccna.sk/
+</VirtualHost>
+<VirtualHost *:80>
+  ServerName ignet.sk
+  ServerAlias *.ignet.sk
+  Redirect / http://www.ccna.sk/
+</VirtualHost>
+
