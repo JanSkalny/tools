@@ -16,6 +16,7 @@
 #
 # UPDATE HISTORY:
 # 2016-10-27  add LSB information and history
+# 2016-11-15  zabbix from netvor.sk
 #
 
 IT=/sbin/iptables
@@ -108,8 +109,8 @@ done
 # ssh and https from everywhere
 $IT -A INPUT -p tcp --dport 22 -j ACCEPT
 
-# snmp z monitoru
-$IT -A INPUT -p udp -s $MONITOR --dport 161 -j ACCEPT
+# monitor
+$IT -A INPUT -p tcp -s 92.240.244.36 --dport 10050 -j ACCEPT
 
 ### icmp
 $IT -A INPUT -p icmp -m limit --limit 10/second -j ACCEPT

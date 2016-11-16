@@ -16,6 +16,7 @@
 #
 # UPDATE HISTORY:
 # 2016-10-27  add LSB information and history
+# 2016-11-15  zabbix from netvor.sk
 #
 
 IT=/sbin/iptables
@@ -135,8 +136,7 @@ $IT -A INPUT -m state --state INVALID -j log_drop
 $IT -A INPUT -p tcp --dport ssh -j ACCEPT
 
 # monitor
-$IT -A INPUT -p tcp -s 192.168.254.134 --dport 5666 -j ACCEPT
-$IT -A INPUT -p udp -s 192.168.254.134 --dport 161 -j ACCEPT
+$IT -A INPUT -p tcp -s 92.240.244.36 --dport 10050 -j ACCEPT
 
 # do AD sa dostanu ludia ucebne, ucitelia a VPN-ka
 $IT -A INPUT -s 192.168.21.0/24 -j AD

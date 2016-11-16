@@ -24,6 +24,15 @@
 - name: configure zabbix-agent
   template: src="zabbix_agentd.conf" dest="/etc/zabbix/zabbix_agentd.conf"
 
+- name: enable mdadm monitoring
+  copy: src="zabbix_mdraid.conf" dest="/etc/zabbix/zabbix_agentd.d/zabbix_mdraid.conf" owner="root" mode=0640
+
+- name: support scripts for mdadm monitoring
+  copy: src="zabbix_mdraid.sh" dest="/usr/local/bin/zabbix_mdraid.sh" owner="root" mode=0755
+
+- name: enable auto-start of zabbix-agent
+  raw: systemctl enable zabbix-agent
+
 - name: restart zabbix-agent
   service: name=zabbix-agent state=restarted
 

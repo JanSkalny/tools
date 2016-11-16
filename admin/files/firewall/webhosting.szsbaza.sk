@@ -16,6 +16,7 @@
 #
 # UPDATE HISTORY:
 # 2016-10-27  add LSB information and history
+# 2016-11-15  zabbix from netvor.sk
 #
 
 IT=/sbin/iptables
@@ -123,8 +124,8 @@ $IT -A INPUT -p tcp --dport 9102 -s $BACKUP -j ACCEPT
 $IT -A INPUT -p tcp --dport ftp -j ACCEPT
 $IT -A INPUT -p tcp --dport 53100:53200 -j ACCEPT
 
-# nrpe z monitor-u
-$IT -A INPUT -p tcp -s $MONITOR --dport 5666 -j ACCEPT
+# monitor
+$IT -A INPUT -p tcp -s 92.240.244.36 --dport 10050 -j ACCEPT
 
 ### icmp
 $IT -A INPUT -p icmp -m limit --limit 10/second -j ACCEPT

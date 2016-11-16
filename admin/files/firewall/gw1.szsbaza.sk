@@ -16,6 +16,7 @@
 #
 # UPDATE HISTORY:
 # 2016-10-27  add LSB information and history
+# 2016-11-15  zabbix from netvor.sk
 #
 
 IT=/sbin/iptables
@@ -55,8 +56,6 @@ WEBHOSTING_INET="194.160.5.136"
 CUBE="192.168.254.99"
 TSUBAKI="192.168.254.138"
 TSUBAKI_INET="194.160.5.138"
-MONITOR="192.168.254.134"
-MONITOR_INET="194.160.5.134"
 HOLLY="192.168.254.10"
 HOLLY_INET="194.160.5.132"
 BACKUP="194.160.5.138"
@@ -66,6 +65,7 @@ TP_INET="194.160.5.140"
 NOD="192.168.254.135"
 NOD_INET="194.160.5.135"
 DC="192.168.253.10"
+DC_INET="194.160.5.134"
 
 GW1="192.168.254.254"
 GW2="192.168.254.253"
@@ -74,7 +74,7 @@ GW1_INET="194.160.5.130"
 GW2_INET="194.160.5.131"
 
 #XXX: TSUBAKI chodi skrz nas
-SERVERS_INET="$RADIUS_INET $WEBHOSTING_INET $TP_INET $NOD_INET $MONITOR_INET $HOLLY_INET"
+SERVERS_INET="$RADIUS_INET $WEBHOSTING_INET $TP_INET $NOD_INET $DC_INET $HOLLY_INET"
 
 echo 1 > /proc/sys/net/ipv4/ip_forward
 echo 1 > /proc/sys/net/ipv4/tcp_syncookies
@@ -209,12 +209,6 @@ $IT -A INPUT -p tcp --dport 1195 -j ACCEPT
 $IT -A INPUT -p icmp -m limit --limit 10/second -j ACCEPT
 $IT -A INPUT -p icmp -j log_drop 
 
-# monitor (nrpe)
-$IT -A INPUT -s $MONITOR -p tcp --dport 5666 -j ACCEPT
-
-# monitor (snmp)
-$IT -A INPUT -s $MONITOR -p udp --dport 161 -j ACCEPT
-
 # zahodme samba broadcasty
 $IT -A INPUT -p tcp --dport 137 -j DROP
 $IT -A INPUT -p udp --dport 137 -j DROP
@@ -231,7 +225,7 @@ $IT -N SKOLA_TO_DMZ
 	$IT -A SKOLA_TO_DMZ -d $RADIUS -p tcp --dport 443 -j ACCEPT
 
 	# wifi - radius z celej wifi a z monitoru
-	for HOST in $WIFI $MONITOR; do
+	for HOST in $WIFI ; do
 		$IT -A SKOLA_TO_DMZ -s $HOST -d $RADIUS -p udp --dport 1812 -j ACCEPT
 	done
 	# wifi - ap-cka mozu syslog na radius
@@ -300,6 +294,10 @@ $IT -N SKOLA_TO_INET
 	$IT -A SKOLA_TO_INET -p tcp --dport 1194 -j ACCEPT
 	$IT -A SKOLA_TO_INET -p udp --dport 1194 -j ACCEPT
 
+$IT -N INET_TO_AD
+	# zabbix monitoring from netvor.sk
+	$IT -A INET_TO_AD -p tcp --dport 10050 -j krabica
+	$IT -A INET_TO_AD -p tcp --dport 22 -j krabica
 
 $IT -N INET_TO_DMZ
 	# bacula
@@ -314,14 +312,12 @@ $IT -N INET_TO_DMZ
 	done
 	$IT -A INET_TO_DMZ -d $WEBHOSTING -p tcp --dport 53100:53200 -j ACCEPT
 
-	# monitor - nagios
-	$IT -A INET_TO_DMZ -d $MONITOR -p tcp --dport 443 -j krabica
-	
 	# radius - management
 	$IT -A INET_TO_DMZ -d $RADIUS -p tcp --dport 443 -j krabica
-
-	# TP ssh
-	$IT -A INET_TO_DMZ -d $TP -p tcp --dport 22 -j ACCEPT
+	
+	# zabbix monitoring from netvor.sk
+	$IT -A INET_TO_DMZ -p tcp --dport 10050 -j krabica
+	$IT -A INET_TO_DMZ -p tcp --dport 22 -j krabica
 
 	# eset remote administrator
 	$IT -A INET_TO_DMZ -d $NOD -p tcp --dport 2222 -j ACCEPT
@@ -366,22 +362,19 @@ $IT -N DMZ_TO_INET
 	$IT -A DMZ_TO_INET -s $HOLLY -p udp --dport 1195 -d 92.240.244.36 -j ACCEPT
 
 $IT -N DMZ_TO_SKOLA 
-	# monitor - nrpe
-	$IT -A DMZ_TO_SKOLA -s $MONITOR -p tcp --dport 5666 -j ACCEPT
-
 	# monitor - dochadzka (vnc)
-	$IT -A DMZ_TO_SKOLA -s $MONITOR -d $DOCHADZKA -p tcp --dport 5900 -j ACCEPT
+	#$IT -A DMZ_TO_SKOLA -s $MONITOR -d $DOCHADZKA -p tcp --dport 5900 -j ACCEPT
 
 	# monitor - snmp
-	$IT -A DMZ_TO_SKOLA -s $MONITOR -p udp --dport 161 -j ACCEPT
+	#$IT -A DMZ_TO_SKOLA -s $MONITOR -p udp --dport 161 -j ACCEPT
 
 	# monitor - ssh
-	$IT -A DMZ_TO_SKOLA -s $MONITOR -p tcp --dport 22 -j ACCEPT
+	#$IT -A DMZ_TO_SKOLA -s $MONITOR -p tcp --dport 22 -j ACCEPT
 
 	# monitor - wifi-ap-* (snmp)
-	for HOST in $WIFI_AP; do
-		$IT -A DMZ_TO_SKOLA -s $MONITOR -d $HOST -p udp --dport 161 -j ACCEPT
-	done
+	#for HOST in $WIFI_AP; do
+	#	$IT -A DMZ_TO_SKOLA -s $MONITOR -d $HOST -p udp --dport 161 -j ACCEPT
+	#done
 
 
 $IT -N VPN_TO_INET
@@ -431,6 +424,7 @@ $IT -A FORWARD -s $SKOLA	-d $DMZ			-j SKOLA_TO_DMZ
 $IT -A FORWARD -s $DMZ		\! -d $SKOLA	-j DMZ_TO_INET
 $IT -A FORWARD -s $DMZ		-d $SKOLA		-j DMZ_TO_SKOLA
 $IT -A FORWARD \! -s $SKOLA	-d $DMZ			-j INET_TO_DMZ 
+$IT -A FORWARD \! -s $SKOLA	-d $AD			-j INET_TO_AD 
 $IT -A FORWARD -s $VPN		-d $SKOLA		-j VPN_TO_SKOLA
 $IT -A FORWARD -s $VPN		-d $DMZ			-j ACCEPT
 $IT -A FORWARD -s $VPN		\! -d $SKOLA	-j VPN_TO_INET
@@ -443,10 +437,6 @@ $IT -A FORWARD -s $VPNVEDENIE	\! -d $SKOLA	-j VPN_TO_INET
 # povolime icmp 
 $IT -A FORWARD -p icmp -m limit --limit 10/second -j ACCEPT
 $IT -A FORWARD -p icmp -j log_drop 
-
-# hack pre asymetricke smerovanie :/ (LB problem)
-$IT -I FORWARD -p tcp --dport 5666 -s $MONITOR -j ACCEPT
-$IT -I FORWARD -p tcp --sport 5666 -d $MONITOR -j ACCEPT
 
 # default
 $IT -A FORWARD -j log_reject
@@ -471,14 +461,14 @@ $IT -t nat -A POSTROUTING -o upl0 -s $HOLLY -j SNAT --to-source $HOLLY_INET
 $IT -t nat -A POSTROUTING -o upl0 -s $RADIUS -j SNAT --to-source $RADIUS_INET
 $IT -t nat -A POSTROUTING -o upl0 -s $NOD -j SNAT --to-source $NOD_INET
 $IT -t nat -A POSTROUTING -o upl0 -s $TP -j SNAT --to-source $TP_INET
-$IT -t nat -A POSTROUTING -o upl0 -s $MONITOR -j SNAT --to-source $MONITOR_INET
+$IT -t nat -A POSTROUTING -o upl0 -s $DC -j SNAT --to-source $DC_INET
 $IT -t nat -A POSTROUTING -o upl0 -s $TSUBAKI -j SNAT --to-source $TSUBAKI_INET
 $IT -t nat -A PREROUTING -i upl0 -d $WEBHOSTING_INET -j DNAT --to-destination $WEBHOSTING
 $IT -t nat -A PREROUTING -i upl0 -d $HOLLY_INET -j DNAT --to-destination $HOLLY
 $IT -t nat -A PREROUTING -i upl0 -d $RADIUS_INET -j DNAT --to-destination $RADIUS
 $IT -t nat -A PREROUTING -i upl0 -d $NOD_INET -j DNAT --to-destination $NOD
 $IT -t nat -A PREROUTING -i upl0 -d $TP_INET -j DNAT --to-destination $TP
-$IT -t nat -A PREROUTING -i upl0 -d $MONITOR_INET -j DNAT --to-destination $MONITOR
+$IT -t nat -A PREROUTING -i upl0 -d $DC_INET -j DNAT --to-destination $DC
 $IT -t nat -A PREROUTING -i upl0 -d $TSUBAKI_INET -j DNAT --to-destination $TSUBAKI
 
 # vsetci von
