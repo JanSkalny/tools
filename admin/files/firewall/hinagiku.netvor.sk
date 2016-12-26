@@ -19,10 +19,6 @@
 # 2016-11-15  cleanup and add monitoring agent
 #
 
-IF_INET=wan1
-
-SIX="147.175.204.0/24"
-NETVOR="172.20.0.0/16"
 MONITOR="92.240.244.36"
 
 IT=/sbin/iptables
@@ -88,16 +84,12 @@ $IT -N CHECK_IF
 	$IT -A CHECK_IF -s 224.0.0.0/3 -j DROP			# multicast
 	$IT -A CHECK_IF -s 100.64.0.0/10 -j LOG_DROP	# RFC 6598
 
-	# VPN na netvor.sk
-	$IT -A CHECK_IF -i brVPN -s $NETVOR -j RETURN
+	# vlan 204 only interface
+	$IT -A CHECK_IF -i eno2 -s 147.175.204.0/24 -j RETURN
 
-	# SIX interface
-	$IT -A CHECK_IF -i brSIX -s $SIX -j RETURN
-
-	# public interface MUST NOT containt any private address
-	$IT -A CHECK_IF -i $IF_INET -s $SIX -j LOG_DROP
-	$IT -A CHECK_IF -i $IF_INET -s $NETVOR -j LOG_DROP
-	$IT -A CHECK_IF -i $IF_INET -j RETURN
+	# vlan 15 (wan) interface
+	$IT -A CHECK_IF -i brWAN -s 147.175.204.0/24 -j LOG_DROP
+	$IT -A CHECK_IF -i brWAN -j RETURN
 
 	# everything else is dropped!
 	$IT -A CHECK_IF -j LOG_DROP
@@ -134,14 +126,6 @@ $IT -A INPUT -j LOG_DROP
 
 
 ############################################################
-### FORWARD traffic from SIX hosts
-$IT -N FORWARD_SIX 
-	# anywhere but private networks
-	$IT -A FORWARD_SIX -d $NETVOR -j LOG_DROP
-	$IT -A FORWARD_SIX -j ACCEPT
-
-
-############################################################
 ### FORWARD ruleset
 
 # verify source address / interface
@@ -152,9 +136,6 @@ $IT -A FORWARD -j CHECK_IF
 # - invalid packets MUST be dropped!
 $IT -A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
 $IT -A FORWARD -m state --state INVALID -j LOG_DROP
-
-# source specific FORWARD chains
-$IT -A FORWARD -s $SIX -j FORWARD_SIX
 
 # default rule
 $IT -A FORWARD -j LOG_DROP

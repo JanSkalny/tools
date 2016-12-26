@@ -18,6 +18,8 @@
 # 2015-01-06  migrated from old fw.sh
 # 2016-10-13  remove old rules and cleanup
 # 2016-10-27  add LSB information
+# 2016-12-18  hlds
+# 2016-12-26  razor, pyzor, dcc
 #
 
 IT=/sbin/iptables
@@ -137,6 +139,11 @@ for PORT in 25 465 993; do
 	$IT -A INPUT -p tcp --dport $PORT -j ACCEPT
 done
 
+# antispam DCC, razor2, pyzor
+$IT -A INPUT -p udp --dport 6277 -j ACCEPT
+$IT -A INPUT -p tcp --dport 2307 -j ACCEPT
+$IT -A INPUT -p udp --dport 24441 -j ACCEPT
+
 # apache
 for PORT in 80 443; do
 	$IT -A INPUT -p tcp --dport $PORT -j ACCEPT
@@ -183,6 +190,10 @@ $IT -A INPUT -p udp --dport 1194 -j ACCEPT
 # zabbix agent (active checks)
 $IT -A INPUT -p tcp --dport 10051 -s 92.240.244.0/25 -j ACCEPT
 $IT -A INPUT -p tcp --dport 10051 -s 217.73.16.50 -j ACCEPT
+
+# srcds (cs:go)
+$IT -A INPUT -p tcp --dport 27015 -j ACCEPT
+$IT -A INPUT -p udp --dport 27015 -j ACCEPT
 
 # ignore junk from windows servers (samba)
 for PORT in 137 138; do

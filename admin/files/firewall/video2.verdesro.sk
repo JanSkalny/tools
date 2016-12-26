@@ -113,6 +113,11 @@ for PORT in 80 443; do
 	$IT -A INPUT -p tcp --dport $PORT -j ACCEPT
 done
 
+# ogg stream
+for PORT in 8081; do
+	$IT -A INPUT -p tcp --dport $PORT -j ACCEPT
+done
+
 # ftp upload zo stavby
 $IT -I INPUT -p tcp --dport 21 -j ACCEPT
 $IT -I INPUT -p tcp --dport 32100:32200 -j ACCEPT

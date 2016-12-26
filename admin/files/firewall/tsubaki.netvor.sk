@@ -16,6 +16,7 @@
 #
 # UPDATE HISTORY:
 # 2016-10-27  add LSB information and history
+# 2016-12-26  razor, pyzor, dcc
 #
 
 IT=/sbin/iptables
@@ -137,6 +138,11 @@ $IT -A INPUT -p udp --dport 53 -j ACCEPT
 
 # posta od vsadial
 $IT -A INPUT -p tcp --dport 25 -j ACCEPT
+
+# antispam DCC, razor2, pyzor
+$IT -A INPUT -p udp --dport 6277 -j ACCEPT
+$IT -A INPUT -p tcp --dport 2307 -j ACCEPT
+$IT -A INPUT -p udp --dport 24441 -j ACCEPT
 
 # icmp
 $IT -A INPUT -p icmp -m limit --limit 10/second -j ACCEPT

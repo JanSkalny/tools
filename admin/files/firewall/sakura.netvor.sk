@@ -16,6 +16,7 @@
 #
 # UPDATE HISTORY:
 # 2016-10-27  add LSB information and history
+# 2016-12-26  razor, pyzor, dcc
 #
 
 IT=/sbin/iptables
@@ -123,6 +124,11 @@ $IT -A INPUT -p tcp --dport ssh -j ACCEPT
 $IT -A INPUT -p tcp --dport https -j ACCEPT
 $IT -A INPUT -p tcp --dport smtp -j ACCEPT
 $IT -A INPUT -p udp --dport domain -j ACCEPT
+
+# antispam DCC, razor2, pyzor
+$IT -A INPUT -p udp --dport 6277 -j ACCEPT
+$IT -A INPUT -p tcp --dport 2307 -j ACCEPT
+$IT -A INPUT -p udp --dport 24441 -j ACCEPT
 
 # nagios z krabice (TCP/5666 nrpe)
 $IT -A INPUT -p tcp --dport 5666 -s 92.240.244.36 -j ACCEPT
