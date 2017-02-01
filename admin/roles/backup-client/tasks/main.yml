@@ -15,6 +15,6 @@
 - name: copy mysql backup script
   copy: dest="/etc/bacula/scripts/make_mysql_backup.sh" src="make_mysql_backup.sh" owner="root" group="root" mode=0750
 
-- name: restart zabbix-fd
+- name: restart bacula-fd
   service: name=bacula-fd state=restarted
 
