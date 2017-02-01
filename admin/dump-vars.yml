@@ -1,4 +1,4 @@
-- hosts: netvor
+- hosts: video-dev.verdesro.sk
   tasks:
     - debug: var=vars
     - debug: var=hostvars[inventory_hostname]

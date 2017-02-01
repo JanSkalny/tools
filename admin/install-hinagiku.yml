@@ -1,9 +1,6 @@
-- hosts: azami.netvor.sk
-  vars:
-    user: johnny
+- hosts: hinagiku.netvor.sk
   roles:
   - ubuntu_server
   - { role: admins, users: ['johnny'] }
   - physical
   - kvm
-  - monitor-client

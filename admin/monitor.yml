@@ -1,0 +1,4 @@
+- hosts: ci.verdesro.sk
+  roles:
+  - monitor-client
+

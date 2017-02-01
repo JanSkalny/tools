@@ -1,0 +1,4 @@
+- hosts: bitwise.binarity.cz gatekeeper.szsbaza.sk kurobara.netvor.sk radius.szsbaza.sk sakura.netvor.sk true.binarity.cz webhosting.szsbaza.sk
+  roles:
+  - { role: backup-client }
+

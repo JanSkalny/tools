@@ -1,4 +1,4 @@
-- hosts: all
+- hosts: netvor binarity szsbaza verde hrdlica
   tasks:
   - name: apt-get update
     apt: update_cache=yes
@@ -12,4 +12,6 @@
     register: dist_upgrade
   - name: apt-get dist-upgrade results
     debug: var=dist_upgrade
+  - name: apt-get autoremove
+    command: apt-get -y autoremove
 

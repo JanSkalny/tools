@@ -1,0 +1,13 @@
+- hosts: tmgh.hrdlica.cz
+  vars:
+    user: johnny
+  roles:
+  - ubuntu_server
+  - { role: admins, users: ['johnny','peter'] }
+  - www
+  - letsencrypt
+  - firewall
+  - mail-stub
+  - mail-admin
+  - monitor-client
+  - backup-client

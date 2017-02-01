@@ -1,6 +1,4 @@
 - hosts: lunex
-  vars:
-    user: jsk
   roles:
   - ubuntu_server
   - physical

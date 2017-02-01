@@ -1,5 +1,13 @@
 #example ansible_ssh_pass=password ask_sudo_pass=Yes ansible_sudo_pass=password
 
+[linefactory]
+builder.linefactory.net user=jsk
+jenkins.linefactory.net user=jsk
+containership1.linefactory.net user=jsk
+central.linefactory.net user=jsk
+bts.linefactory.net user=jsk
+dist.linefactory.net user=jsk
+
 #[cerise]
 #data.cerise.io
 #service.cerise.io
@@ -14,8 +22,10 @@
 kurobara.netvor.sk
 sakura.netvor.sk
 tsubaki.netvor.sk
-azami.netvor.sk
-hinagiku.netvor.sk
+azami.netvor.sk 
+hinagiku.netvor.sk ansible_ssh_host=147.175.145.245
+mgmt.netvor.sk
+lunex
 
 [binarity]
 true.binarity.cz
@@ -32,9 +42,10 @@ dc.szsbaza.sk
 gatekeeper.szsbaza.sk
 
 [verde]
+ci.verdesro.sk
 mail.verdesro.sk
 host1.verdesro.sk
-video1.verdesro.sk
+#video1.verdesro.sk
 video2.verdesro.sk
 video-dev.verdesro.sk
 gatekeeper.verdesro.sk
@@ -42,3 +53,5 @@ backup.verdesro.sk
 dev.verdesro.sk
 intranet.verdesro.sk
 
+[hrdlica] 
+tmgh.hrdlica.cz
