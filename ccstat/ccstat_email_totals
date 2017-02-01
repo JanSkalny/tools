@@ -4,5 +4,5 @@ now=`date +'%s'`
 yday=`expr $now - 36000`
 month=`date -d "@$yday" +'%Y-%m'`
 
-/usr/local/bin/ccstat_total /var/lib/ccstat/$month-*.stats | mail -s "HOSTNAME stats $month" admin@netvor.sk
+/usr/local/bin/ccstat_total /var/lib/ccstat/$month-*.stats | mail -s "{{ ansible_fqdn }} stats $month" admin@netvor.sk
 

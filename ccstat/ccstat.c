@@ -1,7 +1,7 @@
 #include "stdafx.h"
 
 #define OUTPUT_PATH "/var/lib/ccstat"
-#define DEV "eth0"
+#define DEV "wan0"
 #define SNAP_LEN 38
 
 typedef struct record {

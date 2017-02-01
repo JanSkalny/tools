@@ -1,6 +1,6 @@
 CC=gcc
-SVN_REV= $(shell svnversion -n .)
-CFLAGS= -Wall -O2 -D'SVN_REV="$(SVN_REV)"'
+GIT_VERSION= $( git describe --always )
+CFLAGS= -Wall -O2 -D'SVN_REV="$(GIT_VERSION)"'
 LIBS= -lrt -lpcap -lGeoIP
 DEPEND := makedepend
 SRCS= ccstat.c stdafx.c
@@ -28,7 +28,7 @@ install: all
 	cp ccstat_* /usr/local/bin/
 	cp ccstat /usr/local/bin/
 	cp ccstat /usr/local/bin/
-	cat ccstat_email_totals | sed "s/HOSTNAME/$(shell uname -n)/" > /usr/local/bin/ccstat_email_totals
+	cat ccstat_email_totals | sed "s/{{ ansible_fqdn }}/$(shell uname -n)/" > /usr/local/bin/ccstat_email_totals
 	service cron restart
 
 # binaries
