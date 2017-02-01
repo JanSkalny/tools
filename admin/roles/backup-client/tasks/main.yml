@@ -9,7 +9,7 @@
   copy: dest="/etc/bacula/{{item.dst}}" src="backup/{{item.src}}" owner="root" group="root" mode=0750
   with_items:
   - { src: "{{backup_host}}.crt", dst: "{{backup_host}}.crt" }
-  - { src: "{{backup_host}}.pem", dst: "{{backup_host}}.key" }
+  - { src: "{{backup_host}}.pem", dst: "{{backup_host}}.pem" }
   - { src: "ca.crt", dst: "ca.crt" }
 
 - name: copy mysql backup script

@@ -33,6 +33,7 @@
   - actions 
   - fastcgi 
   - alias
+  - vhost_alias  
 
 - name: configure apache2 
   copy: src="{{ item }}" dest="/etc/apache2/conf-available/{{ item }}"
@@ -54,6 +55,18 @@
   raw: a2enconf {{ item }}
   with_items:
   - php-fpm
+
+- name: disable mod_php 
+  raw: a2dismod php*
+  ignore_errors: yes
+
+- name: disable mod_php 
+  raw: a2dismod php7.0
+  ignore_errors: yes
+
+- name: disable mod_php 
+  raw: a2dismod php7.1
+  ignore_errors: yes
 
 #- name: disable docs
 #  raw: a2disconf apache2-doc

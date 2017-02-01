@@ -1,1 +1,2 @@
-backup_director: "backup.krabica.net"
+backup_director: "backup.netvor.sk"
+backup_host: "{{ inventory_hostname }}"
