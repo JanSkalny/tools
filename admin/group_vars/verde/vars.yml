@@ -1,3 +1,4 @@
 user: "skalny"
 admin_email: "admin@verdesro.sk"
 monitor_proxy_addr: "192.168.153.1"
+backup_group: "verde"

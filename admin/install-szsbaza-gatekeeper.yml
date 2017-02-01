@@ -1,6 +1,4 @@
 - hosts: gatekeeper.szsbaza.sk
-  vars:
-    user: johnny
   roles:
   - ubuntu_server
   - { role: admins, users: ['johnny'] }

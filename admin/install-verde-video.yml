@@ -1,6 +1,4 @@
 - hosts: video2.verdesro.sk
-  vars:
-    user: skalny
   roles:
   - ubuntu_server
   - physical

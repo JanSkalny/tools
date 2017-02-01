@@ -1,6 +1,4 @@
 - hosts: tmgh.hrdlica.cz
-  vars:
-    user: johnny
   roles:
   - ubuntu_server
   - { role: admins, users: ['johnny','peter'] }

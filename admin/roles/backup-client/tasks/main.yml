@@ -6,7 +6,7 @@
   template: src="bacula-fd.conf" dest="/etc/bacula/bacula-fd.conf"
 
 - name: copy keys and certificates
-  copy: dest="/etc/bacula/{{item.dst}}" src="backup/{{item.src}}" owner="root" group="root" mode=0750
+  copy: dest="/etc/bacula/{{item.dst}}" src="backup/{{backup_group}}/{{item.src}}" owner="root" group="root" mode=0750
   with_items:
   - { src: "{{backup_host}}.crt", dst: "{{backup_host}}.crt" }
   - { src: "{{backup_host}}.pem", dst: "{{backup_host}}.pem" }

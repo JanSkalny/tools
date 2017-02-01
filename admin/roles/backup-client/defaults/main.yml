@@ -1,2 +1,3 @@
 backup_director: "backup.netvor.sk"
 backup_host: "{{ inventory_hostname }}"
+backup_group: "netvor"
