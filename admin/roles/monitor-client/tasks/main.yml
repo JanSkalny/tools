@@ -24,11 +24,41 @@
 - name: configure zabbix-agent
   template: src="zabbix_agentd.conf" dest="/etc/zabbix/zabbix_agentd.conf"
 
-- name: enable mdadm monitoring
-  copy: src="zabbix_mdraid.conf" dest="/etc/zabbix/zabbix_agentd.d/zabbix_mdraid.conf" owner="root" mode=0640
+- name: custom user parameters
+  copy: 
+      src="{{ item }}" 
+      dest="/etc/zabbix/zabbix_agentd.d/{{ item }}" 
+      owner="root" mode=0640
+  with_items:
+  - bind.conf
+  - mdraid.conf
+  - apache.conf
+  - mysql.conf
+  - postfix.conf
 
-- name: support scripts for mdadm monitoring
-  copy: src="zabbix_mdraid.sh" dest="/usr/local/bin/zabbix_mdraid.sh" owner="root" mode=0755
+- name: monitoring scripts
+  copy: src="{{ item }}" 
+      dest="/usr/local/bin/{{ item }}" 
+      owner="root" mode=0755
+  with_items:
+  - zabbix_mdraid.sh
+  - zabbix_bind_stats.py
+  - zabbix_check_apache
+
+- name: create mysql user for monitoring
+  mysql_user:
+    name={{ monitor_sql_user }}
+    password={{ monitor_sql_password }}
+    priv='*.*:USAGE'
+    state=present
+  when: monitor_sql_password is defined
+
+- name: generate .my.cnf for monitoring
+  template: 
+    src="my.cnf"
+    dest="/var/lib/zabbix/.my.cnf"
+    owner="zabbix" group="zabbix" mode=0600
+  when: monitor_sql_password is defined
 
 - name: enable auto-start of zabbix-agent
   raw: systemctl enable zabbix-agent
