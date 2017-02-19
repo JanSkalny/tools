@@ -20,6 +20,7 @@
 # 2016-10-27  add LSB information
 # 2016-12-18  hlds
 # 2016-12-26  razor, pyzor, dcc
+# 2017-02-19  zabbix from ctrdn
 #
 
 IT=/sbin/iptables
@@ -188,8 +189,10 @@ $IT -A INPUT -p tcp --dport 1194 -j ACCEPT
 $IT -A INPUT -p udp --dport 1194 -j ACCEPT
 
 # zabbix agent (active checks)
-$IT -A INPUT -p tcp --dport 10051 -s 92.240.244.0/25 -j ACCEPT
-$IT -A INPUT -p tcp --dport 10051 -s 217.73.16.50 -j ACCEPT
+$IT -A INPUT -p tcp --dport 10051 -s 92.240.244.0/25 -j ACCEPT	# lightstorm
+$IT -A INPUT -p tcp --dport 10051 -s 217.73.16.50 -j ACCEPT		# verde vnet
+$IT -A INPUT -p tcp --dport 10051 -s 185.140.30.0/27 -j ACCEPT	# ctrdn
+$IT -A INPUT -p tcp --dport 10051 -s 185.140.28.18 -j ACCEPT	# ctrdn uplink
 
 # srcds (cs:go)
 $IT -A INPUT -p tcp --dport 27015 -j ACCEPT

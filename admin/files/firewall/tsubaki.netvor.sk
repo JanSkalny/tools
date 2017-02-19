@@ -17,6 +17,7 @@
 # UPDATE HISTORY:
 # 2016-10-27  add LSB information and history
 # 2016-12-26  razor, pyzor, dcc
+# 2017-02-19  backup from tmgh.hrdlica.cz
 #
 
 IT=/sbin/iptables
@@ -128,6 +129,7 @@ $IT -A INPUT -p tcp --dport 9103 -s 92.240.244.25 -j ACCEPT
 $IT -A INPUT -p tcp --dport 9103 -s 92.240.244.36 -j ACCEPT
 $IT -A INPUT -p tcp --dport 9103 -s 92.240.244.37 -j ACCEPT
 $IT -A INPUT -p tcp --dport 9103 -s 92.240.244.42 -j ACCEPT
+$IT -A INPUT -p tcp --dport 9103 -s 92.240.244.101 -j ACCEPT
 $IT -A INPUT -p tcp --dport 9103 -s 87.197.159.3 -j ACCEPT
 $IT -A INPUT -p tcp --dport 9103 -s 194.160.5.128/28 -j ACCEPT
 $IT -A INPUT -p tcp --dport 9103 -s 147.175.204.0/24 -j ACCEPT

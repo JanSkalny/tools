@@ -22,6 +22,7 @@
 # 2015-11-19  fixed hole in backup forwarding
 # 2016-10-26  remove backdoor for truvision
 # 2016-10-27  added backdoor for truvision and LSB info
+# 2017-02-09  backup from video-dev and video2
 #
 
 IT=/sbin/iptables
@@ -208,7 +209,7 @@ $IT -A FORWARD -m state --state INVALID -j LOG_DROP
 $IT -A FORWARD -s $NET_VPN0 -j ACCEPT
 
 # niektore stroje mozu robit 9103 (bacula) na backup
-for HOST in $NET_VPN0 92.240.244.101 92.240.244.104; do
+for HOST in $NET_VPN0 92.240.244.101 92.240.244.104 92.240.244.102 92.240.244.53; do
 	$IT -A FORWARD -s $HOST -d $BACKUP -p tcp --dport 9103 -j ACCEPT
 done
 

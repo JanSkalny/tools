@@ -16,6 +16,7 @@
 #
 # UPDATE HISTORY:
 # 2016-10-27  add LSB information and update history
+# 2017-02-09  backup from ci, video-dev and video2
 #
 
 VPN=192.168.153.0/24
@@ -25,6 +26,9 @@ INTRANET="192.168.153.1"
 HOST1="92.240.244.104"
 MONITOR="92.240.244.36"
 NAS="192.168.153.231"
+CI="192.168.153.26"
+VIDEO_DEV="92.240.244.102"
+VIDEO2="92.240.244.53"
 
 IT=/sbin/iptables
 
@@ -102,7 +106,7 @@ $IT -A INPUT -m state --state INVALID -j log_drop
 $IT -A INPUT -p tcp -s $VPN --dport ssh -j ACCEPT
 
 # bacula
-for host in $INTRANET $MAIL 92.240.244.101 $HOST1 $NAS; do
+for host in $INTRANET $MAIL 92.240.244.101 $HOST1 $NAS $CI $VIDEO_DEV $VIDEO2; do
 	$IT -A INPUT -p tcp --dport 9103 -s $host -j ACCEPT
 done
 
