@@ -35,6 +35,7 @@
   - apache.conf
   - mysql.conf
   - postfix.conf
+  - kvm.conf
 
 - name: monitoring scripts
   copy: src="{{ item }}" 
@@ -44,6 +45,7 @@
   - zabbix_mdraid.sh
   - zabbix_bind_stats.py
   - zabbix_check_apache
+  - zabbix_kvm.py
 
 - name: create mysql user for monitoring
   mysql_user:
