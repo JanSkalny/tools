@@ -1,0 +1,7 @@
+
+include "/etc/bind/master.conf";
+
+statistics-channels {
+        inet 127.0.0.1 port 8653 allow { 127.0.0.1; };
+};
+

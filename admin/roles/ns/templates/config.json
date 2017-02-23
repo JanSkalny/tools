@@ -1,0 +1,4 @@
+{
+	"api_key": "{{ns_api_key}}",
+	"api_url": "{{ns_api_url}}"
+}

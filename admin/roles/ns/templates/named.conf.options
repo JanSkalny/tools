@@ -1,0 +1,39 @@
+options {
+  directory "/etc/bind";
+
+  forwarders {
+    {{ ns_upstream1 }};
+    {{ ns_upstream2 }};
+    8.8.8.8;
+  };
+
+  //========================================================================
+  // If BIND logs error messages about the root key being expired,
+  // you will need to update your keys.  See https://www.isc.org/bind-keys
+  //========================================================================
+  dnssec-validation auto;
+
+  auth-nxdomain no;  # conform to RFC1035
+  listen-on-v6 { any; };
+  listen-on { any; };
+
+  //match-clients { any; };
+
+  recursion yes;
+  allow-recursion {
+    127.0.0.1;
+    194.160.5.130;
+    194.160.5.131;
+    194.160.5.132;
+    194.160.5.138;
+    87.197.159.3;
+    92.240.244.52;
+    92.240.244.25;
+    172.20.0.0/16;
+  };
+  allow-query { any; };
+  allow-transfer { none; };
+  allow-update { none; };
+  allow-notify { none; };
+  allow-update-forwarding { none; };
+};
