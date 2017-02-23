@@ -1,4 +1,9 @@
 
+- name: install dependencies
+  apt: name={{ item }}
+  with_items:
+  - python-mysqldb
+
 - name: check if zabbix-release is available
   command: dpkg-query -W zabbix-release
   register: res
@@ -24,6 +29,14 @@
 - name: configure zabbix-agent
   template: src="zabbix_agentd.conf" dest="/etc/zabbix/zabbix_agentd.conf"
 
+- name: delete default user parameter files
+  file: 
+    path="/etc/zabbix/zabbix_agentd.d/{{item}}"
+    state=absent
+  with_items:
+  - userparameter_mysql.conf
+  - zabbix_mdraid.conf
+
 - name: custom user parameters
   copy: 
       src="{{ item }}" 
@@ -47,6 +60,12 @@
   - zabbix_check_apache
   - zabbix_kvm.py
 
+- name: make sure zabbix home directory is present
+  file:
+    path="/var/lib/zabbix/"
+    state=directory
+    mode=700 owner=zabbix group=zabbix
+    
 - name: create mysql user for monitoring
   mysql_user:
     name={{ monitor_sql_user }}
@@ -61,6 +80,13 @@
     dest="/var/lib/zabbix/.my.cnf"
     owner="zabbix" group="zabbix" mode=0600
   when: monitor_sql_password is defined
+
+- name: generate zabbix_agentd.psk
+  template:
+    src="zabbix_agentd.psk"
+    dest="/etc/zabbix/zabbix_agentd.psk"
+    owner="zabbix" group="zabbix" mode=0600
+  when: monitor_psk is defined
 
 - name: enable auto-start of zabbix-agent
   raw: systemctl enable zabbix-agent
