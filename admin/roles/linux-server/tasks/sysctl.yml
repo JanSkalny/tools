@@ -1,3 +1,10 @@
-  - name: copy public gpg key
-    copy: src="sysctl.conf" dest="/etc/sysctl.d/netvor.conf" owner="root" mode=0444
+- name: sysctl - reboot system on kernel panic
+  sysctl:
+    name=kernel.panic
+    value=10
+
+- name: sysctl - swap is not good...
+  sysctl:
+    name=vm.swappiness
+    value=10
 
