@@ -81,3 +81,7 @@ $config['plugins'] = array(
 
 // skin name: folder from skins/
 $config['skin'] = 'classic';
+
+// automatically create default directories
+$config['create_default_folders'] = true;
+
