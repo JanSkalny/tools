@@ -141,7 +141,7 @@ $IT -A INPUT -p udp --dport 67 -i trunk0.100 -j ACCEPT
 $IT -A INPUT -p udp --dport 53 -s $VPN -j ACCEPT
 
 # zabbix agent
-$IT -A INPUT -p tcp --dport 10050 -s 92.240.244.36 -j ACCEPT
+$IT -A INPUT -p tcp --dport 10050 -s 92.240.244.110 -j ACCEPT
 $IT -A INPUT -p tcp --dport 10050 -s 192.168.153.1 -j ACCEPT
 
 #XXX:

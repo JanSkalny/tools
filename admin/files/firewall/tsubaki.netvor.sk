@@ -116,13 +116,8 @@ $IT -A INPUT -m state --state INVALID -j LOG_DROP
 # ssh from everywhere
 $IT -A INPUT -p tcp --dport 22 -j ACCEPT
 
-# NRPE z krabice (nagios)
-$IT -A INPUT -s 92.240.244.36 -p tcp --dport 5666 -j ACCEPT
-$IT -A INPUT -s 172.20.0.1 -p tcp --dport 5666 -j ACCEPT
-
-# zabbix agent z monitor.netvor.sk
-$IT -A INPUT -s 92.240.244.36 -p tcp --dport 10050 -j ACCEPT
-$IT -A INPUT -s 172.20.0.1 -p tcp --dport 10050 -j ACCEPT
+# zabbix from monitor.netvor.sk
+$IT -A INPUT -s 92.240.244.110 -p tcp --dport 10050 -j ACCEPT
 
 # backup (bacula) od vsetkych klientov
 $IT -A INPUT -p tcp --dport 9103 -s 92.240.244.25 -j ACCEPT

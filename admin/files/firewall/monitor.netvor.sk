@@ -15,9 +15,10 @@
 # Jan Skalny <jan@skalny.sk>
 #
 # UPDATE HISTORY:
-# 2017-01-24  created fw.sh
-# 2017-02-22  new monitoring & cleanup
+# 2017-02-22  created fw.sh
 #
+
+WAN=ens160
 
 IT=/sbin/iptables
 
@@ -77,11 +78,11 @@ $IT -N CHECK_IF
   $IT -A CHECK_IF -s 224.0.0.0/3 -j DROP      # multicast
   $IT -A CHECK_IF -s 100.64.0.0/10 -j LOG_DROP  # RFC 6598
 
-  # public interface (wan0) MUST NOT containt any private address
-  $IT -A CHECK_IF -i wan0 -s 192.168.0.0/16 -j LOG_DROP
-  $IT -A CHECK_IF -i wan0 -s 172.16.0.0/12 -j LOG_DROP
-  $IT -A CHECK_IF -i wan0 -s 10.0.0.0/8 -j LOG_DROP
-  $IT -A CHECK_IF -i wan0 -j RETURN 
+  # public interface MUST NOT containt any private address
+  $IT -A CHECK_IF -i $WAN -s 192.168.0.0/16 -j LOG_DROP
+  $IT -A CHECK_IF -i $WAN -s 172.16.0.0/12 -j LOG_DROP
+  $IT -A CHECK_IF -i $WAN -s 10.0.0.0/8 -j LOG_DROP
+  $IT -A CHECK_IF -i $WAN -j RETURN 
 
   # everything else is dropped!
   $IT -A CHECK_IF -j LOG_DROP
@@ -107,8 +108,6 @@ $IT -A INPUT -p tcp --dport 22 -j ACCEPT
 
 # publicly accessible services
 # - http(s) 
-# - smtp, smtps
-# - imaps 
 for PORT in 25 465 993 80 443; do
   $IT -A INPUT -p tcp --dport $PORT -j ACCEPT
 done
@@ -116,8 +115,11 @@ done
 # bacula from backup.netvor.sk
 $IT -A INPUT -p tcp --dport 9102 -s 194.160.5.138 -j ACCEPT
 
-# zabbix from monitor.netvor.sk
-$IT -A INPUT -p tcp --dport 10050 -s 92.240.244.110 -j ACCEPT
+# zabbix agent (active checks)
+$IT -A INPUT -p tcp --dport 10051 -s 92.240.244.0/25 -j ACCEPT	# lightstorm
+$IT -A INPUT -p tcp --dport 10051 -s 217.73.16.50 -j ACCEPT		# verde vnet
+$IT -A INPUT -p tcp --dport 10051 -s 185.140.30.0/27 -j ACCEPT	# ctrdn
+$IT -A INPUT -p tcp --dport 10051 -s 185.140.28.18 -j ACCEPT	# ctrdn uplink
 
 # icmp rate limit
 $IT -A INPUT -p icmp -m limit --limit 10/second -j ACCEPT

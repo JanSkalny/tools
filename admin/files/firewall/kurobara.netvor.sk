@@ -26,7 +26,6 @@
 IT=/sbin/iptables
 
 VPN="172.20.0.0/16"
-BACKUP="194.160.5.138"
 
 modprobe ip_conntrack
 modprobe ip_conntrack_ftp
@@ -163,7 +162,7 @@ $IT -A INPUT -p tcp --dport 21 -j ACCEPT
 $IT -A INPUT -p tcp --dport 32100:32200 -j ACCEPT
 
 # zalohovanie (bacula)
-$IT -A INPUT -p tcp --dport 9102 -s $BACKUP -j ACCEPT
+$IT -A INPUT -p tcp --dport 9102 -s 194.160.5.138  -j ACCEPT
 
 # sakura a tsubaki sa mozu pripojit cez VPN na mysql
 # (postfix sync.sh script)
@@ -193,6 +192,9 @@ $IT -A INPUT -p tcp --dport 10051 -s 92.240.244.0/25 -j ACCEPT	# lightstorm
 $IT -A INPUT -p tcp --dport 10051 -s 217.73.16.50 -j ACCEPT		# verde vnet
 $IT -A INPUT -p tcp --dport 10051 -s 185.140.30.0/27 -j ACCEPT	# ctrdn
 $IT -A INPUT -p tcp --dport 10051 -s 185.140.28.18 -j ACCEPT	# ctrdn uplink
+
+# zabbix from monitor.netvor.sk
+$IT -A INPUT -p tcp --dport 10050 -s 92.240.244.110 -j ACCEPT
 
 # srcds (cs:go)
 $IT -A INPUT -p tcp --dport 27015 -j ACCEPT

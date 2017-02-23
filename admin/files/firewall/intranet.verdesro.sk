@@ -29,7 +29,6 @@ IT=/sbin/iptables
 
 NET_VPN0=192.168.153.0/24
 NET_VPN1=172.20.101.0/24
-MONITOR=92.240.244.36
 BACKUP=192.168.153.19
 
 modprobe ip_conntrack
@@ -164,11 +163,8 @@ $IT -A INPUT -p udp --dport 1195 -j ACCEPT
 $IT -A INPUT -p udp --dport 514 -s host1.verdesro.sk -j ACCEPT
 $IT -A INPUT -p udp --dport 514 -s virt1.verdesro.sk -j ACCEPT
 
-# nrpe from monitor.krabica.net (nagios)
-$IT -A INPUT -p tcp --dport 5666 -s $MONITOR -j ACCEPT
-
-# zabbix agent
-$IT -A INPUT -p tcp --dport 10050 -s 92.240.244.36 -j ACCEPT
+# zabbix from monitor.netvor.sk
+$IT -A INPUT -p tcp --dport 10050 -s 92.240.244.110 -j ACCEPT
 
 #XXX: upratat niekam inam!
 # dhcp requesty na bridge rozhrani (intranet)

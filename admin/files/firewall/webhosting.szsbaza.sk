@@ -23,7 +23,6 @@ IT=/sbin/iptables
 
 
 DC="192.168.253.10"
-BACKUP="194.160.5.138"
 MONITOR="192.168.254.134"
 
 modprobe ip_conntrack
@@ -117,15 +116,15 @@ $IT -A INPUT -p tcp --dport 465 -j ACCEPT
 # mysql z DC
 $IT -A INPUT -s $DC -p tcp --dport 3306 -j ACCEPT
 
-# bacula IN
-$IT -A INPUT -p tcp --dport 9102 -s $BACKUP -j ACCEPT
+# bacula from backup.netvor.sk
+$IT -A INPUT -p tcp --dport 9102 -s 194.160.5.138 -j ACCEPT
 
 # ftp
 $IT -A INPUT -p tcp --dport ftp -j ACCEPT
 $IT -A INPUT -p tcp --dport 53100:53200 -j ACCEPT
 
-# monitor
-$IT -A INPUT -p tcp -s 92.240.244.36 --dport 10050 -j ACCEPT
+# zabbix from monitor.netvor.sk
+$IT -A INPUT -p tcp -s 92.240.244.110 --dport 10050 -j ACCEPT
 
 ### icmp
 $IT -A INPUT -p icmp -m limit --limit 10/second -j ACCEPT

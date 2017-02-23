@@ -17,18 +17,10 @@
 # UPDATE HISTORY:
 # 2016-10-27  add LSB information and update history
 # 2017-02-09  backup from ci, video-dev and video2
+# 2017-02-22  new monitoring & cleanup
 #
 
 VPN=192.168.153.0/24
-
-MAIL="192.168.153.20"
-INTRANET="192.168.153.1"
-HOST1="92.240.244.104"
-MONITOR="92.240.244.36"
-NAS="192.168.153.231"
-CI="192.168.153.26"
-VIDEO_DEV="92.240.244.102"
-VIDEO2="92.240.244.53"
 
 IT=/sbin/iptables
 
@@ -45,87 +37,95 @@ echo 0 > /proc/sys/net/ipv4/conf/all/send_redirects
 echo 0 > /proc/sys/net/ipv4/conf/all/accept_source_route
 
 for TABLE in filter nat mangle; do
-	$IT -t $TABLE -F
-	$IT -t $TABLE -X
+  $IT -t $TABLE -F
+  $IT -t $TABLE -X
 done
 
 $IT -P INPUT DROP
 $IT -P OUTPUT ACCEPT
 $IT -P FORWARD DROP
 
-$IT -N log_reject
-	$IT -A log_reject -m limit --limit 5/sec --limit-burst 8 -j LOG --log-ip-options --log-tcp-options --log-prefix fw-reject_ --log-level debug
-	$IT -A log_reject -m limit --limit 5/sec --limit-burst 8 -j REJECT --reject-with icmp-port-unreachable
-	$IT -A log_reject -j DROP
-
-$IT -N log_drop
-	$IT -A log_drop -m limit --limit 5/sec --limit-burst 8 -j LOG --log-ip-options --log-tcp-options --log-prefix fw-drop_ --log-level debug
-	$IT -A log_drop -j DROP
-
-$IT -N log_accept
-	$IT -A log_accept -m limit --limit 10/sec --limit-burst 20 -j LOG --log-ip-options --log-tcp-options --log-prefix fw-accept_ --log-level debug
-	$IT -A log_accept -j ACCEPT
-
-$IT -N check_if
-	# whitelist
-	$IT -A check_if -s 92.240.244.25 -j RETURN
-	$IT -A check_if -s 87.197.159.3 -j RETURN
-
-	# block private and special ip ranges
-	$IT -A check_if -s 10.0.0.0/8 -j log_drop
-	$IT -A check_if -s 172.16.0.0/12 -j log_drop
-	#$IT -A check_if -s 192.168.0.0/16 -j log_drop
-	$IT -A check_if -s 127.0.0.0/8 -j log_drop
-	$IT -A check_if -s 0.0.0.0/8 -j log_drop
-	$IT -A check_if -s 169.254.0.0/16 -j log_drop
-	$IT -A check_if -s 192.0.2.0/24 -j log_drop
-	$IT -A check_if -s 204.152.64.0/23 -j log_drop
-	$IT -A check_if -s 224.0.0.0/3 -j log_drop
-
-	# public interface
-	$IT -A check_if -i eth0 -j RETURN
-
-	# everything else
-	$IT -A check_if -j log_drop
 
 ############################################################
+### custom ACCEPT / REJECT / DROP actions
+
+$IT -N LOG_REJECT
+  $IT -A LOG_REJECT -m limit --limit 5/sec --limit-burst 8 -j LOG \
+    --log-ip-options --log-tcp-options --log-prefix fw-reject_ --log-level debug
+  $IT -A LOG_REJECT -m limit --limit 5/sec --limit-burst 8 -j REJECT \
+    --reject-with icmp-port-unreachable
+  $IT -A LOG_REJECT -j DROP
+
+$IT -N LOG_DROP
+  $IT -A LOG_DROP -m limit --limit 5/sec --limit-burst 8 -j LOG \
+    --log-ip-options --log-tcp-options --log-prefix fw-drop_ --log-level debug
+  $IT -A LOG_DROP -j DROP
+
+$IT -N LOG_ACCEPT
+  $IT -A LOG_ACCEPT -m limit --limit 10/sec --limit-burst 20 -j LOG \
+    --log-ip-options --log-tcp-options --log-prefix fw-accept_ --log-level debug
+  $IT -A LOG_ACCEPT -j ACCEPT
+
+
+############################################################
+### verify source address of packet (RFC 2827, RFC 1918)
+
+$IT -N CHECK_IF
+  # whitelist
+  $IT -A CHECK_IF -s 92.240.244.25 -j RETURN
+  $IT -A CHECK_IF -s 87.197.159.3 -j RETURN
+
+  # block private and special ip ranges
+  $IT -A CHECK_IF -s 10.0.0.0/8 -j LOG_DROP
+  $IT -A CHECK_IF -s 172.16.0.0/12 -j LOG_DROP
+  #$IT -A CHECK_IF -s 192.168.0.0/16 -j LOG_DROP
+  $IT -A CHECK_IF -s 127.0.0.0/8 -j LOG_DROP
+  $IT -A CHECK_IF -s 0.0.0.0/8 -j LOG_DROP
+  $IT -A CHECK_IF -s 169.254.0.0/16 -j LOG_DROP
+  $IT -A CHECK_IF -s 192.0.2.0/24 -j LOG_DROP
+  $IT -A CHECK_IF -s 204.152.64.0/23 -j LOG_DROP
+  $IT -A CHECK_IF -s 224.0.0.0/3 -j LOG_DROP
+
+  # public interface
+  $IT -A CHECK_IF -i eth0 -j RETURN
+
+  # everything else
+  $IT -A CHECK_IF -j LOG_DROP
+
+
+############################################################
+### INPUT ruleset
 
 # loopback is allowed
 $IT -A INPUT -i lo -j ACCEPT
 
 # verify source address / interface
-$IT -A INPUT -j check_if
+$IT -A INPUT -j CHECK_IF
 
 # connection state
 $IT -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
-$IT -A INPUT -m state --state INVALID -j log_drop
+$IT -A INPUT -m state --state INVALID -j LOG_DROP
 
-### input ruleset
-
-# ssh cez VPN
+# ssh only from VPN
 $IT -A INPUT -p tcp -s $VPN --dport ssh -j ACCEPT
 
-# bacula
-for host in $INTRANET $MAIL 92.240.244.101 $HOST1 $NAS $CI $VIDEO_DEV $VIDEO2; do
-	$IT -A INPUT -p tcp --dport 9103 -s $host -j ACCEPT
+# bacula backup jobs
+for HOST in 192.168.153.20 192.168.153.1 92.240.244.104 192.168.153.231 192.168.153.26 92.240.244.102 92.240.244.53 92.240.244.101; do
+  $IT -A INPUT -p tcp --dport 9103 -s $HOST -j ACCEPT
 done
 
-# allow nrpe (tcp port 5666) from monitor.krabica.net
-$IT -A INPUT -p tcp --dport 5666 -s $MONITOR -j ACCEPT
-
-# zabbix agent
-$IT -A INPUT -p tcp --dport 10050 -s 92.240.244.36 -j ACCEPT
+# zabbix from monitor.netvor.sk and intranet
+$IT -A INPUT -p tcp --dport 10050 -s 92.240.244.110 -j ACCEPT
 $IT -A INPUT -p tcp --dport 10050 -s 192.168.153.1 -j ACCEPT
 
-### icmp
+# icmp rate limit
 $IT -A INPUT -p icmp -m limit --limit 10/second -j ACCEPT
-$IT -A INPUT -p icmp -j log_drop 
+$IT -A INPUT -p icmp -j LOG_DROP 
 
-#XXX:
 # ignore junk from windows servers (samba)
 for PORT in 137 138; do
-	$IT -A INPUT -p udp --dport $PORT -j DROP
+  $IT -A INPUT -p udp --dport $PORT -j DROP
 done
 
-### default rule
-$IT -A INPUT -j log_drop
+# default rule
+$IT -A INPUT -j LOG_DROP

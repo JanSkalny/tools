@@ -22,9 +22,6 @@ IT=/sbin/iptables
 
 IP_VPN=192.168.153.0/24
 
-MONITOR="92.240.244.36"
-BACKUP="192.168.153.19"
-
 modprobe ip_conntrack
 modprobe ip_conntrack_ftp
 
@@ -97,15 +94,12 @@ $IT -A INPUT -m state --state INVALID -j log_drop
 # allow ssh 
 $IT -A INPUT -p tcp --dport ssh -j ACCEPT
 
-# allow nrpe (tcp port 5666) from monitor.krabica.net
-$IT -A INPUT -p tcp --dport 5666 -s $MONITOR -j ACCEPT
-
-# zabbix agent
-$IT -A INPUT -p tcp --dport 10050 -s 92.240.244.36 -j ACCEPT
+# zabbix from monitor.netvor.sk and intranet
+$IT -A INPUT -p tcp --dport 10050 -s 92.240.244.110 -j ACCEPT
 $IT -A INPUT -p tcp --dport 10050 -s 192.168.153.1 -j ACCEPT
 
 # bacula FD z backup.verdesro.sk
-$IT -A INPUT -p tcp --dport 9102 -s $BACKUP -j  ACCEPT
+$IT -A INPUT -p tcp --dport 9102 -s 192.168.153.19 -j  ACCEPT
 
 # public services
 for PROTO in http https imaps smtps smtp; do

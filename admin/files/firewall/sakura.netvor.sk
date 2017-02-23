@@ -22,7 +22,6 @@
 IT=/sbin/iptables
 
 VPN="172.20.0.0/16"
-BACKUP="194.160.5.138"
 
 modprobe ip_conntrack
 modprobe ip_conntrack_ftp
@@ -130,16 +129,11 @@ $IT -A INPUT -p udp --dport 6277 -j ACCEPT
 $IT -A INPUT -p tcp --dport 2307 -j ACCEPT
 $IT -A INPUT -p udp --dport 24441 -j ACCEPT
 
-# nagios z krabice (TCP/5666 nrpe)
-$IT -A INPUT -p tcp --dport 5666 -s 92.240.244.36 -j ACCEPT
-$IT -A INPUT -p tcp --dport 5666 -s $VPN -j ACCEPT
+# zabbix from monitor.netvor.sk
+$IT -A INPUT -p tcp --dport 10050 -s 92.240.244.110 -j ACCEPT
 
-# zabbiz agent
-$IT -A INPUT -p tcp --dport 10050 -s 92.240.244.36 -j ACCEPT
-$IT -A INPUT -p tcp --dport 10050 -s $VPN -j ACCEPT
-
-# zalohovanie (bacula)
-$IT -A INPUT -p tcp --dport 9102 -s $BACKUP -j ACCEPT
+# bacula from backup.netvor.sk
+$IT -A INPUT -p tcp --dport 9102 -s 194.160.5.138 -j ACCEPT
 
 # icmp
 $IT -A INPUT -p icmp -m limit --limit 10/second -j ACCEPT

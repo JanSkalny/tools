@@ -21,7 +21,6 @@
 
 IT=/sbin/iptables
 
-BACKUP="194.160.5.138"
 MONITOR="192.168.254.134"
 WIFI_AP0="192.168.200.32"
 WIFI_AP1="192.168.200.33"
@@ -111,8 +110,8 @@ $IT -A INPUT -p tcp --dport ssh -j ACCEPT
 $IT -A INPUT -p tcp --dport http -j ACCEPT
 $IT -A INPUT -p tcp --dport https -j ACCEPT
 
-# backup (bacula)
-$IT -A INPUT -p tcp --dport 9102 -s $BACKUP -j ACCEPT
+# bacula from backup.netvor.sk
+$IT -A INPUT -p tcp --dport 9102 -s 194.160.5.138 -j ACCEPT
 
 # freeradius
 $IT -A INPUT -p udp -s $WIFI_AP0 --dport 1812 -j ACCEPT
@@ -122,8 +121,8 @@ $IT -A INPUT -p udp -s $WIFI_AP3 --dport 1812 -j ACCEPT
 $IT -A INPUT -p udp -s $WIFI_AP4 --dport 1812 -j ACCEPT
 $IT -A INPUT -p udp -s $MONITOR --dport 1812 -j ACCEPT
 
-# monitor
-$IT -A INPUT -p tcp -s 92.240.244.36 --dport 10050 -j ACCEPT
+# zabbix from monitor.netvor.sk
+$IT -A INPUT -p tcp -s 92.240.244.110 --dport 10050 -j ACCEPT
 
 # syslog od ap-ciek
 $IT -A INPUT -p udp -s $WIFI_AP0 --dport syslog -j ACCEPT

@@ -17,11 +17,10 @@
 # UPDATE HISTORY:
 # 2016-10-27  add LSB information and history
 # 2016-11-15  zabbix from netvor.sk
+# 2016-02-22  mgmt, ns2 and relay2 vm's
 #
 
 IT=/sbin/iptables
-
-MONITOR="192.168.254.134"
 
 modprobe ip_conntrack
 modprobe ip_conntrack_ftp
@@ -110,7 +109,7 @@ done
 $IT -A INPUT -p tcp --dport 22 -j ACCEPT
 
 # monitor
-$IT -A INPUT -p tcp -s 92.240.244.36 --dport 10050 -j ACCEPT
+$IT -A INPUT -p tcp -s 92.240.244.110 --dport 10050 -j ACCEPT
 
 ### icmp
 $IT -A INPUT -p icmp -m limit --limit 10/second -j ACCEPT
@@ -147,6 +146,20 @@ $IT -A FORWARD -d 194.160.5.139 -p tcp --dport 3389 -j ACCEPT
 # gatekeeper.szsbaza.sk
 $IT -A FORWARD -s 194.160.5.131 -j ACCEPT
 $IT -A FORWARD -d 194.160.5.131 -j ACCEPT
+
+# relay2.netvor.sk
+$IT -A FORWARD -s 194.160.5.137 -j ACCEPT
+$IT -A FORWARD -d 194.160.5.137 -j ACCEPT
+
+# mgmt.netvor.sk
+$IT -A FORWARD -s 194.160.5.140 -j ACCEPT
+$IT -A FORWARD -d 194.160.5.140 -j ACCEPT
+
+# ns2.netvor.sk
+$IT -A FORWARD -s 194.160.5.141 -j ACCEPT
+$IT -A FORWARD -d 194.160.5.141 -j ACCEPT
+
+
 
 ### default rule
 $IT -A INPUT -j log_reject

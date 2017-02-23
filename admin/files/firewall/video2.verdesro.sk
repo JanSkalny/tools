@@ -20,10 +20,6 @@
 
 IT=/sbin/iptables
 
-MONITOR=92.240.244.36
-BACKUP=92.240.244.52
-INTRANET=92.240.244.52
-
 modprobe ip_conntrack
 modprobe ip_conntrack_ftp
 
@@ -122,11 +118,11 @@ done
 $IT -I INPUT -p tcp --dport 21 -j ACCEPT
 $IT -I INPUT -p tcp --dport 32100:32200 -j ACCEPT
 
-# bacula FD z backup.verdesro.sk
-$IT -A INPUT -p tcp --dport 9102 -s $BACKUP -j ACCEPT
+# bacula from backup.verdesro.sk
+$IT -A INPUT -p tcp --dport 9102 -s 92.240.244.52 -j ACCEPT
 
-# zabbix agent
-$IT -A INPUT -p tcp --dport 10050 -s $MONITOR -j ACCEPT
+# zabbix from monitor.netvor.sk
+$IT -A INPUT -p tcp --dport 10050 -s 92.240.244.110 -j ACCEPT
 
 # icmp
 $IT -A INPUT -p icmp -m limit --limit 10/second -j ACCEPT

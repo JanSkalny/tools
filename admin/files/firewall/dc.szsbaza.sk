@@ -136,7 +136,7 @@ $IT -A INPUT -m state --state INVALID -j log_drop
 $IT -A INPUT -p tcp --dport ssh -j ACCEPT
 
 # monitor
-$IT -A INPUT -p tcp -s 92.240.244.36 --dport 10050 -j ACCEPT
+$IT -A INPUT -p tcp -s 92.240.244.110 --dport 10050 -j ACCEPT
 
 # do AD sa dostanu ludia ucebne, ucitelia a VPN-ka
 $IT -A INPUT -s 192.168.21.0/24 -j AD

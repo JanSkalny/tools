@@ -19,7 +19,7 @@
 # 2016-11-15  cleanup and add monitoring agent
 #
 
-MONITOR="92.240.244.36"
+WAN=eno1
 
 IT=/sbin/iptables
 
@@ -84,12 +84,8 @@ $IT -N CHECK_IF
 	$IT -A CHECK_IF -s 224.0.0.0/3 -j DROP			# multicast
 	$IT -A CHECK_IF -s 100.64.0.0/10 -j LOG_DROP	# RFC 6598
 
-	# vlan 204 only interface
-	$IT -A CHECK_IF -i eno2 -s 147.175.204.0/24 -j RETURN
-
 	# vlan 15 (wan) interface
-	$IT -A CHECK_IF -i brWAN -s 147.175.204.0/24 -j LOG_DROP
-	$IT -A CHECK_IF -i brWAN -j RETURN
+	$IT -A CHECK_IF -i $WAN -j RETURN
 
 	# everything else is dropped!
 	$IT -A CHECK_IF -j LOG_DROP
@@ -114,8 +110,8 @@ $IT -A INPUT -m state --state INVALID -j LOG_DROP
 # ssh from everywhere
 $IT -A INPUT -p tcp --dport 22 -j ACCEPT
 
-# zabbix monitoring from netvor.sk
-$IT -A INPUT -p tcp --dport 10050 -s $MONITOR -j ACCEPT
+# zabbix from monitor.netvor.sk
+$IT -A INPUT -p tcp --dport 10050 -s 92.240.244.110 -j ACCEPT
 
 # icmp
 $IT -A INPUT -p icmp -m limit --limit 10/second -j ACCEPT

@@ -116,7 +116,7 @@ $IT -A INPUT -p icmp -m limit --limit 10/second -j ACCEPT
 $IT -A INPUT -p icmp -j log_drop 
 
 # zabbix agent
-$IT -A INPUT -p tcp --dport 10050 -s 92.240.244.36 -j ACCEPT
+$IT -A INPUT -p tcp --dport 10050 -s 92.240.244.110 -j ACCEPT
 $IT -A INPUT -p tcp --dport 10050 -s 192.168.153.1 -j ACCEPT
 
 ### ejabered
