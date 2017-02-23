@@ -6,3 +6,5 @@
   - www
   - letsencrypt
   - firewall
+  - backup-client
+  - monitor-client

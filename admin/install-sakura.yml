@@ -3,4 +3,4 @@
   - ubuntu_server
   - physical
   - firewall
-  - { role: backup-client, backup_host: "netvor-sakura" }
+  - backup-client
