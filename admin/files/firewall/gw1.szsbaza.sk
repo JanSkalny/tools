@@ -58,7 +58,6 @@ TSUBAKI="192.168.254.138"
 TSUBAKI_INET="194.160.5.138"
 HOLLY="192.168.254.10"
 HOLLY_INET="194.160.5.132"
-BACKUP="194.160.5.138"
 DOCHADZKA="192.168.120.32"
 TP="192.168.254.140"
 TP_INET="194.160.5.140"
@@ -301,7 +300,7 @@ $IT -N INET_TO_AD
 
 $IT -N INET_TO_DMZ
 	# bacula
-	$IT -A INET_TO_DMZ -s $BACKUP -p tcp --dport 9102 -j ACCEPT
+	$IT -A INET_TO_DMZ -s 194.160.5.138 -p tcp --dport 9102 -j ACCEPT
 	
 	# tsubaki je neblokovany
 	$IT -A INET_TO_DMZ -d $TSUBAKI -j ACCEPT
@@ -345,7 +344,7 @@ $IT -N DMZ_TO_INET
 	$IT -A DMZ_TO_INET -s $CUBE -d 92.240.244.36 -p tcp --dport 1194 -j ACCEPT
 
 	# bacula storage daemon
-	$IT -A DMZ_TO_INET -d $BACKUP -p tcp --dport 9103 -j ACCEPT
+	$IT -A DMZ_TO_INET -d 194.160.5.138 -p tcp --dport 9103 -j ACCEPT
 
 	# webhosting - razor
 	$IT -A DMZ_TO_INET -s $WEBHOSTING -p tcp --dport 2703 -j ACCEPT
