@@ -19,31 +19,31 @@
 #data.cerise.io
 
 [netvor]
-kurobara.netvor.sk
-sakura.netvor.sk
-tsubaki.netvor.sk
-#azami.netvor.sk
-hinagiku.netvor.sk ansible_ssh_host=147.175.145.245
-mgmt.netvor.sk
-monitor.netvor.sk
-relay1.netvor.sk
-relay2.netvor.sk
-ns1.netvor.sk
-ns2.netvor.sk
+webhosting.netvor.sk # verde - virt1
+dev.netvor.sk ansible_ssh_host=147.175.145.245
+backup.netvor.sk # zahradnicka 
+mgmt.netvor.sk # zahradnicka - hilly
+monitor.netvor.sk # verde - virt2
+relay1.netvor.sk # verde - virt2
+relay2.netvor.sk # zahradnicka - hilly
+ns1.netvor.sk # verde - virt1
+ns2.netvor.sk # zahradnicka - hilly
+ns3.netvor.sk # sasovska
 
 [binarity]
 true.binarity.cz
 bitwise.binarity.cz
 
 [szsbaza]
-gw1.szsbaza.sk
+#gw1.szsbaza.sk
 #gw2.szsbaza.sk
+gatekeeper.szsbaza.sk
 holly.szsbaza.sk
+hilly.szsbaza.sk
 webhosting.szsbaza.sk
 #monitor.szsbaza.sk
 radius.szsbaza.sk
 dc.szsbaza.sk
-gatekeeper.szsbaza.sk
 
 [verde]
 ci.verdesro.sk

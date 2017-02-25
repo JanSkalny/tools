@@ -6,6 +6,6 @@
   - swap
   - letsencrypt
   - mail-antispam
-  - backup-client
-  - monitor-client
-  - firewall
+    #- backup-client
+    #- monitor-client
+    #- firewall

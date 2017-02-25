@@ -1,0 +1,6 @@
+- hosts: relay1.netvor.sk relay2.netvor.sk
+  tasks:
+  - name: update postfix configuration
+    shell: /opt/netvor/generate_postfix.js
+  - name: retart postfix
+    service: name=postfix state=restarted

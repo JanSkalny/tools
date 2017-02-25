@@ -20,3 +20,4 @@
     - netsniff-ng
     - git
     - iotop
+    - sysstat

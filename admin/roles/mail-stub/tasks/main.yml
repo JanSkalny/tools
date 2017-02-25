@@ -38,7 +38,7 @@
   template:
     src="{{ item }}"
     dest="/etc/postfix/{{ item }}"
-    owner=root group=root mode=640
+    owner=root group=root mode=644
   with_items:
   - main.cf
   - master.cf

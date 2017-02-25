@@ -19,24 +19,24 @@
       owner=bind group=bind mode=750
   with_items:
   - "/etc/bind/master/"
-  - "/opt/dns/"
+  - "/opt/netvor/"
 
 - name: install generate.js 
   copy:
       src="generate.js"
-      dest="/opt/dns/generate.js"
+      dest="/opt/netvor/generate_bind.js"
       owner=bind group=bind mode=750
 
 - name: create generate.js configuration file
   template:
       src="config.json"
-      dest="/opt/dns/config.json"
+      dest="/opt/netvor/config.json"
       owner=bind group=bind mode=600
 
 - name: install npm dependencies
   npm:
       name="{{item}}"
-      path="/opt/dns/"
+      path="/opt/netvor/"
   with_items:
   - dateformat
   - q

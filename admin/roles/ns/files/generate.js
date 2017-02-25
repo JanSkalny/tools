@@ -34,7 +34,8 @@ request(opts)
 		create_master(zones.zones)
 	})
 
-function get_next_zone(zones) {
+function get_next_zone(zones_in) {
+	let zones = JSON.parse(JSON.stringify(zones_in))
 	if (zones.length == 0)
 		return
 
@@ -64,7 +65,7 @@ function saveZone(zone, records) {
 	let s = fs.createWriteStream("/etc/bind/master/"+zone+".conf")
 	s.once('open', function(fd) {
 		s.write("$TTL 1h\n")
-		s.write(zone+". IN SOA ns.netvor.sk. admin.netvor.sk. ( "+ts+" 10800 3600 432000 38400 )\n")
+		s.write(zone+". IN SOA ns1.netvor.sk. admin.netvor.sk. ( "+ts+" 10800 3600 432000 38400 )\n")
 		for (let i=0; i!=records.length; i++) {
 			let r = records[i]
 			s.write(r.name+" IN "+r.type+" "+r.value+"\n")
@@ -81,7 +82,7 @@ function create_master(zones) {
 		for (let i=0; i!=zones.length; i++) {
 			let zone = zones[i].zone
 			s.write("zone \""+zone+"\" {\n")
-			s.write("  zone-statistics yes;\n")
+			s.write("  zone-statistics no;\n")
 			s.write("  type master;\n")
 			s.write("  file \"master/"+zone+".conf\";\n")
 			s.write("};\n")
