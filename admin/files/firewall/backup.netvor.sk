@@ -86,9 +86,9 @@ $IT -N check_if
 	$IT -A check_if -i tun0 -s 172.20.0.0/16 -j RETURN
 
 	# public interface MUST NOT containt any private address
-	$IT -A check_if -i eth0 -s 10.0.0.0/8 -j LOG_DROP
-	$IT -A check_if -i eth0 -s 172.20.0.0/12 -j LOG_DROP
-	$IT -A check_if -i eth0 -j RETURN
+	$IT -A check_if -i wan0 -s 10.0.0.0/8 -j LOG_DROP
+	$IT -A check_if -i wan0 -s 172.20.0.0/12 -j LOG_DROP
+	$IT -A check_if -i wan0 -j RETURN
 
 	# everything else is dropped!
 	$IT -A check_if -j LOG_DROP

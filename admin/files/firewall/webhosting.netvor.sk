@@ -200,6 +200,11 @@ $IT -A INPUT -p tcp --dport 10050 -s 92.240.244.110 -j ACCEPT
 $IT -A INPUT -p tcp --dport 27015 -j ACCEPT
 $IT -A INPUT -p udp --dport 27015 -j ACCEPT
 
+# netvor api
+for HOST in 194.160.5.141 87.197.159.3 92.240.244.109 194.160.5.137; do
+	$IT -A INPUT -p tcp --dport 8001 -s $HOST -j ACCEPT
+done
+
 # ignore junk from windows servers (samba)
 for PORT in 137 138; do
 	$IT -A INPUT -p udp --dport $PORT -j DROP

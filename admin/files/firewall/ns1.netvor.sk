@@ -15,7 +15,7 @@
 # Jan Skalny <jan@skalny.sk>
 #
 # UPDATE HISTORY:
-# 2017-02-22  created fw.sh
+# 2017-02-24  created fw.sh
 #
 
 WAN=wan0
@@ -103,29 +103,23 @@ $IT -A INPUT -j CHECK_IF
 $IT -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 $IT -A INPUT -m state --state INVALID -j LOG_DROP
 
-# ssh
+# ssh from everywhere
 $IT -A INPUT -p tcp --dport 22 -j ACCEPT
 
-# publicly accessible services
-# - http(s) 
-for PORT in 25 465 993 80 443; do
-  $IT -A INPUT -p tcp --dport $PORT -j ACCEPT
-done
+# public DNS server
+$IT -A INPUT -p udp --dport 53 -j ACCEPT
 
 # bacula from backup.netvor.sk
 $IT -A INPUT -p tcp --dport 9102 -s 194.160.5.138 -j ACCEPT
 
-# zabbix agent (active checks)
-$IT -A INPUT -p tcp --dport 10051 -s 92.240.244.0/25 -j ACCEPT	# lightstorm
-$IT -A INPUT -p tcp --dport 10051 -s 217.73.16.50 -j ACCEPT		# verde vnet
-$IT -A INPUT -p tcp --dport 10051 -s 185.140.30.0/27 -j ACCEPT	# ctrdn
-$IT -A INPUT -p tcp --dport 10051 -s 185.140.28.18 -j ACCEPT	# ctrdn uplink
+# zabbix from monitor.netvor.sk
+$IT -A INPUT -p tcp -s 92.240.244.110 --dport 10050 -j ACCEPT
 
 # icmp rate limit
 $IT -A INPUT -p icmp -m limit --limit 10/second -j ACCEPT
 $IT -A INPUT -p icmp -j LOG_DROP 
 
-# ignore junk from samba
+# ignore junk from windows servers (samba)
 for PORT in 137 138; do
   $IT -A INPUT -p udp --dport $PORT -j DROP
 done

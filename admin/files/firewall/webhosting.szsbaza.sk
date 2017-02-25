@@ -75,8 +75,12 @@ $IT -N check_if
 	$IT -A check_if -s 204.152.64.0/23 -j log_drop
 	$IT -A check_if -s 224.0.0.0/3 -j log_drop
 
+	# dmz interface
+	$IT -A check_if -i dmz0 -j RETURN
+
 	# public interface
-	$IT -A check_if -i eth0 -j RETURN
+	$IT -A check_if -s 192.168.0.0/24 -i wan0 -j log_drop
+	$IT -A check_if -i wan0 -j RETURN
 
 	# everything else
 	$IT -A check_if -j log_drop
