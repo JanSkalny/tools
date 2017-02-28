@@ -3,6 +3,7 @@
   apt: name={{ item }}
   with_items:
   - python-mysqldb
+  - logtail
 
 - name: check if zabbix-release is available
   command: dpkg-query -W zabbix-release
@@ -49,6 +50,7 @@
   - mysql.conf
   - postfix.conf
   - kvm.conf
+  - apcupsd.conf
 
 - name: monitoring scripts
   copy: src="{{ item }}" 
@@ -59,6 +61,7 @@
   - zabbix_bind_stats.py
   - zabbix_check_apache
   - zabbix_kvm.py
+  - zabbix_postfix.sh
 
 - name: make sure zabbix home directory is present
   file:
