@@ -1,3 +1,8 @@
+ - name: install curl
+   apt: 
+       name=curl 
+       update_cache=yes
+
  - name: add nodejs repo
    shell: curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
        creates=/etc/apt/sources.list.d/nodesource.list

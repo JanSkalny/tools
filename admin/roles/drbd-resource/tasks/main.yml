@@ -1,0 +1,6 @@
+
+- name: create resource config
+  template:
+      src="resource"
+      dest=/etc/drbd.d/{{drbd_res_name}}.res
+      

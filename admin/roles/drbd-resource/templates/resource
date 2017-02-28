@@ -1,0 +1,33 @@
+resource {{drbd_res_name}} {
+  protocol C;
+
+  device minor {{drbd_res_id}};
+  meta-disk /dev/vg0/{{drbd_res_name}}_meta;
+
+  startup {
+    wfc-timeout 15;
+    degr-wfc-timeout 60;
+  }
+
+  net {
+    cram-hmac-alg sha1;
+    shared-secret "{{drbd_psk}}";
+    max-buffers 8000;
+    max-epoch-size 8000;
+    sndbuf-size 0;
+  }
+
+  syncer {
+    rate 200M;
+    verify-alg sha1;
+  }
+
+  on holly {
+    disk /dev/vg0/{{drbd_res_name}};
+    address 10.10.10.1:{{7700+drbd_res_id}};
+  }
+  on hilly {
+    disk /dev/vg0/{{drbd_res_name}};
+    address 10.10.10.2:{{7700+drbd_res_id}};
+  }
+}
