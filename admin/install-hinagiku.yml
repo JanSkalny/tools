@@ -1,7 +1,0 @@
-- hosts: hinagiku.netvor.sk
-  roles:
-  - linux-server
-  - { role: admins, users: ['johnny'] }
-  - physical
-  - kvm
-  - monitor-client

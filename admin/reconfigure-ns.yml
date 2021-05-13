@@ -1,6 +1,0 @@
-- hosts: ns1.netvor.sk ns2.netvor.sk ns3.netvor.sk
-  tasks:
-  - name: update zone files
-    shell: /opt/netvor/generate_bind.js
-  - name: reload bind
-    shell: rndc reload

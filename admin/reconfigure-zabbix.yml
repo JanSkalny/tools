@@ -1,4 +1,0 @@
-- hosts: verde szsbaza binarity hrdlica netvor
-  roles:
-  - monitor-client
-

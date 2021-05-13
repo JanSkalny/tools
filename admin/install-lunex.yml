@@ -1,5 +1,0 @@
-- hosts: lunex
-  roles:
-  - ubuntu_server
-  - physical
-  - kvm

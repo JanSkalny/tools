@@ -1,2 +1,0 @@
-monitor_proxy_addr: "127.0.0.1"
-monitor_sql_user: "zabbix"

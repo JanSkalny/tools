@@ -1,8 +1,0 @@
-- include: smartmontools.yml
-- include: mdadm.yml
-
-- name: install extra packages
-  apt:
-     name=lm-sensors
-     state=present
-

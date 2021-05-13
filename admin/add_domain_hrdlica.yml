@@ -1,3 +1,0 @@
-- hosts: tmgh.hrdlica.cz
-  roles:
-   - { role: www-domain, www_user: www-hrdlica, www_domain: hrdlica.cz, www_domain_enable_ssl: true }

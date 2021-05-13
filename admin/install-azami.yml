@@ -1,7 +1,0 @@
-- hosts: azami.netvor.sk
-  roles:
-  - ubuntu_server
-  - { role: admins, users: ['johnny'] }
-  - physical
-  - kvm
-  - monitor-client

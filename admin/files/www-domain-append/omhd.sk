@@ -1,5 +1,0 @@
-<VirtualHost *:80>
-	ServerName otransit.sk
-	ServerAlias www.otransit.sk
-	Redirect / http://www.omhd.sk/
-</VirtualHost>

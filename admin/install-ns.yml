@@ -1,9 +1,0 @@
-- hosts: ns1.netvor.sk ns2.netvor.sk ns3.netvor.sk
-  roles:
-  - linux-server
-  - { role: admins, users: ['johnny'] }
-  - virtual
-  - swap
-  - monitor-client
-  - ns
-  - firewall

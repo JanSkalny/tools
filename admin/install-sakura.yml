@@ -1,6 +1,0 @@
-- hosts: sakura.netvor.sk
-  roles:
-  - ubuntu_server
-  - physical
-  - firewall
-  - backup-client

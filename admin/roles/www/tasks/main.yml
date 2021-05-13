@@ -1,6 +1,0 @@
-
-# install and secure basic apache, php, mysql setup
-- include: base.yml
-
-# install and configure mysql
-- include: mysql.yml

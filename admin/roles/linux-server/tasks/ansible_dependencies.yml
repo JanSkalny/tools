@@ -1,9 +1,0 @@
-# install ansible dependencies
-- name: apt-update
-  apt: update_cache=yes
-- name: install python (ansible dep)
-  raw: apt-get install -y python python-simplejson ansible aptitude
-- name: install python-apt -y
-  raw: apt-get install python-apt -y
-- name : install python-pycurl (ansible deb)
-  raw: apt-get install python-pycurl -y

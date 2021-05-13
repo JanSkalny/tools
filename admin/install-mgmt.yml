@@ -1,5 +1,0 @@
-- hosts: mgmt.netvor.sk
-  roles:
-  - ubuntu_server
-  - monitor-client
-  - letsencrypt
